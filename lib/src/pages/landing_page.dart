@@ -20,6 +20,13 @@ class LandingPage extends StatelessWidget {
               onPressed: () => c.increment(),
             ),
             ElevatedButton(
+              onPressed: () {
+                Get.changeTheme(
+                    Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+              },
+              child: const Text("Change Theme"),
+            ),
+            ElevatedButton(
               child: const Text("Change language"),
               onPressed: () => {
                 if (Get.locale == const Locale('en', 'US'))
