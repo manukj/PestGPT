@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/localizer_manager.dart';
-import 'package:pest_gpt/src/pages/landing_page.dart';
+import 'package:pest_gpt/src/pages/landing/landing_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       translations: LocalizationManager(),
       fallbackLocale: const Locale('en', 'US'),
       locale: Get.deviceLocale,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
