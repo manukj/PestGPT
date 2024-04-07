@@ -6,7 +6,7 @@ import 'package:pest_gpt/src/pages/landing/controller/landing_controller.dart';
 import 'package:pest_gpt/src/resource/image.dart';
 
 class LandingPage extends StatelessWidget {
-  List<PageViewModel> listOfPages = [
+  final List<PageViewModel> listOfPages = [
     PageViewModel(
       title: "Welcome to Parllel Farm",
       body:
