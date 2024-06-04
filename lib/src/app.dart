@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/localizer_manager.dart';
-import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
+import 'package:pest_gpt/src/pages/splash/splash.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: PestDetectionPage(),
+      home: const Splash(),
       translations: LocalizationManager(),
       fallbackLocale: const Locale('en', 'US'),
       locale: Get.deviceLocale,
