@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/Intro/intro.dart';
 import 'package:pest_gpt/src/pages/landing/landing_page.dart';
+import 'package:pest_gpt/src/pages/login/login.dart';
 import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 
 class Splash extends StatelessWidget {
@@ -16,6 +17,7 @@ class Splash extends StatelessWidget {
 
   Future<void> initalize() async {
     _authenticationManager.checkLoginStatus();
+    _introController.checkIfIntroIsSeen();
   }
 
   @override
@@ -34,7 +36,11 @@ class Splash extends StatelessWidget {
             if (_authenticationManager.isLogged.value) {
               return const LandingPage();
             } else {
-              return IntroPage();
+              if (_introController.isFirstTime.value) {
+                return IntroPage();
+              } else {
+                return const Login();
+              }
             }
           }
         }
