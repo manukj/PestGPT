@@ -1,21 +1,20 @@
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/utils/cache_manager/cache_manager.dart';
 
-class AuthenticationManager extends GetxController with CacheManager {
+class AuthenticationController extends GetxController with CacheManager {
   final isLogged = false.obs;
   void logOut() {
     isLogged.value = false;
-    removeToken();
+    remove(CacheManagerKey.TOKEN);
   }
 
   void login(String? token) async {
     isLogged.value = true;
-    //Token is cached
-    await saveToken(token);
+    await saveString(CacheManagerKey.TOKEN, token);
   }
 
   void checkLoginStatus() {
-    final token = getToken();
+    final token = getString(CacheManagerKey.TOKEN);
     if (token != null) {
       isLogged.value = true;
     }

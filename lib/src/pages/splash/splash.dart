@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/Intro/intro.dart';
 import 'package:pest_gpt/src/pages/landing/landing_page.dart';
-import 'package:pest_gpt/src/utils/authentication/authentication_manager.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 
 class Splash extends StatelessWidget {
-  final AuthenticationManager _authenticationManager =
-      Get.put(AuthenticationManager());
+  final AuthenticationController _authenticationManager =
+      Get.put(AuthenticationController());
+  final IntroController _introController = Get.put(IntroController());
 
   Splash({
     super.key,
