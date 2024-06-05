@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: const Splash(),
+      home: Splash(),
       translations: LocalizationManager(),
       fallbackLocale: const Locale('en', 'US'),
       locale: Get.deviceLocale,
