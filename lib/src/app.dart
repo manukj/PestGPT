@@ -13,7 +13,10 @@ class App extends StatelessWidget {
       translations: LocalizationManager(),
       fallbackLocale: const Locale('en', 'US'),
       locale: Get.deviceLocale,
+      darkTheme: ThemeData.dark(),
+      theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
     );
   }
 }
