@@ -37,7 +37,7 @@ class Splash extends StatelessWidget {
               return const LandingPage();
             } else {
               if (_introController.isFirstTime.value) {
-                return IntroPage();
+                return const IntroPage();
               } else {
                 return const Login();
               }
