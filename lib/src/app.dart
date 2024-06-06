@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/localizer_manager.dart';
@@ -17,6 +18,11 @@ class App extends StatelessWidget {
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
+      routingCallback: (routing) {
+        if (kDebugMode) {
+          print("pushing ${routing?.current} router");
+        }
+      },
     );
   }
 }
