@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pest_gpt/src/resource/constants.dart';
 
 class CommonPrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -16,6 +17,11 @@ class CommonPrimaryButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          shape: const RoundedRectangleBorder(
+            borderRadius: Constants.borderRadius,
+          ),
+        ),
         child: child,
       ),
     );

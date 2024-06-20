@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:pest_gpt/src/resource/image_path.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -7,9 +9,9 @@ class LoginHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(
-          'assets/tractor.png', // Replace with your image asset
-          height: 150,
+        SvgPicture.asset(
+          IMAGEPATH.loginTractor, // Replace with your image asset
+          height: 200,
         ),
         const SizedBox(height: 20),
         // Title

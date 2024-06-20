@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pest_gpt/src/resource/constants.dart';
 
 class CommonTextField extends StatelessWidget {
   const CommonTextField({
@@ -22,15 +23,15 @@ class CommonTextField extends StatelessWidget {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: Constants.borderRadius,
           borderSide: BorderSide(color: Colors.grey),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: Constants.borderRadius,
           borderSide: BorderSide(color: Colors.grey),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: Constants.borderRadius,
           borderSide: BorderSide(color: Colors.grey),
         ),
       ),
