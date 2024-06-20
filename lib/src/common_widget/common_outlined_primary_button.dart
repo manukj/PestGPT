@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pest_gpt/src/resource/constants.dart';
 
-class CommonPrimaryButton extends StatelessWidget {
+class CommonOutlinedPrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
+  final Widget prefixIcon; // Changed type to Widget
 
-  const CommonPrimaryButton({
+  const CommonOutlinedPrimaryButton({
     required this.onPressed,
     required this.child,
+    this.prefixIcon = const SizedBox(), // Added default value
     Key? key,
   }) : super(key: key);
 
@@ -15,15 +17,16 @@ class CommonPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
+      child: OutlinedButton.icon(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 15.0),
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric( vertical: 15.0),
           shape: const RoundedRectangleBorder(
             borderRadius: Constants.borderRadius,
           ),
         ),
-        child: child,
+        icon: prefixIcon,
+        label: child,
       ),
     );
   }

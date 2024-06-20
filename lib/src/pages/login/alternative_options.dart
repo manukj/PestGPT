@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pest_gpt/src/common_widget/common_outlined_primary_button.dart';
 
 class AlternativeOptions extends StatelessWidget {
   const AlternativeOptions({super.key});
@@ -19,34 +20,26 @@ class AlternativeOptions extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        // Sign in with passKey button
-        OutlinedButton.icon(
-          onPressed: () {
-            // Handle sign in with passKey
-          },
-          style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-          ),
-          icon: Icon(Icons.fingerprint),
-          label: Text('Sign in with passKey'),
+        CommonOutlinedPrimaryButton(
+          onPressed: () {},
+          prefixIcon: const Icon(Icons.fingerprint),
+          child: const Text('Sign in with passKey'),
         ),
-        SizedBox(height: 20),
-        // Sign Up
-        GestureDetector(
-          onTap: () {
-            // Handle sign up
-          },
-          child: Text(
-            'Sign Up',
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        ),
-        Spacer(),
+
+        // const SizedBox(height: 20),
+        // // Sign Up
+        // GestureDetector(
+        //   onTap: () {
+        //     // Handle sign up
+        //   },
+        //   child: const Text(
+        //     'Sign Up',
+        //     style: TextStyle(
+        //       decoration: TextDecoration.underline,
+        //     ),
+        //   ),
+        // ),
+        // const Spacer(),
       ],
     );
   }
