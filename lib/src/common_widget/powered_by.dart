@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pest_gpt/src/resource/image_path.dart';
 
 class PoweredBy extends StatelessWidget {
   const PoweredBy({super.key});
@@ -6,8 +7,8 @@ class PoweredBy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/mutus_tech_logo.png', // Replace with your image asset
-      height: 50,
+      IMAGEPATH.mutusLogo, // Replace with your image asset
+      height: 35,
     );
   }
 }
