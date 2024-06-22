@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:pest_gpt/src/localization/string.dart';
+import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
-import 'package:pest_gpt/src/resource/image.dart';
+import 'package:pest_gpt/src/resource/image_path.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -31,14 +31,14 @@ class IntroPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Center(
-            child: Image.asset(ImagePath.welcomelanding_1, width: 350),
+            child: Image.asset(IMAGEPATH.welcomelanding_1, width: 350),
           ),
         ),
       ),
       bodyWidget: Column(
         children: [
           Text(
-            StringText.welcomeToPFarm.tr,
+            StringConstant.welcomeToPFarm.tr,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
