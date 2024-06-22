@@ -3,9 +3,9 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/common_widget/common_text_field.dart';
 import 'package:pest_gpt/src/common_widget/powered_by.dart';
-import 'package:pest_gpt/src/pages/login/alternative_options.dart';
-import 'package:pest_gpt/src/pages/login/forgot_password.dart';
-import 'package:pest_gpt/src/pages/login/header.dart';
+import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
+import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
+import 'package:pest_gpt/src/pages/login/widget/header.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -14,9 +14,12 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CommonScaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [LoginWidget(), PoweredBy()],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [LoginWidget(), PoweredBy()],
+        ),
       ),
     );
   }

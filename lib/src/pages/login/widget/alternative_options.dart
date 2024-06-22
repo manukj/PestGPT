@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pest_gpt/src/common_widget/common_outlined_primary_button.dart';
+import 'package:pest_gpt/src/pages/login/widget/sign_up_button.dart';
 
 class AlternativeOptions extends StatelessWidget {
   const AlternativeOptions({super.key});
@@ -26,20 +27,7 @@ class AlternativeOptions extends StatelessWidget {
           child: const Text('Sign in with passKey'),
         ),
 
-        // const SizedBox(height: 20),
-        // // Sign Up
-        // GestureDetector(
-        //   onTap: () {
-        //     // Handle sign up
-        //   },
-        //   child: const Text(
-        //     'Sign Up',
-        //     style: TextStyle(
-        //       decoration: TextDecoration.underline,
-        //     ),
-        //   ),
-        // ),
-        // const Spacer(),
+        const SignUpButton()
       ],
     );
   }
