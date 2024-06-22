@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/common_widget/common_text_field.dart';
 import 'package:pest_gpt/src/common_widget/powered_by.dart';
+import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
 import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
 import 'package:pest_gpt/src/pages/login/widget/header.dart';
@@ -37,15 +39,22 @@ class LoginWidget extends StatelessWidget {
       children: [
         const LoginHeader(),
         const SizedBox(height: 20),
-        const CommonTextField(hintText: "Email", prefixIcon: Icon(Icons.email)),
+        CommonTextField(
+          hintText: StringConstant.email.tr,
+          prefixIcon: const Icon(Icons.email),
+        ),
         const SizedBox(height: 20),
-        const CommonTextField(
-            hintText: "Password", prefixIcon: Icon(Icons.vpn_key)),
+        CommonTextField(
+            hintText: StringConstant.password.tr,
+            prefixIcon: const Icon(Icons.vpn_key)),
         const ForgotPassword(),
         const SizedBox(height: 10),
         CommonPrimaryButton(
-          onPressed: () {},
-          child: const Text('Log In'),
+          onPressed: () {
+            print("updating locale"); 
+            Get.updateLocale(const Locale('zh', 'CN'));
+          },
+          child: Text(StringConstant.signIn.tr),
         ),
         const SizedBox(height: 20),
         const AlternativeOptions(),

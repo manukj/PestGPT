@@ -1,5 +1,13 @@
 const Map<String, String> en_US = {
-  'appName': 'Parallel Farm',
-  'welcomeToPFarm': 'Welcome To Parallel Farm',
-  'welcomeToPFarmDesc': 'Welcome to the future of farming',
+  'appName': '',
+  'welcomeToPFarm': '',
+  'welcomeToPFarmDesc': '',
+  'email': '',
+  'password': '',
+  'forgotPassword': '',
+  'signIn': '',
+  'signInWithFingerprint': '',
+  'orUse': '',
+  'register': '',
+  'createAccount': '',
 };
