@@ -7,16 +7,19 @@ class CommonTextField extends StatelessWidget {
     required this.hintText,
     this.textController,
     this.prefixIcon,
+    this.obscureText = false,
   }) : super(key: key);
 
   final String hintText;
   final TextEditingController? textController;
   final Widget? prefixIcon;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: textController,
+      obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         hintText: hintText,

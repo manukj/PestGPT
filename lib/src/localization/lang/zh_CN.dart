@@ -11,4 +11,9 @@ const Map<String, String> zh_CN = {
   'Register': '注册',
   'Create Account': '创建账号',
   'Home': '首页',
+  'UserName': 'UserName',
+  'Mobile Number': 'Mobile Number',
+  'Confirm Password': 'Confirm Password',
+  'Already have an account?': 'Already have an account?',
+  'Sign Up': 'Sign Up',
 };
