@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
+import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/pages/registration/registration.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({super.key});
@@ -15,7 +16,9 @@ class SignUpButton extends StatelessWidget {
           style: const TextStyle(fontSize: 16),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(const Registration());
+          },
           child: Text(
             StringConstant.register.tr,
             style: const TextStyle(

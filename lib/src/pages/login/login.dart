@@ -16,9 +16,12 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CommonScaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [LoginWidget(), PoweredBy()],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [LoginWidget(), PoweredBy()],
+        ),
       ),
     );
   }
