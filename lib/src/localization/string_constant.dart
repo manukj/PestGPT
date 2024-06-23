@@ -17,6 +17,11 @@ class StringConstant {
   // register
   static const String register = 'Register';
   static const String createAccount = 'Create Account';
+  static const String userName = 'UserName';
+  static const String mobileNumber = 'Mobile Number';
+  static const String congfirmPassword = 'Confirm Password';
+  static const String alreadyHaveAnAccount = 'Already have an account?';
+  static const String signUp = 'Sign Up';
 
   // home
   static const String home = 'Home';

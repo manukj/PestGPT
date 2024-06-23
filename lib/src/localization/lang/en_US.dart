@@ -11,4 +11,9 @@ const Map<String, String> en_US = {
   'Sign In With Fingerprint': 'Sign In With Fingerprint',
   'OR USE': 'OR USE',
   'Create Account': 'Create Account',
+  'UserName': 'UserName',
+  'Mobile Number': 'Mobile Number',
+  'Confirm Password': 'Confirm Password',
+  'Already have an account?': 'Already have an account?',
+  'Sign Up': 'Sign Up',
 };
