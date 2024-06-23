@@ -520,11 +520,10 @@ packages:
   lang_internationalization:
     dependency: "direct main"
     description:
-      name: lang_internationalization
-      sha256: "1dca357017f3fa4f37f03f38376ca0de1e3e2e97fbc4fd9f6b3e274b1ae444f7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
+      path: "/Users/manu/Projects/University/dessertation/PestGPT/internationalization"
+      relative: false
+    source: path
+    version: "0.0.4"
   leak_tracker:
     dependency: transitive
     description:

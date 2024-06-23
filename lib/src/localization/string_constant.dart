@@ -2,19 +2,22 @@ import 'package:lang_internationalization/lang_internationalization.dart';
 
 @LangInternationalization(["en_US", "zh_CN"])
 class StringConstant {
-  static String appName = 'Parallel Farm';
-  static String welcomeToPFarm = 'Welcome To Parallel Farm';
-  static String welcomeToPFarmDesc = 'Welcome to the future of farming';
+  static const String appName = 'Parallel Farm';
+  static const String welcomeToPFarm = 'Welcome To Parallel Farm';
+  static const String welcomeToPFarmDesc = 'Welcome to the future of farming';
 
   // login
-  static String email = 'Email';
-  static String password = 'Password';
-  static String forgotPassword = 'Forgot Password';
-  static String signIn = 'Sign In';
-  static String signInWithFingerprint = 'Sign In With Fingerprint';
-  static String orUse = 'OR USE';
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String forgotPassword = 'Forgot your password?';
+  static const String signIn = 'Sign In';
+  static const String signInWithFingerprint = 'Sign In With Fingerprint';
+  static const String orUse = 'OR USE';
 
   // register
-  static String register = 'Register';
-  static String createAccount = 'Create Account';
+  static const String register = 'Register';
+  static const String createAccount = 'Create Account';
+
+  // home
+  static const String home = 'Home';
 }
