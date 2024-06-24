@@ -18,6 +18,9 @@ dependencies:
   image_picker: ^1.0.7
   flutter_svg: ^2.0.10+1
   json_annotation: ^4.9.0
+  camera: ^0.11.0+1
+  path_provider: ^2.1.3
+  permission_handler: ^11.3.1
   lang_internationalization: 
     path: /Users/manu/Projects/University/dessertation/PestGPT/internationalization
   flutter_localizations:
