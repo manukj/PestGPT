@@ -1,10 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class PestCameraController extends GetxController {
   late List<CameraDescription> cameras;
   late CameraController controller;
   late Future<void> initializeControllerFuture;
+  XFile? captureFile;
 
   final loading = false.obs;
   final path = ''.obs;
@@ -17,10 +19,6 @@ class PestCameraController extends GetxController {
       ResolutionPreset.high,
     );
     initializeControllerFuture = controller.initialize();
-  }
-
-  PestCameraController() {
-    availableCameras().then((value) {});
   }
 
   void setLoading(bool value) {
@@ -37,6 +35,12 @@ class PestCameraController extends GetxController {
     super.dispose();
   }
 
-  void captureImage() {
+  Future<void> captureImage() async {
+    await initializeControllerFuture;
+
+    final path = await getTemporaryDirectory();
+    final filePath = '${path.path}/${DateTime.now()}.png';
+
+    var captureFile = await controller.takePicture();
   }
 }
