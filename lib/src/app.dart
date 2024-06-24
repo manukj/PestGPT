@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/localizer_manager.dart';
 import 'package:pest_gpt/src/pages/splash/splash.dart';
 
+import './resource/theme/theme.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -15,8 +17,8 @@ class App extends StatelessWidget {
       translations: LocalizationManager(),
       fallbackLocale: const Locale('en', 'US'),
       locale: Get.deviceLocale,
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData.light(),
+      darkTheme: darkTheme(),
+      theme: lightTheme(),
       debugShowCheckedModeBanner: false,
       supportedLocales: const [
         Locale('en', 'US'),
