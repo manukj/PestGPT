@@ -4,7 +4,7 @@ ThemeData lightTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     primaryColor: Colors.green,
-    hintColor: Colors.brown,
+    hintColor: Colors.grey,
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.green,
       textTheme: ButtonTextTheme.primary,
@@ -12,9 +12,13 @@ ThemeData lightTheme() {
     appBarTheme: const AppBarTheme(
       color: Colors.green,
     ),
-    scaffoldBackgroundColor: Colors.lightGreen[50],
+    scaffoldBackgroundColor: Colors.white,
     cardColor: Colors.white,
     iconTheme: const IconThemeData(color: Colors.green),
+    colorScheme: base.colorScheme.copyWith(
+      primary: Colors.green[700], // Background color of the ElevatedButton
+      onPrimary: Colors.white,
+    ),
   );
 }
 
@@ -22,7 +26,7 @@ ThemeData darkTheme() {
   final ThemeData base = ThemeData.dark();
   return base.copyWith(
     primaryColor: Colors.green[700],
-    hintColor: Colors.brown[700],
+    hintColor: Colors.grey,
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.green[700],
       textTheme: ButtonTextTheme.primary,

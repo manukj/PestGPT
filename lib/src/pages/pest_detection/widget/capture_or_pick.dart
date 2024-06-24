@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pest_gpt/src/resource/constants.dart';
 
 class CaptureOrPick extends StatelessWidget {
-  const CaptureOrPick({super.key});
+  final VoidCallback onCapturePressed;
+  final VoidCallback onPickFromImagePressed;
+  const CaptureOrPick({
+    super.key,
+    required this.onCapturePressed,
+    required this.onPickFromImagePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +30,22 @@ class CaptureOrPick extends StatelessWidget {
                 _buildIconButton(
                   context,
                   () {
-                    print('clicked');
+                    Get.back();
                   },
                   Icons.home,
                 ),
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.radio_button_checked,
+                    color: Theme.of(context).primaryColor,
                     size: 65,
                   ),
-                  onPressed: () {},
+                  onPressed: onCapturePressed,
                 ),
                 _buildIconButton(
                   context,
                   () {
-                    print('clicked');
+                    onPickFromImagePressed();
                   },
                   Icons.image,
                 ),
