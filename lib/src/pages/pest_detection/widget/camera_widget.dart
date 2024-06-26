@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,16 +46,22 @@ class _CameraWidgetState extends State<CameraWidget> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            return Column(
-              children: [
-                Expanded(
-                  child: CameraPreview(_cameraController.controller),
-                ),
-                CaptureOrPick(
-                  onCapturePressed: _cameraController.captureImage,
-                  onPickFromImagePressed: () {},
-                ),
-              ],
+            return Obx(
+              () => Column(
+                children: [
+                  _cameraController.captureFile.value != null
+                      ? Image.file(
+                          File(_cameraController.captureFile.value!.path),
+                        )
+                      : Expanded(
+                          child: CameraPreview(_cameraController.controller),
+                        ),
+                  CaptureOrPick(
+                    onCapturePressed: _cameraController.captureImage,
+                    onPickFromImagePressed: () {},
+                  ),
+                ],
+              ),
             );
           }
         }

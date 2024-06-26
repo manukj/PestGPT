@@ -6,7 +6,7 @@ class PestCameraController extends GetxController {
   late List<CameraDescription> cameras;
   late CameraController controller;
   late Future<void> initializeControllerFuture;
-  XFile? captureFile;
+  Rx<XFile?> captureFile = Rx<XFile?>(null);
 
   final loading = false.obs;
   final path = ''.obs;
@@ -36,11 +36,18 @@ class PestCameraController extends GetxController {
   }
 
   Future<void> captureImage() async {
-    await initializeControllerFuture;
+    try {
+      await initializeControllerFuture;
 
-    final path = await getTemporaryDirectory();
-    final filePath = '${path.path}/${DateTime.now()}.png';
+      final path = await getTemporaryDirectory();
+      final filePath = '${path.path}/${DateTime.now()}.png';
 
-    var captureFile = await controller.takePicture();
+      XFile? takenFile = await controller.takePicture();
+      captureFile.value = takenFile;
+      print(captureFile.value);
+    } catch (e) {
+      // Handle the error here
+      print('Error capturing image: $e');
+    }
   }
 }
