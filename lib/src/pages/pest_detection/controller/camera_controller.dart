@@ -4,8 +4,8 @@ import 'package:path_provider/path_provider.dart';
 
 class PestCameraController extends GetxController {
   late List<CameraDescription> cameras;
-  late CameraController controller;
-  late Future<void> initializeControllerFuture;
+   CameraController? controller;
+   Future<void>? initializeControllerFuture;
   Rx<XFile?> captureFile = Rx<XFile?>(null);
 
   final loading = false.obs;
@@ -18,7 +18,7 @@ class PestCameraController extends GetxController {
       firstCamera,
       ResolutionPreset.high,
     );
-    initializeControllerFuture = controller.initialize();
+    initializeControllerFuture = controller?.initialize();
   }
 
   void setLoading(bool value) {
@@ -31,7 +31,7 @@ class PestCameraController extends GetxController {
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
@@ -42,9 +42,8 @@ class PestCameraController extends GetxController {
       final path = await getTemporaryDirectory();
       final filePath = '${path.path}/${DateTime.now()}.png';
 
-      XFile? takenFile = await controller.takePicture();
+      XFile? takenFile = await controller?.takePicture();
       captureFile.value = takenFile;
-      print(captureFile.value);
     } catch (e) {
       // Handle the error here
       print('Error capturing image: $e');
