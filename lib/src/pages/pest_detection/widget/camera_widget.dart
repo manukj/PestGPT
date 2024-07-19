@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/camera_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/widget/capture_or_pick.dart';
 
@@ -53,18 +54,20 @@ class _CameraWidgetState extends State<CameraWidget> {
                       width: double.infinity,
                       height: 300,
                     )
-                  : Column(
-                      children: [
-                        Expanded(
-                          child:
-                              CameraPreview(_cameraController.controller),
+                  : _cameraController.controller == null
+                      ? const CommonLoader()
+                      : Column(
+                          children: [
+                            Expanded(
+                              child:
+                                  CameraPreview(_cameraController.controller!),
+                            ),
+                            CaptureOrPick(
+                              onCapturePressed: _cameraController.captureImage,
+                              onPickFromImagePressed: () {},
+                            ),
+                          ],
                         ),
-                        CaptureOrPick(
-                          onCapturePressed: _cameraController.captureImage,
-                          onPickFromImagePressed: () {},
-                        ),
-                      ],
-                    ),
             );
           }
         }
