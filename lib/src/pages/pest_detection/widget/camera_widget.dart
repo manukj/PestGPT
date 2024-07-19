@@ -47,21 +47,24 @@ class _CameraWidgetState extends State<CameraWidget> {
             );
           } else {
             return Obx(
-              () => Column(
-                children: [
-                  _cameraController.captureFile.value != null
-                      ? Image.file(
-                          File(_cameraController.captureFile.value!.path),
-                        )
-                      : Expanded(
-                          child: CameraPreview(_cameraController.controller),
+              () => _cameraController.captureFile.value != null
+                  ? Image.file(
+                      File(_cameraController.captureFile.value!.path),
+                      width: double.infinity,
+                      height: 300,
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child:
+                              CameraPreview(_cameraController.controller),
                         ),
-                  CaptureOrPick(
-                    onCapturePressed: _cameraController.captureImage,
-                    onPickFromImagePressed: () {},
-                  ),
-                ],
-              ),
+                        CaptureOrPick(
+                          onCapturePressed: _cameraController.captureImage,
+                          onPickFromImagePressed: () {},
+                        ),
+                      ],
+                    ),
             );
           }
         }
