@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/camera_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/widget/capture_or_pick.dart';
+import 'package:pest_gpt/src/pages/pest_detection/widget/detect_pest.dart';
 
 class CameraWidget extends StatefulWidget {
   const CameraWidget({super.key});
@@ -49,11 +50,7 @@ class _CameraWidgetState extends State<CameraWidget> {
           } else {
             return Obx(
               () => _cameraController.captureFile.value != null
-                  ? Image.file(
-                      File(_cameraController.captureFile.value!.path),
-                      width: double.infinity,
-                      height: 300,
-                    )
+                  ? DetectPest(path: _cameraController.captureFile.value!.path)
                   : _cameraController.controller == null
                       ? const CommonLoader()
                       : Column(
