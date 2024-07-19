@@ -17,7 +17,7 @@ class DetectPest extends StatelessWidget {
             width: double.infinity,
           ),
         ),
-        CommonPrimaryButton(onPressed: () {}, text: "Detect Pest")
+        CommonPrimaryButton(onPressed: () {}, title: "Detect Pest")
       ],
     );
   }

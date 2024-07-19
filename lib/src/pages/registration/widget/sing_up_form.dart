@@ -46,7 +46,7 @@ class SingUpForm extends StatelessWidget {
         const SizedBox(height: 24),
         CommonPrimaryButton(
           onPressed: () {},
-          child: Text(StringConstant.signUp.tr),
+          titleWidget: Text(StringConstant.signUp.tr),
         ),
         const SizedBox(height: 16),
         const SignInButton(),

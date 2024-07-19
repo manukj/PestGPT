@@ -3,13 +3,13 @@ import 'package:pest_gpt/src/resource/constants.dart';
 
 class CommonPrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final Widget? child;
-  final String? text;
+  final Widget? titleWidget;
+  final String? title;
 
   const CommonPrimaryButton({
     required this.onPressed,
-    this.child,
-    this.text,
+    this.titleWidget,
+    this.title,
     Key? key,
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class CommonPrimaryButton extends StatelessWidget {
             borderRadius: Constants.borderRadius,
           ),
         ),
-        child: child ?? Text(text ?? ''),
+        child: titleWidget ?? Text(title ?? ''),
       ),
     );
   }

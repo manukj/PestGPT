@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
@@ -46,9 +47,14 @@ class IntroPage extends StatelessWidget {
           const Text(
             "The \"Farmer-Centred Interoperable Mobile-Cloud System\" (FCIMCS) project, a collaborative effort spanning the UK and China",
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Login"),
+          const SizedBox(
+            height: 20,
+          ),
+          CommonPrimaryButton(
+            onPressed: () {
+              Get.to(const Login());
+            },
+            title: StringConstant.signIn.tr,
           ),
         ],
       ),

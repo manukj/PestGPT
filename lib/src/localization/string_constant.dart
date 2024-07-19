@@ -5,6 +5,9 @@ class StringConstant {
   static const String appName = 'Parallel Farm';
   static const String welcomeToPFarm = 'Welcome To Parallel Farm';
   static const String welcomeToPFarmDesc = 'Welcome to the future of farming';
+  static const String invalidEmail = 'Invalid Email';
+  static const String emailCannotBeEmpty = 'Email cannot be empty';
+  static const String passwordCannotBeEmpty = 'Password cannot be empty';
 
   // login
   static const String email = 'Email';
