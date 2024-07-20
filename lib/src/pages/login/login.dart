@@ -11,9 +11,7 @@ import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
 import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
 import 'package:pest_gpt/src/pages/login/widget/header.dart';
 import 'package:pest_gpt/src/resource/api_service/user_service.dart';
-import 'package:pest_gpt/src/utils/common_util.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
-import 'package:toastification/toastification.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -44,31 +42,35 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   bool isLoading = false;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> login() async {
-    if (emailController.text.isEmpty) {
-      ToastManager.showError(StringConstant.emailCannotBeEmpty.tr);
+    if (userNameController.text.isEmpty) {
+      ToastManager.showError(StringConstant.userNameCannotBeEmpty.tr);
       return;
     }
     if (passwordController.text.isEmpty) {
       ToastManager.showError(StringConstant.passwordCannotBeEmpty.tr);
       return;
     }
-    if (!CommonUtil.isValidEmail(emailController.text)) {
-      ToastManager.showError(StringConstant.invalidEmail.tr);
-      return;
-    }
-    final response = await UserService().login(UserLoginRequest(
-      email: emailController.text,
-      password: passwordController.text,
-    ));
-    if (response.accessToken != null) {
-      print(response.accessToken);
-    } else {
-      toastification.show(
-          context: Get.context, title: const Text('Something went wrong'));
+    // if (!CommonUtil.isValiduserName(userNameController.text)) {
+    //   ToastManager.showError(StringConstant.invaliduserName.tr);
+    //   return;
+    // }
+    try {
+      final response = await UserService().login(UserLoginRequest(
+        username: userNameController.text,
+        password: passwordController.text,
+      ));
+      if (response.error != null) {
+        ToastManager.showError(response.error!);
+      } else {
+        ToastManager.showSuccess(StringConstant.loginSuccess.tr);
+        // Get.offAllNamed(Routes.home);
+      }
+    } catch (e) {
+      ToastManager.showError(e.toString());
     }
   }
 
@@ -82,9 +84,9 @@ class _LoginWidgetState extends State<LoginWidget> {
               const LoginHeader(),
               const SizedBox(height: 20),
               CommonTextField(
-                hintText: StringConstant.email.tr,
-                prefixIcon: const Icon(Icons.email),
-                textController: emailController,
+                hintText: StringConstant.userName.tr,
+                prefixIcon: const Icon(Icons.person_4_sharp),
+                textController: userNameController,
               ),
               const SizedBox(height: 20),
               CommonTextField(

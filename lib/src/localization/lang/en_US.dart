@@ -16,4 +16,7 @@ const Map<String, String> en_US = {
   'Confirm Password': 'Confirm Password',
   'Already have an account?': 'Already have an account?',
   'Sign Up': 'Sign Up',
+  'Invalid Email': 'Invalid Email',
+  'User Name cannot be empty': 'User Name cannot be empty',
+  'Password cannot be empty': 'Password cannot be empty',
 };

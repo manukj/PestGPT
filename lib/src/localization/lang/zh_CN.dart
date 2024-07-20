@@ -16,4 +16,7 @@ const Map<String, String> zh_CN = {
   'Confirm Password': '确认密码',
   'Already have an account?': '已有账号？',
   'Sign Up': '注册',
+  'Invalid Email': 'Invalid Email',
+  'User Name cannot be empty': 'User Name cannot be empty',
+  'Password cannot be empty': 'Password cannot be empty',
 };

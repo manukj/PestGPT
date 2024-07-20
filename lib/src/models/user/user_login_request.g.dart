@@ -8,14 +8,14 @@ part of 'user_login_request.dart';
 
 UserLoginRequest _$UserLoginRequestFromJson(Map<String, dynamic> json) =>
     UserLoginRequest(
-      email: json['email'] as String,
+      username: json['username'] as String,
       password: json['password'] as String,
       rememberMe: json['rememberMe'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$UserLoginRequestToJson(UserLoginRequest instance) =>
     <String, dynamic>{
-      'email': instance.email,
+      'username': instance.username,
       'password': instance.password,
       'rememberMe': instance.rememberMe,
     };

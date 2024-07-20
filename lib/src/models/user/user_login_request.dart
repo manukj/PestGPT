@@ -4,12 +4,12 @@ part 'user_login_request.g.dart';
 
 @JsonSerializable()
 class UserLoginRequest {
-  String email;
+  String username;
   String password;
   bool rememberMe;
 
   UserLoginRequest({
-    required this.email,
+    required this.username,
     required this.password,
     this.rememberMe = true,
   });
