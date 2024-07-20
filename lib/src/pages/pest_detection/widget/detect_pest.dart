@@ -41,6 +41,7 @@ class DetectPest extends StatelessWidget {
           CommonPrimaryButton(
             onPressed: controller.detectPest,
             title: StringConstant.detectPest.tr,
+            isLoading: controller.isLoading.value,
           )
         ],
       );

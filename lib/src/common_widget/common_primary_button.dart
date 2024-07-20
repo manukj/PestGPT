@@ -5,11 +5,13 @@ class CommonPrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget? titleWidget;
   final String? title;
+  final bool isLoading;
 
   const CommonPrimaryButton({
     required this.onPressed,
     this.titleWidget,
     this.title,
+    this.isLoading = false,
     Key? key,
   }) : super(key: key);
 
@@ -18,14 +20,25 @@ class CommonPrimaryButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 15.0),
           shape: const RoundedRectangleBorder(
             borderRadius: Constants.borderRadius,
           ),
         ),
-        child: titleWidget ?? Text(title ?? ''),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            isLoading
+                ? const Padding(
+                    padding: EdgeInsets.only(right: 5.0),
+                    child: CircularProgressIndicator(),
+                  )
+                : const SizedBox(),
+            titleWidget ?? Text(title ?? ''),
+          ],
+        ),
       ),
     );
   }
