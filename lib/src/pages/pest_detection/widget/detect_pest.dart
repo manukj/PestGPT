@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 
 class DetectPest extends StatelessWidget {
   final String path;
@@ -17,7 +19,13 @@ class DetectPest extends StatelessWidget {
             width: double.infinity,
           ),
         ),
-        CommonPrimaryButton(onPressed: () {}, title: "Detect Pest")
+        CommonPrimaryButton(
+            onPressed: () {
+              var access =
+                  Get.find<AuthenticationController>().getAccessToken();
+              print(access);
+            },
+            title: "Detect Pest")
       ],
     );
   }

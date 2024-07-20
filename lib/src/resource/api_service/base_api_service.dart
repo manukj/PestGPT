@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 
 class BaseApiService extends GetConnect {
   final String _baseUrl = 'https://dev-api.fcimcs.com/api/';
@@ -22,11 +23,19 @@ class BaseApiService extends GetConnect {
   }
 
   Future postApi(String url, Map<String, dynamic> body) async {
-    final response = await post(_baseUrl + url, body);
+    final response = await post(_baseUrl + url, body, headers: getHeaders());
     if (response.statusCode == 200) {
       return response.body;
     } else {
       throw Exception('Login Api Failed : ${response.body}');
     }
+  }
+
+  Map<String, String>? getHeaders() {
+    final token = Get.find<AuthenticationController>().getAccessToken();
+    if (token != null) {
+      return {};
+    }
+    return {'Authorization': '$token'};
   }
 }

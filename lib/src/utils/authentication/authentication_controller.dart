@@ -20,4 +20,8 @@ class AuthenticationController extends GetxController with CacheManager {
       isLogged.value = true;
     }
   }
+
+  String? getAccessToken() {
+    return getString(CacheManagerKey.TOKEN);
+  }
 }
