@@ -1,9 +1,10 @@
 class DataorErrorResponse<T> {
   final String? error;
-  final T? data;
+  final dynamic data;
 
   DataorErrorResponse({
     this.error,
     this.data,
+   
   });
 }

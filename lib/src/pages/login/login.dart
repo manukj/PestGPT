@@ -10,7 +10,9 @@ import 'package:pest_gpt/src/models/user/user_login_request.dart';
 import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
 import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
 import 'package:pest_gpt/src/pages/login/widget/header.dart';
+import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
 import 'package:pest_gpt/src/resource/api_service/user_service.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class Login extends StatelessWidget {
@@ -55,7 +57,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       return;
     }
     // if (!CommonUtil.isValiduserName(userNameController.text)) {
-    //   ToastManager.showError(StringConstant.invaliduserName.tr);
+    //   ToastManager.howError(StringConstant.invaliduserName.tr);
     //   return;
     // }
     try {
@@ -63,12 +65,9 @@ class _LoginWidgetState extends State<LoginWidget> {
         username: userNameController.text,
         password: passwordController.text,
       ));
-      if (response.error != null) {
-        ToastManager.showError(response.error!);
-      } else {
-        ToastManager.showSuccess(StringConstant.loginSuccess.tr);
-        // Get.offAllNamed(Routes.home);
-      }
+      ToastManager.showSuccess(StringConstant.loginSuccess.tr);
+      Get.find<AuthenticationController>().login(response);
+      Get.to(const PestDetection());
     } catch (e) {
       ToastManager.showError(e.toString());
     }

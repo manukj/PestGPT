@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:pest_gpt/src/models/api/data_error_response.dart';
 
 class BaseApiService extends GetConnect {
   final String _baseUrl = 'https://dev-api.fcimcs.com/api/';
@@ -22,13 +21,12 @@ class BaseApiService extends GetConnect {
     super.onInit();
   }
 
-  Future<DataorErrorResponse> postApi(
-      String url, Map<String, dynamic> body) async {
+  Future postApi(String url, Map<String, dynamic> body) async {
     final response = await post(_baseUrl + url, body);
     if (response.statusCode == 200) {
-      return DataorErrorResponse(data: response.body);
+      return response.body;
     } else {
-      return DataorErrorResponse(error: response.body);
+      throw Exception('Login Api Failed : ${response.body}');
     }
   }
 }

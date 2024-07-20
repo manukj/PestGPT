@@ -5,7 +5,6 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
-import 'package:pest_gpt/src/pages/registration/registration.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
 class IntroPage extends StatelessWidget {
@@ -21,7 +20,7 @@ class IntroPage extends StatelessWidget {
       skip: const Text("Skip"),
       onDone: () async {
         await Get.find<IntroController>().markIntroAsSeen();
-        Get.to(const Registration());
+        Get.to(const Login());
       },
     );
   }
