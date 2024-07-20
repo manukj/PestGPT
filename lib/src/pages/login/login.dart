@@ -67,7 +67,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       ));
       ToastManager.showSuccess(StringConstant.loginSuccess.tr);
       Get.find<AuthenticationController>().login(response);
-      Get.to(const PestDetection());
+      Get.to(PestDetection());
     } catch (e) {
       ToastManager.showError(e.toString());
     }

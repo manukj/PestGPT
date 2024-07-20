@@ -33,12 +33,12 @@ class Splash extends StatelessWidget {
             );
           } else {
             if (_authenticationManager.isLogged.value) {
-              return const PestDetection();
+              return PestDetection();
             } else {
               if (_introController.isFirstTime.value) {
                 return const IntroPage();
               } else {
-                return const PestDetection();
+                return PestDetection();
               }
             }
           }

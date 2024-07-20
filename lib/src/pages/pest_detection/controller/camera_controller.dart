@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class PestCameraController extends GetxController {
   late List<CameraDescription> cameras;
@@ -29,24 +29,13 @@ class PestCameraController extends GetxController {
     path.value = value;
   }
 
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
   Future<void> captureImage() async {
     try {
       await initializeControllerFuture;
-
-      final path = await getTemporaryDirectory();
-      final filePath = '${path.path}/${DateTime.now()}.png';
-
       XFile? takenFile = await controller?.takePicture();
       captureFile.value = takenFile;
     } catch (e) {
-      // Handle the error here
-      print('Error capturing image: $e');
+      ToastManager.showError('Error capturing image');
     }
   }
 }

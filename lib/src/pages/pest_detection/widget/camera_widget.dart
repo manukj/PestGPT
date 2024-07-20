@@ -1,38 +1,18 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/camera_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/widget/capture_or_pick.dart';
-import 'package:pest_gpt/src/pages/pest_detection/widget/detect_pest.dart';
 
-class CameraWidget extends StatefulWidget {
-  const CameraWidget({super.key});
-
-  @override
-  State<CameraWidget> createState() => _CameraWidgetState();
-}
-
-class _CameraWidgetState extends State<CameraWidget> {
+class CameraWidget extends StatelessWidget {
+  CameraWidget({super.key});
   final PestCameraController _cameraController =
-      Get.put(PestCameraController());
-
-  @override
-  void initState() {
-    super.initState();
-  }
+      Get.find<PestCameraController>();
 
   Future<void> _initializeCamera() async {
     await _cameraController.init();
     return _cameraController.initializeControllerFuture;
-  }
-
-  @override
-  void dispose() {
-    _cameraController.dispose();
-    super.dispose();
   }
 
   @override
@@ -48,24 +28,19 @@ class _CameraWidgetState extends State<CameraWidget> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            return Obx(
-              () => _cameraController.captureFile.value != null
-                  ? DetectPest(path: _cameraController.captureFile.value!.path)
-                  : _cameraController.controller == null
-                      ? const CommonLoader()
-                      : Column(
-                          children: [
-                            Expanded(
-                              child:
-                                  CameraPreview(_cameraController.controller!),
-                            ),
-                            CaptureOrPick(
-                              onCapturePressed: _cameraController.captureImage,
-                              onPickFromImagePressed: () {},
-                            ),
-                          ],
-                        ),
-            );
+            return _cameraController.controller == null
+                ? const CommonLoader()
+                : Column(
+                    children: [
+                      Expanded(
+                        child: CameraPreview(_cameraController.controller!),
+                      ),
+                      CaptureOrPick(
+                        onCapturePressed: _cameraController.captureImage,
+                        onPickFromImagePressed: () {},
+                      ),
+                    ],
+                  );
           }
         }
       },

@@ -30,4 +30,8 @@ class StringConstant {
 
   // home
   static const String home = 'Home';
+
+  //pest detection 
+  static const String detectPest = 'Detect Pest';
+  static const String failedToDetectPest = 'Failed to detect pest';
 }
