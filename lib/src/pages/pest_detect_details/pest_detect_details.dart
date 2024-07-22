@@ -1,5 +1,8 @@
-import 'package:flutter/widgets.dart';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart' as img;
 import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
@@ -27,6 +30,34 @@ class PestDetectDetails extends StatelessWidget {
               height: 150,
             ),
           ),
+          Column(
+            children: controller.pestList.map((pest) {
+              return ExpansionTile(
+                title: Text(pest.pestName),
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Image.memory(
+                    Uint8List.fromList(
+                      img.encodeJpg(pest.image),
+                    ),
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                trailing: const SizedBox(
+                  width: 20,
+                  height: 20,
+                ),
+              );
+            }).toList(),
+          )
         ],
       ),
     );

@@ -52,6 +52,7 @@ class DetectPestController extends GetxController {
   Future<void> proccessResponse(
       PestDetectionResponse response, String imagePath) async {
     final img.Image image = img.decodeImage(File(imagePath).readAsBytesSync())!;
+    pestList.clear();
     ImageUtil.drawBoundingBoxesAndCropPestImage(image, response, pestList);
     final Uint8List processedBytes = Uint8List.fromList(img.encodeJpg(image));
     processedImage.value = processedBytes;

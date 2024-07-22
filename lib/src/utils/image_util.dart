@@ -38,7 +38,7 @@ class ImageUtil {
       int y2 = (box[3] * yScale).toInt();
       var color = getColor(i);
       var pestImage =
-          img.copyCrop(image, x: x1, y: y1, width: x1 + x2, height: y1 + y2);
+          img.copyCrop(image, x: x1, y: y1, width: x2 - x1, height: y2 - y1);
       pestList.add(
         PestModel(
           pestName: item.className,
