@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/camera_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/widget/capture_or_pick.dart';
@@ -37,7 +38,14 @@ class CameraWidget extends StatelessWidget {
                       ),
                       CaptureOrPick(
                         onCapturePressed: _cameraController.captureImage,
-                        onPickFromImagePressed: () {},
+                        onPickFromImagePressed: () async {
+                          final ImagePicker picker = ImagePicker();
+                          final XFile? image = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (image != null) {
+                            _cameraController.captureFile.value = image;
+                          }
+                        },
                       ),
                     ],
                   );

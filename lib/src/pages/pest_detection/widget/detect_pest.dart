@@ -23,17 +23,19 @@ class DetectPest extends StatelessWidget {
           Expanded(
             child: Stack(
               children: [
-                Opacity(
-                  opacity: controller.isLoading.value ? 0.5 : 1,
-                  child: controller.processedImage.value != null
-                      ? Image.memory(
-                          controller.processedImage.value!,
-                          width: double.infinity,
-                        )
-                      : Image.file(
-                          File(path),
-                          width: double.infinity,
-                        ),
+                Center(
+                  child: Opacity(
+                    opacity: controller.isLoading.value ? 0.5 : 1,
+                    child: controller.processedImage.value != null
+                        ? Image.memory(
+                            controller.processedImage.value!,
+                            width: double.infinity,
+                          )
+                        : Image.file(
+                            File(path),
+                            width: double.infinity,
+                          ),
+                  ),
                 ),
                 controller.isLoading.value
                     ? const Expanded(
@@ -45,6 +47,7 @@ class DetectPest extends StatelessWidget {
                 CommonAppBar(
                   onBackPressed: () {
                     Get.find<PestCameraController>().captureFile.value = null;
+                    controller.processedImage.value = null;
                   },
                   backgroundColor: Colors.transparent,
                 )
