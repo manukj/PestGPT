@@ -5,12 +5,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackPressed;
   final Color? backgroundColor;
 
-  const CommonAppBar({super.key, this.titleText, this.onBackPressed, this.backgroundColor});
+  const CommonAppBar(
+      {super.key, this.titleText, this.onBackPressed, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? Colors.transparent,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {

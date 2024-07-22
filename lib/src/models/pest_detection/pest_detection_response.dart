@@ -12,6 +12,14 @@ class PestDetectionResponse {
       _$PestDetectionResponseFromJson({'items': json});
 
   List<dynamic> toJson() => _$PestDetectionResponseToJson(this)['items'];
+
+  List<DetectionItem> getPestDetectionList() {
+    List<DetectionItem> pestItems = [];
+    for (var element in items) {
+      pestItems.addAll(element);
+    }
+    return pestItems;
+  }
 }
 
 @JsonSerializable()

@@ -3,23 +3,25 @@ import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 
 class ToastManager {
-  static void showError(String message) {
+  static void showError(String message,
+      {Duration duration = const Duration(seconds: 5)}) {
     toastification.show(
       context: Get.context,
       title: Text(message),
       type: ToastificationType.error,
-      autoCloseDuration: const Duration(seconds: 5),
+      autoCloseDuration: duration,
       style: ToastificationStyle.fillColored,
       alignment: Alignment.bottomCenter,
     );
   }
 
-  static void showSuccess(String message) {
+  static void showSuccess(String message,
+      {Duration duration = const Duration(seconds: 5)}) {
     toastification.show(
       context: Get.context,
       title: Text(message),
       type: ToastificationType.success,
-      autoCloseDuration: const Duration(seconds: 5),
+      autoCloseDuration: duration,
       style: ToastificationStyle.fillColored,
       alignment: Alignment.bottomCenter,
     );

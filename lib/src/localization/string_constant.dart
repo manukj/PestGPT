@@ -35,4 +35,6 @@ class StringConstant {
   static const String detectPest = 'Detect Pest';
   static const String failedToDetectPest = 'Failed to detect pest';
   static const String pestDetected = 'Pest detected';
+  static const String pestDetails = 'Pest Details';
+  static const String showPestDetails = 'Show Pest Details';
 }
