@@ -19,4 +19,9 @@ const Map<String, String> zh_CN = {
   'Invalid Email': 'Invalid Email',
   'User Name cannot be empty': 'User Name cannot be empty',
   'Password cannot be empty': 'Password cannot be empty',
+  'Something went wrong': 'Something went wrong',
+  'Login Success': 'Login Success',
+  'User Name': 'User Name',
+  'Detect Pest': 'Detect Pest',
+  'Failed to detect pest': 'Failed to detect pest',
 };

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:pest_gpt/src/models/pest_detection/pest_detection_request.dart';
 import 'package:pest_gpt/src/models/pest_detection/pest_detection_response.dart';
 import 'package:pest_gpt/src/resource/api_service/base_api_service.dart';
@@ -25,8 +27,11 @@ class PestDetectService extends BaseApiService {
                   ]
                 ]
         """;
-    await Future.delayed(Duration(seconds: 12));
-    return PestDetectionResponse.fromJson(json as Map<String, dynamic>);
+
+    await Future.delayed(Duration(seconds: 1));
+    var data = JsonDecoder().convert(json);
+    var detectionResponse = PestDetectionResponse.fromJson(data);
+    return detectionResponse;
     final response = await postApi(
       '/plug/pest/detector',
       request.toJson(),

@@ -28,6 +28,7 @@ class DetectPestController extends GetxController {
 
     try {
       var response = await PestDetectService().detect(request);
+      ToastManager.showSuccess(StringConstant.pestDetected.tr);
       setResponse(response);
     } catch (e) {
       ToastManager.showError(

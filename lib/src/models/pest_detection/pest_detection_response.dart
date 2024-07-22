@@ -4,27 +4,37 @@ part 'pest_detection_response.g.dart';
 
 @JsonSerializable()
 class PestDetectionResponse {
+  List<List<DetectionItem>> items;
+
+  PestDetectionResponse({required this.items});
+
+  factory PestDetectionResponse.fromJson(List<dynamic> json) =>
+      _$PestDetectionResponseFromJson({'items': json});
+
+  List<dynamic> toJson() => _$PestDetectionResponseToJson(this)['items'];
+}
+
+@JsonSerializable()
+class DetectionItem {
+  @JsonKey(name: 'original_shape')
+  List<int> originalShape;
   @JsonKey(name: 'class_id')
-  final double classId;
-
+  double classId;
   @JsonKey(name: 'class_name')
-  final String className;
+  String className;
+  double confidence;
+  List<double> box;
 
-  @JsonKey(name: 'confidence')
-  final double confidence;
-
-  @JsonKey(name: 'box')
-  final List<double> box;
-
-  PestDetectionResponse({
+  DetectionItem({
+    required this.originalShape,
     required this.classId,
     required this.className,
     required this.confidence,
     required this.box,
   });
 
-  factory PestDetectionResponse.fromJson(Map<String, dynamic> json) =>
-      _$PestDetectionResponseFromJson(json);
+  factory DetectionItem.fromJson(Map<String, dynamic> json) =>
+      _$DetectionItemFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PestDetectionResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DetectionItemToJson(this);
 }
