@@ -23,10 +23,15 @@ class DetectPest extends StatelessWidget {
               children: [
                 Opacity(
                   opacity: controller.isLoading.value ? 0.5 : 1,
-                  child: Image.file(
-                    File(path),
-                    width: double.infinity,
-                  ),
+                  child: controller.processedImage.value != null
+                      ? Image.memory(
+                          controller.processedImage.value!,
+                          width: double.infinity,
+                        )
+                      : Image.file(
+                          File(path),
+                          width: double.infinity,
+                        ),
                 ),
                 controller.isLoading.value
                     ? const Expanded(
@@ -39,7 +44,7 @@ class DetectPest extends StatelessWidget {
             ),
           ),
           CommonPrimaryButton(
-            onPressed: controller.detectPest,
+            onPressed: () => {controller.detectPest(path)},
             title: StringConstant.detectPest.tr,
             isLoading: controller.isLoading.value,
           )

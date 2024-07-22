@@ -34,6 +34,7 @@ dev_dependencies:
   json_serializable: ^6.8.0
   flutter_lints: ^2.0.3 
   source_gen: ^1.0.0
+  image: ^4.2.0
 
   
 dependency_overrides:
