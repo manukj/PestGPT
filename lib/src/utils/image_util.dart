@@ -7,11 +7,17 @@ class ImageUtil {
     for (var detectionList in response.items) {
       for (var item in detectionList) {
         List<double> box = item.box;
-        int x1 = box[0].toInt();
-        int y1 = box[1].toInt();
-        int x2 = box[2].toInt();
-        int y2 = box[3].toInt();
+        List<int> originalShape = item.originalShape;
 
+        // Scale factors
+        double xScale = image.width / originalShape[1];
+        double yScale = image.height / originalShape[0];
+
+        // Scale coordinates
+        int x1 = (box[0] * xScale).toInt();
+        int y1 = (box[1] * yScale).toInt();
+        int x2 = (box[2] * xScale).toInt();
+        int y2 = (box[3] * yScale).toInt();
         // Draw the bounding box
         drawRect(
             image, x1, y1, x2, y2, img.ColorRgb8(255, 0, 0)); // Red color box
