@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 
-class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final String titleText;
+class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String? titleText;
+  final VoidCallback? onBackPressed;
+  final Color? backgroundColor;
 
-  const CommonAppBar({super.key, required this.titleText});
+  const CommonAppBar({super.key, this.titleText, this.onBackPressed, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: backgroundColor,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        onPressed: () => Navigator.pop(context),
+        onPressed: () {
+          if (onBackPressed != null) {
+            onBackPressed!();
+            return;
+          }
+          Navigator.pop(context);
+        },
       ),
-      title: Text(titleText),
+      title: titleText != null ? Text(titleText!) : null,
     );
   }
-  
+
   @override
   Size get preferredSize => const Size.fromHeight(70.0);
 }

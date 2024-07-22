@@ -19,18 +19,18 @@ class _PestDetectionState extends State<PestDetection> {
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    // _cameraController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => _cameraController.captureFile.value != null
-          ? DetectPest(path: _cameraController.captureFile.value!.path)
-          : CommonScaffold(
-              body: CameraWidget(),
-            ),
+    return CommonScaffold(
+      body: Obx(
+        () => _cameraController.captureFile.value != null
+            ? DetectPest(path: _cameraController.captureFile.value!.path)
+            : CameraWidget(),
+      ),
     );
   }
 }

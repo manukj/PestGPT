@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/pages/pest_detection/controller/camera_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/detect_pest_controller.dart';
 import 'package:pest_gpt/src/pages/pest_detection/widget/detecting_animation.dart';
 
@@ -40,6 +42,12 @@ class DetectPest extends StatelessWidget {
                         ),
                       )
                     : Container(),
+                CommonAppBar(
+                  onBackPressed: () {
+                    Get.find<PestCameraController>().captureFile.value = null;
+                  },
+                  backgroundColor: Colors.transparent,
+                )
               ],
             ),
           ),
