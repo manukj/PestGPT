@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
@@ -11,24 +13,27 @@ class PestInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-        body: Column(
-      children: [
-        Row(
-          children: [
-            Hero(
-              tag: pestModel.image,
-              child: Image.memory(
-                pestModel.image,
-                fit: BoxFit.scaleDown,
-                height: 100,
-              ),
-            ),
-            Text(pestModel.pestName),
-          ],
+        appBar: CommonAppBar(
+          titleText: pestModel.pestName.capitalizeFirst,
         ),
-        _buildPestInfo(pestDetail),
-      ],
-    ));
+        body: Column(
+          children: [
+            Row(
+              children: [
+                Hero(
+                  tag: pestModel.image,
+                  child: Image.memory(
+                    pestModel.image,
+                    fit: BoxFit.scaleDown,
+                    height: 100,
+                  ),
+                ),
+                Text(pestModel.pestName),
+              ],
+            ),
+            _buildPestInfo(pestDetail),
+          ],
+        ));
   }
 
   _buildPestInfo(LLMPestInfo pestDetail) {

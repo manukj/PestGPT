@@ -13,7 +13,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: backgroundColor ?? Colors.transparent,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(
+          Icons.arrow_back,
+          size: 30,
+        ),
         onPressed: () {
           if (onBackPressed != null) {
             onBackPressed!();
@@ -22,7 +25,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.pop(context);
         },
       ),
-      title: titleText != null ? Text(titleText!) : null,
+      title: titleText != null
+          ? Text(
+              titleText!,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          : null,
     );
   }
 

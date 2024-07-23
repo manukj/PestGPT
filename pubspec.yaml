@@ -37,6 +37,7 @@ dev_dependencies:
   image: ^4.2.0
   flutter_dotenv: ^5.1.0
   google_generative_ai: ^0.4.3
+  neubrutalism_ui: ^2.0.2
 
   
 dependency_overrides:

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/pest_info_page.dart';
-
 class ExpandPestDetails extends StatefulWidget {
   final PestModel pestModel;
   const ExpandPestDetails({super.key, required this.pestModel});
@@ -28,16 +28,9 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
       return ExpansionTile(
         title: Text(widget.pestModel.pestName),
         tilePadding: const EdgeInsets.all(10),
-        leading: Container(
-          width: 50,
+        leading: CommonCard(
           height: 50,
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.onSurface,
-              width: 1.0,
-            ),
-          ),
+          width: 50,
           child: Hero(
             tag: widget.pestModel.image,
             child: Image.memory(
