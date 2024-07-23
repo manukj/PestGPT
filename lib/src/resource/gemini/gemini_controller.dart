@@ -4,6 +4,8 @@ import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class GeminiController {
   GenerativeModel? _model;
+  int totalRequests = 0;
+  final int maxRequests = 3;
 
   GeminiController() {
     try {
@@ -27,8 +29,21 @@ class GeminiController {
     if (_model == null) {
       await initalizeModel();
     }
+    if (totalRequests >= maxRequests) {
+      ToastManager.showError(
+          "You have reached the maximum number of requests for this session");
+      return null;
+    }
+    totalRequests++;
     final content = [Content.text(prompt)];
-    final response = await _model!.generateContent(content);
+    final response = await _model!.generateContent(
+      content,
+      generationConfig: GenerationConfig(
+        maxOutputTokens: 100,
+        temperature: 0.5,
+        responseMimeType: "application/json",
+      ),
+    );
     return response.text;
   }
 }

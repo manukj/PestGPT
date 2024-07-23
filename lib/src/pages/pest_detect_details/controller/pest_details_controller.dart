@@ -10,10 +10,15 @@ class PestDetailsController extends GetxController {
   Future loadPestInformation(List<PestModel> pestList) async {
     isLoading.value = true;
     for (var pest in pestList) {
-      var prompt =
-          "Give me information about the pest ${pest.pestName} in 200 words and in bullet points, i want only the bullet points ";
-      pestDetails[pest.pestName] =
-          await geminiController.generateResponse(prompt);
+      try {
+        var prompt =
+            "Give me information about the pest ${pest.pestName} in 200 words and in bullet points, i want only the bullet points ";
+        pestDetails[pest.pestName] = await geminiController.generateResponse(
+          prompt,
+        );
+      } catch (e) {
+        pestDetails[pest.pestName] = null;
+      }
     }
     isLoading.value = false;
   }
