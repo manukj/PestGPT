@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:image/image.dart' as img;
 import 'package:pest_gpt/src/models/pest/pest_detection_response.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
@@ -37,8 +39,11 @@ class ImageUtil {
       int x2 = (box[2] * xScale).toInt();
       int y2 = (box[3] * yScale).toInt();
       var color = getColor(i);
-      var pestImage =
+      var croppedImage =
           img.copyCrop(image, x: x1, y: y1, width: x2 - x1, height: y2 - y1);
+      var pestImage = Uint8List.fromList(
+        img.encodeJpg(croppedImage),
+      );
       pestList.add(
         PestModel(
           pestName: item.className,

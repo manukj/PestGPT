@@ -1,8 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:image/image.dart';
 
 class PestModel {
   String pestName;
-  Image image;
+  Uint8List image;
   Color color;
 
   PestModel({

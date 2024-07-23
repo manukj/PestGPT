@@ -1,8 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as img;
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
@@ -44,9 +41,7 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
           child: Hero(
             tag: widget.pestModel.image,
             child: Image.memory(
-              Uint8List.fromList(
-                img.encodeJpg(widget.pestModel.image),
-              ),
+              widget.pestModel.image,
               fit: BoxFit.scaleDown,
             ),
           ),
