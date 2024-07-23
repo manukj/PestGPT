@@ -6,7 +6,7 @@ import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/resource/gemini/gemini_controller.dart';
 
 class PestDetailsController extends GetxController {
-  final Map<String, PestInfo?> pestDetails = {};
+  final Map<String, LLMPestInfo?> pestDetails = {};
   final isLoading = false.obs;
   final geminiController = Get.find<GeminiController>();
 
@@ -19,7 +19,7 @@ class PestDetailsController extends GetxController {
         var response = await geminiController.generateResponse(
           prompt,
         );
-        pestDetails[pest.pestName] = PestInfo.fromJson(jsonDecode(response!));
+        pestDetails[pest.pestName] = LLMPestInfo.fromJson(jsonDecode(response!));
       } catch (e) {
         pestDetails[pest.pestName] = null;
       }

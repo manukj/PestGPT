@@ -6,6 +6,7 @@ import 'package:image/image.dart' as img;
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
+import 'package:pest_gpt/src/pages/pest_info_page/pest_info_page.dart';
 
 class ExpandPestDetails extends StatefulWidget {
   final PestModel pestModel;
@@ -40,11 +41,14 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
               width: 1.0,
             ),
           ),
-          child: Image.memory(
-            Uint8List.fromList(
-              img.encodeJpg(widget.pestModel.image),
+          child: Hero(
+            tag: widget.pestModel.image,
+            child: Image.memory(
+              Uint8List.fromList(
+                img.encodeJpg(widget.pestModel.image),
+              ),
+              fit: BoxFit.scaleDown,
             ),
-            fit: BoxFit.scaleDown,
           ),
         ),
         trailing: Icon(
@@ -58,7 +62,9 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
                   child: CircularProgressIndicator(),
                 )
               : _buildPestInfo(
-                  controller.pestDetails[widget.pestModel.pestName]),
+                  controller.pestDetails[widget.pestModel.pestName],
+                  widget.pestModel,
+                ),
         ],
         onExpansionChanged: (bool expanded) {
           setState(() {
@@ -69,7 +75,7 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
     });
   }
 
-  _buildPestInfo(PestInfo? pestDetail) {
+  _buildPestInfo(LLMPestInfo? pestDetail, PestModel pestModel) {
     if (pestDetail == null) {
       return const Center(
         child: Text("Failed to fetch details"),
@@ -80,7 +86,7 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
           Text(pestDetail.pestInfo ?? "N/A"),
           TextButton(
             onPressed: () {
-              Get.to(PestInfo());
+              Get.to(PestInfoPage(pestModel, pestDetail));
             },
             child: const Text('View More'),
           )

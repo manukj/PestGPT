@@ -6,7 +6,7 @@ part of 'pest_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PestInfo _$PestInfoFromJson(Map<String, dynamic> json) => PestInfo(
+LLMPestInfo _$LLMPestInfoFromJson(Map<String, dynamic> json) => LLMPestInfo(
       idealTemperature: json['ideal_temperature'] == null
           ? null
           : IdealTemperature.fromJson(
@@ -20,7 +20,8 @@ PestInfo _$PestInfoFromJson(Map<String, dynamic> json) => PestInfo(
       pestInfo: json['pest_info'] as String?,
     );
 
-Map<String, dynamic> _$PestInfoToJson(PestInfo instance) => <String, dynamic>{
+Map<String, dynamic> _$LLMPestInfoToJson(LLMPestInfo instance) =>
+    <String, dynamic>{
       'ideal_temperature': instance.idealTemperature?.toJson(),
       'precautions': instance.precautions,
       'pesticides': instance.pesticides?.map((e) => e.toJson()).toList(),

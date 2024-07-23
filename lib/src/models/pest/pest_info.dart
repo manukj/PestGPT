@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pest_info.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PestInfo {
+class LLMPestInfo {
   @JsonKey(name: 'ideal_temperature')
   final IdealTemperature? idealTemperature;
   final List<String>? precautions;
@@ -11,16 +11,16 @@ class PestInfo {
   @JsonKey(name: 'pest_info')
   final String? pestInfo;
 
-  PestInfo({
+  LLMPestInfo({
     this.idealTemperature,
     this.precautions,
     this.pesticides,
     this.pestInfo,
   });
 
-  factory PestInfo.fromJson(Map<String, dynamic> json) =>
-      _$PestInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$PestInfoToJson(this);
+  factory LLMPestInfo.fromJson(Map<String, dynamic> json) =>
+      _$LLMPestInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$LLMPestInfoToJson(this);
 }
 
 @JsonSerializable()
