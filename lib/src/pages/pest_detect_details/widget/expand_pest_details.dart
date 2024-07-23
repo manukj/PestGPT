@@ -76,6 +76,17 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
       );
     } else {
       return Column(
+        children: [
+          Text(pestDetail.pestInfo ?? "N/A"),
+          TextButton(
+            onPressed: () {
+              Get.to(PestInfo());
+            },
+            child: const Text('View More'),
+          )
+        ],
+      );
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text("Ideal Temperature"),
@@ -86,7 +97,8 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
           ...(pestDetail.precautions ?? []).map((e) => Text("• $e")),
           const SizedBox(height: 10),
           const Text("Pesticides"),
-          ...(pestDetail.pesticides ?? []).map((e) => Text("${e?.name} - ${e?.cost}")),
+          ...(pestDetail.pesticides ?? [])
+              .map((e) => Text("${e?.name} - ${e?.cost}")),
         ],
       );
     }
