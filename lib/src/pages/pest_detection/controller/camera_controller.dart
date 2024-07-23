@@ -13,12 +13,17 @@ class PestCameraController extends GetxController {
 
   init() async {
     cameras = await availableCameras();
-    final firstCamera = cameras.first;
-    controller = CameraController(
-      firstCamera,
-      ResolutionPreset.high,
-    );
-    initializeControllerFuture = controller?.initialize();
+    if (cameras.isEmpty) {
+      
+      throw Exception('No camera found');
+    } else {
+      final firstCamera = cameras.first;
+      controller = CameraController(
+        firstCamera,
+        ResolutionPreset.high,
+      );
+      initializeControllerFuture = controller?.initialize();
+    }
   }
 
   void setLoading(bool value) {
