@@ -23,12 +23,21 @@ class BaseApiService extends GetConnect {
   }
 
   Future postApi(String url, Map<String, dynamic> body) async {
-    final response = await post(_baseUrl + url, body, headers: getHeaders());
+    final response = await post(
+      _baseUrl + url,
+      body,
+      headers: getHeaders(),
+      contentType: _getContentTypes(),
+    );
     if (response.statusCode == 200) {
       return response.body;
     } else {
       throw Exception('Login Api Failed : ${response.body}');
     }
+  }
+
+  String _getContentTypes() {
+    return 'application/json; charset=UTF-8';
   }
 
   Map<String, String>? getHeaders() {

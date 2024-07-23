@@ -1,20 +1,22 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as img;
 import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
+import 'package:pest_gpt/src/pages/pest_detect_details/widget/expand_pest_details.dart';
 import 'package:pest_gpt/src/pages/pest_detection/controller/detect_pest_controller.dart';
 
 class PestDetectDetails extends StatelessWidget {
   final DetectPestController controller = Get.find<DetectPestController>();
-
+  final detailsController = Get.put(PestDetailsController());
   PestDetectDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      detailsController.loadPestInformation(controller.pestList);
+    });
     controller.getPestNames();
     return CommonScaffold(
       appBar: CommonAppBar(
@@ -32,30 +34,7 @@ class PestDetectDetails extends StatelessWidget {
           ),
           Column(
             children: controller.pestList.map((pest) {
-              return ExpansionTile(
-                title: Text(pest.pestName),
-                leading: Container(
-                  width: 50,
-                  height: 50,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      width: 1.0,
-                    ),
-                  ),
-                  child: Image.memory(
-                    Uint8List.fromList(
-                      img.encodeJpg(pest.image),
-                    ),
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                trailing: const SizedBox(
-                  width: 20,
-                  height: 20,
-                ),
-              );
+              return ExpandPestDetails(pestModel: pest);
             }).toList(),
           )
         ],
