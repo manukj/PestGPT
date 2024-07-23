@@ -37,4 +37,7 @@ class StringConstant {
   static const String pestDetected = 'Pest detected';
   static const String pestDetails = 'Pest Details';
   static const String showPestDetails = 'Show Pest Details';
+  static const String captureImage = 'Capture Image';
+  static const String pickFromGallery = 'Pick From Gallery';
+  static const String cameraInitError = 'Camera initialization error';
 }
