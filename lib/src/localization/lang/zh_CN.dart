@@ -24,4 +24,10 @@ const Map<String, String> zh_CN = {
   'User Name': 'User Name',
   'Detect Pest': 'Detect Pest',
   'Failed to detect pest': 'Failed to detect pest',
+  'Pest detected': 'Pest detected',
+  'Pest Details': 'Pest Details',
+  'Show Pest Details': 'Show Pest Details',
+  'Capture Image': 'Capture Image',
+  'Pick From Gallery': 'Pick From Gallery',
+  'Camera initialization error': 'Camera initialization error',
 };

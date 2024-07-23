@@ -1,6 +1,6 @@
 import 'package:image/image.dart' as img;
-import 'package:pest_gpt/src/models/pest_detection/pest_detection_response.dart';
-import 'package:pest_gpt/src/models/pest_detection/pest_model.dart';
+import 'package:pest_gpt/src/models/pest/pest_detection_response.dart';
+import 'package:pest_gpt/src/models/pest/pest_model.dart';
 
 class ImageUtil {
   static List pestColors = [

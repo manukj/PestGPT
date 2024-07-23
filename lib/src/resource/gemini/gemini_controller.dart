@@ -2,6 +2,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
+final mockResponse = """
+{"ideal_temperature": {"min": "20°C", "max": "30°C"}, "precautions": ["Maintain good sanitation practices, including regularly cleaning up spills and garbage, and emptying trash receptacles often.", "Store food properly in airtight containers to prevent access by flies.", "Use screens on windows and doors to prevent flies from entering.", "Repair any cracks or holes in walls or screens that could provide entry points for flies.", "Eliminate breeding sites by removing stagnant water sources, such as standing water in buckets, tires, or clogged gutters.", "Consider using fly traps or other non-chemical methods to control fly populations."], "pesticides": [{"name": "Pyrethrin", "cost": "10-20 USDC"}, {"name": "Malathion", "cost": "15-30 USDC"}, {"name": "Permethrin", "cost": "20-40 USDC"}, {"name": "Bifenthrin", "cost": "25-50 USDC"}]}
+""";
+
 class GeminiController {
   GenerativeModel? _model;
   int totalRequests = 0;
@@ -26,6 +30,7 @@ class GeminiController {
   }
 
   Future<String?> generateResponse(String prompt) async {
+    return mockResponse;
     if (_model == null) {
       await initalizeModel();
     }

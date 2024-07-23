@@ -22,22 +22,24 @@ class PestDetectDetails extends StatelessWidget {
       appBar: CommonAppBar(
         titleText: StringConstant.pestDetails.tr,
       ),
-      body: Column(
-        children: [
-          Hero(
-            tag: controller.processedImage.value!.toString(),
-            child: Image.memory(
-              controller.processedImage.value!,
-              width: double.infinity,
-              height: 150,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Hero(
+              tag: controller.processedImage.value!.toString(),
+              child: Image.memory(
+                controller.processedImage.value!,
+                width: double.infinity,
+                height: 150,
+              ),
             ),
-          ),
-          Column(
-            children: controller.pestList.map((pest) {
-              return ExpandPestDetails(pestModel: pest);
-            }).toList(),
-          )
-        ],
+            Column(
+              children: controller.pestList.map((pest) {
+                return ExpandPestDetails(pestModel: pest);
+              }).toList(),
+            )
+          ],
+        ),
       ),
     );
   }

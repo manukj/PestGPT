@@ -3,7 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
-import 'package:pest_gpt/src/models/pest_detection/pest_model.dart';
+import 'package:pest_gpt/src/models/pest/pest_info.dart';
+import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
 
 class ExpandPestDetails extends StatefulWidget {
@@ -56,12 +57,8 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                      controller.pestDetails[widget.pestModel.pestName] ??
-                          "No information found"),
-                ),
+              : _buildPestInfo(
+                  controller.pestDetails[widget.pestModel.pestName]),
         ],
         onExpansionChanged: (bool expanded) {
           setState(() {
@@ -70,5 +67,28 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
         },
       );
     });
+  }
+
+  _buildPestInfo(PestInfo? pestDetail) {
+    if (pestDetail == null) {
+      return const Center(
+        child: Text("Failed to fetch details"),
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Ideal Temperature"),
+          Text("Min: ${pestDetail.idealTemperature?.min ?? 'N/A'}"),
+          Text("Max: ${pestDetail.idealTemperature?.max ?? 'N/A'}"),
+          const SizedBox(height: 10),
+          const Text("Precautions"),
+          ...(pestDetail.precautions ?? []).map((e) => Text("• $e")),
+          const SizedBox(height: 10),
+          const Text("Pesticides"),
+          ...(pestDetail.pesticides ?? []).map((e) => Text("${e?.name} - ${e?.cost}")),
+        ],
+      );
+    }
   }
 }
