@@ -5,6 +5,7 @@ import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_detect_details/controller/pest_details_controller.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/pest_info_page.dart';
+
 class ExpandPestDetails extends StatefulWidget {
   final PestModel pestModel;
   const ExpandPestDetails({super.key, required this.pestModel});
@@ -26,7 +27,10 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
   Widget build(BuildContext context) {
     return Obx(() {
       return ExpansionTile(
-        title: Text(widget.pestModel.pestName),
+        title: Text(
+          widget.pestModel.pestName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         tilePadding: const EdgeInsets.all(10),
         leading: CommonCard(
           height: 50,
