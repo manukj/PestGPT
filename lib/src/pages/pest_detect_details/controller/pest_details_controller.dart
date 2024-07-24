@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
+import 'package:pest_gpt/src/resource/api_service/chat_gpt_service.dart';
 import 'package:pest_gpt/src/resource/llm/llm_controller.dart';
 
 class PestDetailsController extends GetxController {
@@ -14,12 +13,10 @@ class PestDetailsController extends GetxController {
     isLoading.value = true;
     for (var pest in pestList) {
       try {
-        var prompt =
-            "Give me information about the pest ${pest.pestName} in 200 words and in bullet points, i want only the bullet points ";
-        var response = await geminiController.generateResponse(
-          prompt,
+        var response = await ChatGptService().generateResponse(
+          pest.pestName,
         );
-        pestDetails[pest.pestName] = LLMPestInfo.fromJson(jsonDecode(response!));
+        pestDetails[pest.pestName] = response;
       } catch (e) {
         pestDetails[pest.pestName] = null;
       }

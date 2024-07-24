@@ -10,8 +10,8 @@ class CommonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeuCard(
-      cardWidth: width ?? 100,
-      cardHeight: height ?? 100,
+      cardWidth: width,
+      cardHeight: height,
       child: child,
       cardColor: Theme.of(context).colorScheme.surface,
     );

@@ -5,8 +5,12 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackPressed;
   final Color? backgroundColor;
 
-  const CommonAppBar(
-      {super.key, this.titleText, this.onBackPressed, this.backgroundColor});
+  const CommonAppBar({
+    super.key,
+    this.titleText,
+    this.onBackPressed,
+    this.backgroundColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
       ),
       title: titleText != null
-          ? Text(
-              titleText!,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+          ? Expanded(
+              child: Text(
+                titleText!,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           : null,
