@@ -32,7 +32,7 @@ class _CommonTabHeaderState extends State<CommonTabHeader> {
       children: [
         // Tab Headers
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(widget.numberOfTab, (index) {
             return NeuTextButton(
               onPressed: () => _onTabTap(index),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/widget/line_chart.dart';
@@ -33,12 +32,10 @@ class _PestImageNClimateState extends State<PestImageNClimate> {
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: CommonCard(
-                child: Text(
-                  getIdealClimate(),
-                  style: const TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
-                ),
+              child: Text(
+                getIdealClimate(),
+                style: const TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
               ),
             ),
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_tab_header.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/tempature/forecast_weather_response.dart';
-import 'package:pest_gpt/src/pages/pest_info_page/widget/temp_difference.dart';
 import 'package:pest_gpt/src/utils/tempature_util.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -131,98 +131,31 @@ class _LineChartState extends State<LineChart> {
           },
         ),
         const SizedBox(height: 10),
-        Stack(
-          children: [
-            Container(
-              height: 240,
-              alignment: Alignment.bottomCenter,
-              color: Theme.of(context).colorScheme.surface,
-              child: Stack(
-                children: [
-                  buildRangeChart(
-                    forecastedRangeData,
-                    context,
-                    min - 10,
-                    max + 10,
-                    Colors.red,
-                  ),
-                  buildRangeChart(pestRangeData, context, min - 10, max + 10,
-                      Theme.of(context).primaryColor.withOpacity(0.2)),
-                ],
+        CommonCard(
+          child: Stack(
+            children: [
+              Container(
+                height: 240,
+                alignment: Alignment.bottomCenter,
+                color: Colors.transparent,
+                child: Stack(
+                  children: [
+                    buildRangeChart(
+                      forecastedRangeData,
+                      context,
+                      min - 10,
+                      max + 10,
+                      Colors.red,
+                    ),
+                    buildRangeChart(pestRangeData, context, min - 10, max + 10,
+                        Theme.of(context).primaryColor.withOpacity(0.2)),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  SfCartesianChart buildLineChart(List<LineChartData> lineChartData, context,
-      double min, double max, List<RangeChartData> rangeChartData) {
-    return SfCartesianChart(
-      plotAreaBorderWidth: 0,
-      primaryXAxis: const NumericAxis(
-        labelFormat: '{value}',
-        labelStyle: TextStyle(color: Colors.transparent, fontSize: 12),
-        majorGridLines: MajorGridLines(width: 0, color: Colors.transparent),
-        minorGridLines: MinorGridLines(width: 0, color: Colors.transparent),
-        majorTickLines: MajorTickLines(width: 0, color: Colors.transparent),
-        minorTickLines: MinorTickLines(width: 0, color: Colors.transparent),
-        axisLine: AxisLine(width: 0, color: Colors.transparent),
-      ),
-      primaryYAxis: NumericAxis(
-        maximum: max.toDouble(),
-        minimum: min.toDouble(),
-        axisLine: const AxisLine(width: 0, color: Colors.transparent),
-        majorGridLines:
-            const MajorGridLines(width: 0, color: Colors.transparent),
-        minorGridLines:
-            const MinorGridLines(width: 0, color: Colors.transparent),
-        majorTickLines:
-            const MajorTickLines(width: 0, color: Colors.transparent),
-        minorTickLines:
-            const MinorTickLines(width: 0, color: Colors.transparent),
-        labelStyle: const TextStyle(color: Colors.transparent, fontSize: 12),
-        axisLabelFormatter: (AxisLabelRenderDetails details) {
-          return ChartAxisLabel(
-            '00°',
-            const TextStyle(
-              fontSize: 12,
-              color: Colors.transparent,
-            ),
-          );
-        },
-      ),
-      series: <CartesianSeries>[
-        // Renders line chart
-        LineSeries<LineChartData, num>(
-          color: Colors.red,
-          dataSource: lineChartData,
-          xValueMapper: (LineChartData data, _) => data.x,
-          yValueMapper: (LineChartData data, _) => data.y,
-          markerSettings: const MarkerSettings(
-            isVisible: true,
-            shape: DataMarkerType
-                .circle, // You can choose other shapes like diamond, rectangle, etc.
-            color: Colors.red,
-            borderWidth: 2,
-            borderColor: Colors.white,
+            ],
           ),
         ),
       ],
-      trackballBehavior: TrackballBehavior(
-        enable: true,
-        activationMode: ActivationMode.singleTap,
-        lineType: TrackballLineType.vertical,
-        tooltipSettings: const InteractiveTooltip(enable: true),
-        builder: (BuildContext context, TrackballDetails details) {
-          final data = rangeChartData[details.pointIndex ?? 0];
-          return TemperatureDifference(
-            currentTemp: details.point?.y?.toDouble() ?? 0,
-            historicalTemp: (data.lowValue + data.highValue) / 2,
-          );
-        },
-      ),
     );
   }
 
@@ -234,6 +167,10 @@ class _LineChartState extends State<LineChart> {
     Color color,
   ) {
     return SfCartesianChart(
+      backgroundColor: Colors.transparent,
+      plotAreaBackgroundColor: Colors.transparent,
+      plotAreaBorderColor: Colors.transparent,
+      borderColor: Colors.transparent,
       plotAreaBorderWidth: 0,
       primaryXAxis: NumericAxis(
         majorGridLines:
@@ -276,7 +213,7 @@ class _LineChartState extends State<LineChart> {
 
         axisLabelFormatter: (AxisLabelRenderDetails details) {
           return ChartAxisLabel(
-            '${details.value.toStringAsFixed(0)}°',
+            getLabelforYAxis(details.value),
             TextStyle(
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSurface,
@@ -298,5 +235,16 @@ class _LineChartState extends State<LineChart> {
         ),
       ],
     );
+  }
+
+  String getLabelforYAxis(num data) {
+    switch (lineChartType) {
+      case LineChartType.temperature:
+        return '${data.toInt()}°C';
+      case LineChartType.humidity:
+        return '${data.toInt()}%';
+      case LineChartType.wind:
+        return '${data.toInt()}km/h';
+    }
   }
 }

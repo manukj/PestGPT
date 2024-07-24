@@ -23,7 +23,7 @@ class PestInfoPage extends StatelessWidget {
           children: [
             PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
             const SizedBox(height: 16),
-            Expanded(child: _buildPestInfo(pestInfo)),
+            // Expanded(child: _buildPestInfo(pestInfo)),
           ],
         ),
       ),
