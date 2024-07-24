@@ -68,12 +68,6 @@ class PestInfoPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16),
-        CommonCard(
-          child: Text(
-            'Pest Info: ${pestDetail.pestInfo}',
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
       ],
     );
   }
