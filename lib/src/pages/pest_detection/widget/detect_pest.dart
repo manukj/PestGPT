@@ -43,11 +43,9 @@ class DetectPest extends StatelessWidget {
                   ),
                 ),
                 controller.isLoading.value
-                    ? const Expanded(
-                        child: Center(
-                          child: DetectingAnimation(),
-                        ),
-                      )
+                    ? const Center(
+                      child: DetectingAnimation(),
+                    )
                     : Container(),
                 CommonAppBar(
                   onBackPressed: () {

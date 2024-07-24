@@ -44,7 +44,7 @@ class PestInfoPage extends StatelessWidget {
         Text('Precautions: ${pestDetail.precautions?.join(', ')}'),
         Text(
             'Pesticides: ${pestDetail.pesticides?.map((e) => '${e.name} - ${e.cost}').join(', ')}'),
-        Text('Pest Info: ${pestDetail.pestInfo}'),
+          Text('Pest Info: ${pestDetail.pestInfo}'),
       ],
     );
   }

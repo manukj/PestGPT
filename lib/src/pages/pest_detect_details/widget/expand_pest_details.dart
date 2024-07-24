@@ -73,16 +73,19 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
         child: Text("Failed to fetch details"),
       );
     } else {
-      return Column(
-        children: [
-          Text(pestDetail.pestInfo ?? "N/A"),
-          TextButton(
-            onPressed: () {
-              Get.to(PestInfoPage(pestModel, pestDetail));
-            },
-            child: const Text('View More'),
-          )
-        ],
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            Text(pestDetail.pestInfo ?? "N/A"),
+            TextButton(
+              onPressed: () {
+                Get.to(PestInfoPage(pestModel, pestDetail));
+              },
+              child: const Text('View More'),
+            )
+          ],
+        ),
       );
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
