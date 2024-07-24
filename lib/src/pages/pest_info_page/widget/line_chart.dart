@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pest_gpt/src/common_widget/common_tab_header.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/tempature/forecast_weather_response.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/widget/temp_difference.dart';
@@ -9,8 +10,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class RangeChartData {
   RangeChartData(this.xValue, this.lowValue, this.highValue);
   final num xValue;
-  final double lowValue;
-  final double highValue;
+  final num lowValue;
+  final num highValue;
 }
 
 class LineChartData {
@@ -19,60 +20,138 @@ class LineChartData {
   final double? y;
 }
 
-class TempatureLineChart extends StatelessWidget {
+enum LineChartType { temperature, humidity, wind }
+
+class LineChart extends StatefulWidget {
   final ForecastWeatherResponse weatherForecast;
-  final IdealTemperature idealTemperature =
-      IdealTemperature(min: "20", max: "30");
-  TempatureLineChart({super.key, required this.weatherForecast});
+  final LLMPestInfo pestInfo;
+  final Function(int) onChangeTab;
+  const LineChart(
+      {super.key,
+      required this.weatherForecast,
+      required this.pestInfo,
+      required this.onChangeTab});
+
+  @override
+  State<LineChart> createState() => _LineChartState();
+}
+
+class _LineChartState extends State<LineChart> {
+  LineChartType lineChartType = LineChartType.temperature;
+  List<RangeChartData> getChartData(bool isForcasted) {
+    List<RangeChartData> rangeChartData = [];
+    switch (lineChartType) {
+      case LineChartType.temperature:
+        rangeChartData = widget.weatherForecast.list
+            .map(
+              (forecast) => RangeChartData(
+                forecast.dt,
+                isForcasted
+                    ? TemperatureUtil.kelvinToCelsius(forecast.temperature.min)
+                    : (widget.pestInfo.idealTemperature?.min ?? 0.0),
+                isForcasted
+                    ? TemperatureUtil.kelvinToCelsius(forecast.temperature.max)
+                    : (widget.pestInfo.idealTemperature?.max ?? 0.0),
+              ),
+            )
+            .toList();
+        break;
+      case LineChartType.humidity:
+        rangeChartData = widget.weatherForecast.list
+            .map(
+              (forecast) => RangeChartData(
+                forecast.dt,
+                isForcasted
+                    ? forecast.humidity
+                    : widget.pestInfo.idealHumidity?.min ?? 0.0,
+                isForcasted
+                    ? forecast.humidity
+                    : widget.pestInfo.idealHumidity?.max ?? 0.0,
+              ),
+            )
+            .toList();
+        break;
+      case LineChartType.wind:
+        rangeChartData = widget.weatherForecast.list
+            .map(
+              (forecast) => RangeChartData(
+                forecast.dt,
+                isForcasted
+                    ? forecast.speed
+                    : widget.pestInfo.idealWindSpeed?.min ?? 0.0,
+                isForcasted
+                    ? forecast.speed
+                    : widget.pestInfo.idealWindSpeed?.max ?? 0.0,
+              ),
+            )
+            .toList();
+        break;
+    }
+    return rangeChartData;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<RangeChartData> rangeChartData = weatherForecast.list
-        .map((forecast) => RangeChartData(
-            forecast.dt,
-            (double.parse(idealTemperature.min)),
-            (double.parse(idealTemperature.max))))
-        .toList();
+    final List<RangeChartData> pestRangeData = getChartData(false);
 
-    final List<RangeChartData> forecastedRangeData = weatherForecast.list
-        .map(
-          (forecast) => RangeChartData(
-            forecast.dt,
-            TemperatureUtil.kelvinToCelsius(forecast.temperature.min),
-            TemperatureUtil.kelvinToCelsius(
-              forecast.temperature.max,
-            ),
-          ),
-        )
-        .toList();
+    final List<RangeChartData> forecastedRangeData = getChartData(true);
 
-    final min = rangeChartData
+    final pestMin = pestRangeData
         .map((e) => e.lowValue)
         .reduce((value, element) => value < element ? value : element);
-    final max = rangeChartData
+    final pestMax = pestRangeData
         .map((e) => e.highValue)
         .reduce((value, element) => value > element ? value : element);
+
+    final forecastedMin = forecastedRangeData
+        .map((e) => e.lowValue)
+        .reduce((value, element) => value < element ? value : element);
+    final forecastedMax = forecastedRangeData
+        .map((e) => e.highValue)
+        .reduce((value, element) => value > element ? value : element);
+
+    final min = pestMin < forecastedMin ? pestMin : forecastedMin;
+    final max = pestMax > forecastedMax ? pestMax : forecastedMax;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Temperature"),
-        Container(
-          height: 240,
-          color: Theme.of(context).colorScheme.surface,
-          child: Stack(
-            children: [
-              buildRangeChart(
-                forecastedRangeData,
-                context,
-                min - 10,
-                max + 10,
-                Colors.red,
+        CommonTabHeader(
+          numberOfTab: 3,
+          tabHeaders: const [
+            'Temperature',
+            'Humidity',
+            'Wind',
+          ],
+          onChangeTab: (index) {
+            setState(() {
+              lineChartType = LineChartType.values[index];
+            });
+            widget.onChangeTab(index);
+          },
+        ),
+        const SizedBox(height: 10),
+        Stack(
+          children: [
+            Container(
+              height: 240,
+              alignment: Alignment.bottomCenter,
+              color: Theme.of(context).colorScheme.surface,
+              child: Stack(
+                children: [
+                  buildRangeChart(
+                    forecastedRangeData,
+                    context,
+                    min - 10,
+                    max + 10,
+                    Colors.red,
+                  ),
+                  buildRangeChart(pestRangeData, context, min - 10, max + 10,
+                      Theme.of(context).primaryColor.withOpacity(0.2)),
+                ],
               ),
-              buildRangeChart(rangeChartData, context, min - 10, max + 10,
-                  Theme.of(context).primaryColor.withOpacity(0.2)),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
@@ -207,6 +286,7 @@ class TempatureLineChart extends StatelessWidget {
       ),
       series: <CartesianSeries<RangeChartData, num>>[
         SplineRangeAreaSeries<RangeChartData, num>(
+          animationDuration: 500,
           dataSource: rangeChartData,
           color: color.withOpacity(0.4),
           borderDrawMode: RangeAreaBorderMode.excludeSides,

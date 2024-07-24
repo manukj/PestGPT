@@ -4,37 +4,39 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 
-final mockResponse = """
+const mockResponse = """
 {
-  "pest_info": "Flies (Diptera) are a diverse group of insects that affect a variety of plants including fruits, vegetables, and ornamental plants. Historically, flies have been known to spread diseases and damage crops. They are particularly troublesome in agriculture where they can lead to significant economic losses by contaminating food sources and spreading pathogens.",
+  "pest_info": "Aphids are small sap-sucking insects that affect a wide variety of plants, including roses, vegetables, fruit trees, and ornamental plants. They have a long history of being a major agricultural pest, causing damage by feeding on plant sap and transmitting plant viruses. Aphids reproduce rapidly, making them difficult to control once an infestation occurs.",
   "ideal_temperature": {
-    "min": "20°C",
-    "max": "30°C"
+    "min": 15.0,
+    "max": 30.0
+  },
+  "ideal_humidity": {
+    "min": 60.0,
+    "max": 80.0
+  },
+  "ideal_rainfall": {
+    "min": 20.0,
+    "max": 50.0
   },
   "precautions": [
-    "Maintain good sanitation practices, including regularly cleaning up spills and garbage, and emptying trash receptacles often.",
-    "Store food properly in airtight containers to prevent access by flies.",
-    "Use screens on windows and doors to prevent flies from entering.",
-    "Repair any cracks or holes in walls or screens that could provide entry points for flies.",
-    "Eliminate breeding sites by removing stagnant water sources, such as standing water in buckets, tires, or clogged gutters.",
-    "Consider using fly traps or other non-chemical methods to control fly populations."
+    "Regularly inspect plants for signs of aphids.",
+    "Use insecticidal soaps or neem oil as preventive measures.",
+    "Encourage natural predators like ladybugs and lacewings.",
+    "Avoid over-fertilizing plants as it can attract aphids."
   ],
   "pesticides": [
     {
+      "name": "Insecticidal Soap",
+      "cost": "15 per liter"
+    },
+    {
+      "name": "Neem Oil",
+      "cost": "20 per liter"
+    },
+    {
       "name": "Pyrethrin",
-      "cost": "10-20 USDC"
-    },
-    {
-      "name": "Malathion",
-      "cost": "15-30 USDC"
-    },
-    {
-      "name": "Permethrin",
-      "cost": "20-40 USDC"
-    },
-    {
-      "name": "Bifenthrin",
-      "cost": "25-50 USDC"
+      "cost": "25 per liter"
     }
   ]
 }
@@ -50,20 +52,20 @@ class ChatGptService extends GetConnect {
   Future<LLMPestInfo> generateResponse(String pestName) async {
     return LLMPestInfo.fromJson(jsonDecode(mockResponse));
     final Map<String, dynamic> data = {
-      'model': 'gpt-4',
-      'messages': [
-        {'role': 'system', 'content': 'You are an expert in pest management.'},
+      "model": "gpt-4",
+      "messages": [
+        {"role": "system", "content": "You are an expert in pest management."},
         {
-          'role': 'user',
-          'content':
-              "Provide a JSON response with information about pest '$pestName'. Include pest_info: a short description of 150 words telling which plants it affects and its history. Then include ideal temperature min and max in which this pest grows, precautions to take to prevent this pest, and a list of pesticides with their costs."
+          "role": "user",
+          "content":
+              "Provide a JSON response with information about pest '$pestName'. Include pest_info: a short description of 150 words telling which plants it affects and its history. Then include idealTemperature, idealHumidity, and idealRainfall in which this pest grows, each as objects with min and max values of type double. Also include precautions to take to prevent this pest, and a list of pesticides with their costs."
         }
       ],
-      'temperature': 0.7,
-      'max_tokens': 100,
-      'n': 1,
-      'stop': null,
-      'response_format': 'json'
+      "temperature": 0.7,
+      "max_tokens": 100,
+      "n": 1,
+      "stop": null,
+      "response_format": "json"
     };
 
     final response = await post(url, data, headers: headers);

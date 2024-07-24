@@ -4,13 +4,12 @@ import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
-import 'package:pest_gpt/src/pages/pest_info_page/widget/line_chart.dart';
-import 'package:pest_gpt/src/resource/api_service/mock.dart';
+import 'package:pest_gpt/src/pages/pest_info_page/widget/pest_image_n_climate.dart';
 
 class PestInfoPage extends StatelessWidget {
   final PestModel pestModel;
-  final LLMPestInfo pestDetail;
-  const PestInfoPage(this.pestModel, this.pestDetail, {super.key});
+  final LLMPestInfo pestInfo;
+  const PestInfoPage(this.pestModel, this.pestInfo, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,55 +21,34 @@ class PestInfoPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                Hero(
-                  tag: pestModel.image,
-                  child: Image.memory(
-                    pestModel.image,
-                    fit: BoxFit.scaleDown,
-                    height: 100,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: CommonCard(
-                    child: Text(
-                      'Ideal Temperature: \n ${pestDetail.idealTemperature?.min} - ${pestDetail.idealTemperature?.max}',
-                      style: const TextStyle(fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
             const SizedBox(height: 16),
-            Expanded(child: _buildPestInfo(pestDetail)),
+            Expanded(child: _buildPestInfo(pestInfo)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPestInfo(LLMPestInfo pestDetail) {
+  Widget _buildPestInfo(LLMPestInfo pestInfo) {
     return ListView(
       shrinkWrap: true,
       children: [
-        TempatureLineChart(weatherForecast: MockWeatherResponse.getWeatherResponse,),
+        
         CommonCard(
           child: Text(
-            'Precautions: ${pestDetail.precautions?.join(', ')}',
-            style: TextStyle(fontSize: 18),
+            'Precautions: ${pestInfo.precautions?.join(', ')}',
+            style: const TextStyle(fontSize: 18),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CommonCard(
           child: Text(
-            'Pesticides: ${pestDetail.pesticides?.map((e) => '${e.name} - ${e.cost}').join(', ')}',
-            style: TextStyle(fontSize: 18),
+            'Pesticides: ${pestInfo.pesticides?.map((e) => '${e.name} - ${e.cost}').join(', ')}',
+            style: const TextStyle(fontSize: 18),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }

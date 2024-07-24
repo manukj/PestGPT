@@ -5,7 +5,11 @@ part 'pest_info.g.dart';
 @JsonSerializable(explicitToJson: true)
 class LLMPestInfo {
   @JsonKey(name: 'ideal_temperature')
-  final IdealTemperature? idealTemperature;
+  final MinMaxValue? idealTemperature;
+  @JsonKey(name: 'ideal_humidity')
+  final MinMaxValue? idealHumidity;
+  @JsonKey(name: 'ideal_wind')
+  final MinMaxValue? idealWindSpeed;
   final List<String>? precautions;
   final List<Pesticide>? pesticides;
   @JsonKey(name: 'pest_info')
@@ -16,6 +20,8 @@ class LLMPestInfo {
     this.precautions,
     this.pesticides,
     this.pestInfo,
+    this.idealHumidity,
+    this.idealWindSpeed,
   });
 
   factory LLMPestInfo.fromJson(Map<String, dynamic> json) =>
@@ -24,18 +30,18 @@ class LLMPestInfo {
 }
 
 @JsonSerializable()
-class IdealTemperature {
-  final String min;
-  final String max;
+class MinMaxValue {
+  final double min;
+  final double max;
 
-  IdealTemperature({
+  MinMaxValue({
     required this.min,
     required this.max,
   });
 
-  factory IdealTemperature.fromJson(Map<String, dynamic> json) =>
-      _$IdealTemperatureFromJson(json);
-  Map<String, dynamic> toJson() => _$IdealTemperatureToJson(this);
+  factory MinMaxValue.fromJson(Map<String, dynamic> json) =>
+      _$MinMaxValueFromJson(json);
+  Map<String, dynamic> toJson() => _$MinMaxValueToJson(this);
 }
 
 @JsonSerializable()

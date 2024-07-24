@@ -9,7 +9,7 @@ part of 'pest_info.dart';
 LLMPestInfo _$LLMPestInfoFromJson(Map<String, dynamic> json) => LLMPestInfo(
       idealTemperature: json['ideal_temperature'] == null
           ? null
-          : IdealTemperature.fromJson(
+          : MinMaxValue.fromJson(
               json['ideal_temperature'] as Map<String, dynamic>),
       precautions: (json['precautions'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -18,23 +18,31 @@ LLMPestInfo _$LLMPestInfoFromJson(Map<String, dynamic> json) => LLMPestInfo(
           ?.map((e) => Pesticide.fromJson(e as Map<String, dynamic>))
           .toList(),
       pestInfo: json['pest_info'] as String?,
+      idealHumidity: json['ideal_humidity'] == null
+          ? null
+          : MinMaxValue.fromJson(
+              json['ideal_humidity'] as Map<String, dynamic>),
+      idealWindSpeed: json['ideal_wind'] == null
+          ? null
+          : MinMaxValue.fromJson(json['ideal_wind'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LLMPestInfoToJson(LLMPestInfo instance) =>
     <String, dynamic>{
       'ideal_temperature': instance.idealTemperature?.toJson(),
+      'ideal_humidity': instance.idealHumidity?.toJson(),
+      'ideal_wind': instance.idealWindSpeed?.toJson(),
       'precautions': instance.precautions,
       'pesticides': instance.pesticides?.map((e) => e.toJson()).toList(),
       'pest_info': instance.pestInfo,
     };
 
-IdealTemperature _$IdealTemperatureFromJson(Map<String, dynamic> json) =>
-    IdealTemperature(
-      min: json['min'] as String,
-      max: json['max'] as String,
+MinMaxValue _$MinMaxValueFromJson(Map<String, dynamic> json) => MinMaxValue(
+      min: (json['min'] as num).toDouble(),
+      max: (json['max'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$IdealTemperatureToJson(IdealTemperature instance) =>
+Map<String, dynamic> _$MinMaxValueToJson(MinMaxValue instance) =>
     <String, dynamic>{
       'min': instance.min,
       'max': instance.max,
