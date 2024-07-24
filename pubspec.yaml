@@ -38,6 +38,8 @@ dev_dependencies:
   flutter_dotenv: ^5.1.0
   google_generative_ai: ^0.4.3
   neubrutalism_ui: ^2.0.2
+  syncfusion_flutter_charts: ^26.1.40
+  location: ^7.0.0
 
   
 dependency_overrides:

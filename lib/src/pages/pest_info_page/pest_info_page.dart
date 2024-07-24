@@ -4,6 +4,8 @@ import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
+import 'package:pest_gpt/src/pages/pest_info_page/widget/line_chart.dart';
+import 'package:pest_gpt/src/resource/api_service/mock.dart';
 
 class PestInfoPage extends StatelessWidget {
   final PestModel pestModel;
@@ -54,6 +56,7 @@ class PestInfoPage extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: [
+        TempatureLineChart(weatherForecast: MockWeatherResponse.getWeatherResponse,),
         CommonCard(
           child: Text(
             'Precautions: ${pestDetail.precautions?.join(', ')}',
