@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/localization/localizer_manager.dart';
 import 'package:pest_gpt/src/pages/splash/splash.dart';
+import 'package:toastification/toastification.dart';
 
 import './resource/theme/theme.dart';
 
@@ -12,29 +13,31 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      home: Splash(),
-      translations: LocalizationManager(),
-      fallbackLocale: const Locale('en', 'US'),
-      locale: Get.deviceLocale,
-      darkTheme: darkTheme(),
-      theme: lightTheme(),
-      debugShowCheckedModeBanner: false,
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('zh', 'CN'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      themeMode: ThemeMode.system,
-      routingCallback: (routing) {
-        if (kDebugMode) {
-          print("pushing ${routing?.current} router");
-        }
-      },
+    return ToastificationWrapper(
+      child: GetMaterialApp(
+        home: Splash(),
+        translations: LocalizationManager(),
+        fallbackLocale: const Locale('en', 'US'),
+        locale: Get.deviceLocale,
+        darkTheme: darkTheme(),
+        theme: lightTheme(),
+        debugShowCheckedModeBanner: false,
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('zh', 'CN'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        themeMode: ThemeMode.system,
+        routingCallback: (routing) {
+          if (kDebugMode) {
+            print("pushing ${routing?.current} router");
+          }
+        },
+      ),
     );
   }
 }

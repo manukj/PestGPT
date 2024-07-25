@@ -21,8 +21,9 @@ dependencies:
   camera: ^0.11.0+1
   path_provider: ^2.1.3
   permission_handler: ^11.3.1
-  lang_internationalization: 
-    path: /Users/manu/Projects/University/dessertation/PestGPT/internationalization
+  lang_internationalization: ^0.0.5
+  toastification: ^2.0.0
+  lottie: ^3.1.2
   flutter_localizations:
     sdk: flutter
 
@@ -33,6 +34,12 @@ dev_dependencies:
   json_serializable: ^6.8.0
   flutter_lints: ^2.0.3 
   source_gen: ^1.0.0
+  image: ^4.2.0
+  flutter_dotenv: ^5.1.0
+  google_generative_ai: ^0.4.3
+  neubrutalism_ui: ^2.0.2
+  syncfusion_flutter_charts: ^26.1.40
+  location: ^7.0.0
 
   
 dependency_overrides:
@@ -50,3 +57,5 @@ flutter:
     - assets/images/
     - assets/models/
     - assets/labels/
+    - assets/lottiefiles/
+    - assets/.env

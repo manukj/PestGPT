@@ -4,6 +4,7 @@ part 'pest_detection_request.g.dart';
 
 @JsonSerializable()
 class PestDetectionRequest {
+  @JsonKey(name: 'detection_list')
   final List<String> detectionList;
 
   PestDetectionRequest({
