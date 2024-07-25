@@ -18,12 +18,13 @@ class PestInfoPage extends StatelessWidget {
         titleText: pestModel.pestName,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView(
+          shrinkWrap: true,
           children: [
             PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
             const SizedBox(height: 16),
-            // Expanded(child: _buildPestInfo(pestInfo)),
+            _buildPestInfo(pestInfo),
           ],
         ),
       ),
@@ -31,16 +32,36 @@ class PestInfoPage extends StatelessWidget {
   }
 
   Widget _buildPestInfo(LLMPestInfo pestInfo) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
-        CommonCard(
-          child: Text(
-            'Precautions: ${pestInfo.precautions?.join(', ')}',
-            style: const TextStyle(fontSize: 18),
+        const Text(
+          "Precautions",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        pestInfo.precautions != null
+            ? Column(
+                children: pestInfo.precautions!
+                    .map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: CommonCard(
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Text(
+                              e,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            : const SizedBox(),
         const SizedBox(height: 16),
         CommonCard(
           child: Text(
