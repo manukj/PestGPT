@@ -6,12 +6,16 @@ class CommonPrimaryButton extends StatelessWidget {
   final Widget? titleWidget;
   final String? title;
   final bool isLoading;
+  final double? width;
+  final double? height;
 
   const CommonPrimaryButton({
     required this.onPressed,
     this.titleWidget,
     this.title,
     this.isLoading = false,
+    this.width,
+    this.height,
     Key? key,
   }) : super(key: key);
 
@@ -29,7 +33,13 @@ class CommonPrimaryButton extends StatelessWidget {
         //     borderRadius: Constants.borderRadius,
         //   ),
         // ),
-        text: Text(title ?? ''),
+        text: Text(
+          title ?? '',
+          style: TextStyle(
+            fontSize: 14,
+            color: Theme.of(context).colorScheme.surface,
+          ),
+        ),
         // child: Row(
         //   mainAxisAlignment: MainAxisAlignment.center,
         //   children: [

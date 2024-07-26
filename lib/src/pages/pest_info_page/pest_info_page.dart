@@ -5,6 +5,7 @@ import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/widget/pest_image_n_climate.dart';
+import 'package:pest_gpt/src/pages/pest_info_page/widget/precaution_list.dart';
 
 class PestInfoPage extends StatelessWidget {
   final PestModel pestModel;
@@ -43,24 +44,7 @@ class PestInfoPage extends StatelessWidget {
           ),
         ),
         pestInfo.precautions != null
-            ? Column(
-                children: pestInfo.precautions!
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: CommonCard(
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text(
-                              e,
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              )
+            ? PrecautionList(pestInfo.precautions!)
             : const SizedBox(),
         const SizedBox(height: 16),
         CommonCard(

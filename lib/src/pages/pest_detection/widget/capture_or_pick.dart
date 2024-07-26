@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neubrutalism_ui/neubrutalism_ui.dart';
+import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
 
 class CaptureOrPick extends StatelessWidget {
   final VoidCallback onCapturePressed;
@@ -20,7 +21,7 @@ class CaptureOrPick extends StatelessWidget {
       ),
       color: Theme.of(context).cardColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -36,9 +37,9 @@ class CaptureOrPick extends StatelessWidget {
                 ),
                 NeuIconButton(
                   buttonColor: Theme.of(context).cardColor,
-                  buttonHeight: 50,
-                  borderRadius: BorderRadius.circular(25),
-                  buttonWidth: 50,
+                  buttonHeight: 66,
+                  borderRadius: BorderRadius.circular(33),
+                  buttonWidth: 66,
                   enableAnimation: true,
                   icon: Icon(
                     Icons.radio_button_checked,
@@ -67,15 +68,11 @@ class CaptureOrPick extends StatelessWidget {
     Null Function() onPressed,
     IconData iconData,
   ) {
-    return NeuIconButton(
-      enableAnimation: true,
-      icon: Icon(
-        iconData,
-        size: 30,
-      ),
+    return CommonIconButton(
+      icon: iconData,
       onPressed: onPressed,
-      buttonHeight: 50,
-      buttonWidth: 50,
+      height: 50,
+      width: 50,
     );
   }
 }

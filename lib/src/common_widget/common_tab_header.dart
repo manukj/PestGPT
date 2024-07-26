@@ -36,7 +36,14 @@ class _CommonTabHeaderState extends State<CommonTabHeader> {
           children: List.generate(widget.numberOfTab, (index) {
             return NeuTextButton(
               onPressed: () => _onTabTap(index),
-              text: Text(widget.tabHeaders[index]),
+              text: Text(
+                widget.tabHeaders[index],
+                style: TextStyle(
+                  color: _currentTabIndex == index
+                      ? Theme.of(context).colorScheme.surface
+                      : Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
               enableAnimation: true,
               buttonColor:
                   _currentTabIndex != index ? Colors.transparent : neuDefault1,

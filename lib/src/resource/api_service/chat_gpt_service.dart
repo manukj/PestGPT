@@ -15,7 +15,7 @@ const mockResponse = """
     "min": 60.0,
     "max": 80.0
   },
-  "ideal_rainfall": {
+  "ideal_wind": {
     "min": 20.0,
     "max": 50.0
   },

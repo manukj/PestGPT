@@ -7,7 +7,6 @@ import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/pest/pest_detection_request.dart';
 import 'package:pest_gpt/src/models/pest/pest_detection_response.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
-import 'package:pest_gpt/src/pages/pest_detect_details/pest_detect_details.dart';
 import 'package:pest_gpt/src/resource/api_service/pest_detect_service.dart';
 import 'package:pest_gpt/src/utils/image_util.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
@@ -41,7 +40,7 @@ class DetectPestController extends GetxController {
           duration: const Duration(seconds: 1));
       await proccessResponse(response, imagePath);
       setResponse(response);
-      Get.to(PestDetectDetails());
+      // Get.to(PestDetectDetails());
     } catch (e) {
       ToastManager.showError(
           StringConstant.failedToDetectPest.tr + e.toString());
@@ -56,7 +55,6 @@ class DetectPestController extends GetxController {
     ImageUtil.drawBoundingBoxesAndCropPestImage(image, response, pestList);
     final Uint8List processedBytes = Uint8List.fromList(img.encodeJpg(image));
     processedImage.value = processedBytes;
-    await Future.delayed(const Duration(seconds: 1));
   }
 
   List<String> getPestNames() {
