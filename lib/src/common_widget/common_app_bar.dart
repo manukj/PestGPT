@@ -30,13 +30,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
       ),
       title: titleText != null
-          ? Expanded(
-              child: Text(
-                titleText!,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+          ? Text(
+              titleText!,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             )
           : null,

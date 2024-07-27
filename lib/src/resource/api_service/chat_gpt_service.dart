@@ -20,10 +20,10 @@ const mockResponse = """
     "max": 50.0
   },
   "precautions": [
-    "Regularly inspect plants for signs of aphids.",
-    "Use insecticidal soaps or neem oil as preventive measures.",
-    "Encourage natural predators like ladybugs and lacewings.",
-    "Avoid over-fertilizing plants as it can attract aphids."
+    "1. Regularly inspect plants for signs of aphids.",
+    "2. Use insecticidal soaps or neem oil as preventive measures.",
+    "3. Encourage natural predators like ladybugs and lacewings.",
+    "4. Avoid over-fertilizing plants as it can attract aphids."
   ],
   "pesticides": [
     {

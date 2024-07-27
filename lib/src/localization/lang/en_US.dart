@@ -30,4 +30,6 @@ const Map<String, String> en_US = {
   'Capture Image': 'Capture Image',
   'Pick From Gallery': 'Pick From Gallery',
   'Camera initialization error': 'Camera initialization error',
+  'Apply': 'Apply',
+  'Add as Task': 'Add as Task',
 };

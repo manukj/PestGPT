@@ -36,7 +36,7 @@ class CommonPrimaryButton extends StatelessWidget {
         text: Text(
           title ?? '',
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             color: Theme.of(context).colorScheme.surface,
           ),
         ),

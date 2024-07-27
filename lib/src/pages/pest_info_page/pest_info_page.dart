@@ -25,26 +25,19 @@ class PestInfoPage extends StatelessWidget {
           children: [
             PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
             const SizedBox(height: 16),
-            _buildPestInfo(pestInfo),
+            _buildPestInfo(pestInfo, pestModel.pestName),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPestInfo(LLMPestInfo pestInfo) {
+  Widget _buildPestInfo(LLMPestInfo pestInfo, String pestName) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Precautions",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         pestInfo.precautions != null
-            ? PrecautionList(pestInfo.precautions!)
+            ? PrecautionList(pestInfo.precautions!, pestName: pestName)
             : const SizedBox(),
         const SizedBox(height: 16),
         CommonCard(
