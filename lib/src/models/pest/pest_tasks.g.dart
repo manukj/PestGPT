@@ -9,7 +9,7 @@ part of 'pest_tasks.dart';
 PestTasks _$PestTasksFromJson(Map<String, dynamic> json) => PestTasks(
       pestName: json['pestName'] as String,
       tasks: (json['tasks'] as List<dynamic>)
-          .map((e) => Tasks.fromJson(e as Map<String, dynamic>))
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -18,12 +18,12 @@ Map<String, dynamic> _$PestTasksToJson(PestTasks instance) => <String, dynamic>{
       'tasks': instance.tasks,
     };
 
-Tasks _$TasksFromJson(Map<String, dynamic> json) => Tasks(
+Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       taskName: json['taskName'] as String,
-      isCompleted: json['isCompleted'] as bool,
+      isCompleted: json['isCompleted'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$TasksToJson(Tasks instance) => <String, dynamic>{
+Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'taskName': instance.taskName,
       'isCompleted': instance.isCompleted,
     };

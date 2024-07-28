@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:path/path.dart';
 import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
 import 'package:sqflite/sqflite.dart';
@@ -19,8 +21,7 @@ class DatabaseService {
   }
 
   Future<Database> _initDatabase() async {
-    var dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'pest_tasks.db');
+    String path = join(await getDatabasesPath(), 'pest_tasks.db');
     return await openDatabase(
       path,
       version: 1,
@@ -32,79 +33,84 @@ class DatabaseService {
     await db.execute('''
       CREATE TABLE PestTasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        pestName TEXT
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE Tasks (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        taskName TEXT,
-        isCompleted INTEGER,
-        pestTaskId INTEGER,
-        FOREIGN KEY (pestTaskId) REFERENCES PestTasks (id) ON DELETE CASCADE
+        pestTasks TEXT NOT NULL,
+        pestName TEXT NOT NULL
       )
     ''');
   }
 
   Future<int> addPestTask(PestTasks pestTask) async {
     final db = await database;
-    int id = await db.insert('PestTasks', {'pestName': pestTask.pestName});
-
-    for (var task in pestTask.tasks) {
-      await db.insert('Tasks', {
-        'taskName': task.taskName,
-        'isCompleted': task.isCompleted ? 1 : 0,
-        'pestTaskId': id
-      });
-    }
-    return id;
-  }
-
-  Future<int> addTask(int pestTaskId, Tasks task) async {
-    final db = await database;
-    return await db.insert('Tasks', {
-      'taskName': task.taskName,
-      'isCompleted': task.isCompleted ? 1 : 0,
-      'pestTaskId': pestTaskId
-    });
-  }
-
-  Future<void> updateTaskStatus(int taskId, bool isCompleted) async {
-    final db = await database;
-    await db.update(
-      'Tasks',
-      {'isCompleted': isCompleted ? 1 : 0},
-      where: 'id = ?',
-      whereArgs: [taskId],
+    String tasksJson = jsonEncode(pestTask.toJson());
+    return await db.insert(
+      'PestTasks',
+      {
+        'pestName': pestTask.pestName,
+        'pestTasks': tasksJson,
+      },
     );
   }
 
-  Future<List<PestTasks>> getPestTasks() async {
+  Future<PestTasks> getPestTask(String pestName) async {
     final db = await database;
-    final List<Map<String, dynamic>> pestTaskMaps = await db.query('PestTasks');
-    List<PestTasks> pestTasks = [];
+    final List<Map<String, dynamic>> maps = await db.query(
+      'PestTasks',
+      where: 'pestName = ?',
+      whereArgs: [pestName],
+    );
 
-    for (var pestTaskMap in pestTaskMaps) {
-      final List<Map<String, dynamic>> taskMaps = await db.query(
-        'Tasks',
-        where: 'pestTaskId = ?',
-        whereArgs: [pestTaskMap['id']],
-      );
-
-      List<Tasks> tasks = taskMaps.map((taskMap) {
-        return Tasks(
-          taskName: taskMap['taskName'],
-          isCompleted: taskMap['isCompleted'] == 1,
-        );
-      }).toList();
-
-      pestTasks.add(PestTasks(
-        pestName: pestTaskMap['pestName'],
-        tasks: tasks,
-      ));
+    if (maps.isNotEmpty) {
+      var pestTaskMap = maps.first['pestTasks'];
+      return PestTasks.fromJson(pestTaskMap);
+    } else {
+      throw Exception('Pest $pestName not found');
     }
+  }
 
-    return pestTasks;
+  Future<List<PestTasks>> getAllPestTasks() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('PestTasks');
+
+    return List.generate(maps.length, (i) {
+      return PestTasks.fromJson(jsonDecode(maps[i]['pestTasks']));
+    });
+  }
+
+  Future<int> addTask(String pestName, Task task) async {
+    final db = await database;
+    var pestTask = await getPestTask(pestName);
+    pestTask.tasks.add(task);
+    return await db.update(
+      'PestTasks',
+      pestTask.toJson(),
+      where: 'pestName = ?',
+      whereArgs: [pestName],
+    );
+  }
+
+  Future<void> updateTask(String pestName, Task task) async {
+    final db = await database;
+    var pestTask = await getPestTask(pestName);
+    var index = pestTask.tasks
+        .indexWhere((element) => element.taskName == task.taskName);
+    pestTask.tasks[index] = task;
+    await db.update(
+      'PestTasks',
+      pestTask.toJson(),
+      where: 'pestName = ?',
+      whereArgs: [pestName],
+    );
+  }
+
+  Future<void> deleteTask(String pestName, Task task) async {
+    final db = await database;
+    var pestTask = await getPestTask(pestName);
+    pestTask.tasks.removeWhere((element) => element.taskName == task.taskName);
+    await db.update(
+      'PestTasks',
+      pestTask.toJson(),
+      where: 'pestName = ?',
+      whereArgs: [pestName],
+    );
   }
 }

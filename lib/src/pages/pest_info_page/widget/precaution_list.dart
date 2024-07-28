@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
 import 'package:pest_gpt/src/resource/db_service/db_service.dart';
 
 class PrecautionList extends StatefulWidget {
   final List<String> precautions;
-  final String pestName;
-  const PrecautionList(this.precautions, {super.key, required this.pestName});
+  final PestModel pestModel;
+  const PrecautionList(this.precautions, {super.key, required this.pestModel});
 
   @override
   State<PrecautionList> createState() => _PrecautionListState();
@@ -75,15 +76,19 @@ class _PrecautionListState extends State<PrecautionList> {
           ),
           if (selectedPrecautions.isNotEmpty)
             CommonPrimaryButton(
-              onPressed: () {
+              onPressed: () async {
                 var pestTask = PestTasks(
-                    pestName: widget.pestName,
+                    pestName: widget.pestModel.pestName,
+                    image: widget.pestModel.image,
                     tasks: selectedPrecautions
-                        .map((e) => Tasks(taskName: e))
+                        .map((e) => Task(taskName: e))
                         .toList());
-                DatabaseService().addPestTask(
+                await DatabaseService().addPestTask(
                   pestTask,
                 );
+                await Future.delayed(const Duration(milliseconds: 500));
+                var data = await DatabaseService().getAllPestTasks();
+                print(data);
               },
               title: StringConstant.addAsTask.tr,
             ),
