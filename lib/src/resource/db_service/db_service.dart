@@ -102,6 +102,15 @@ class DatabaseService {
     );
   }
 
+  Future<void> deletePestTask(String pestName) async {
+    final db = await database;
+    await db.delete(
+      'PestTasks',
+      where: 'pestName = ?',
+      whereArgs: [pestName],
+    );
+  }
+
   Future<void> deleteTask(String pestName, Task task) async {
     final db = await database;
     var pestTask = await getPestTask(pestName);

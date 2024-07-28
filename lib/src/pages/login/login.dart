@@ -7,6 +7,7 @@ import 'package:pest_gpt/src/common_widget/common_text_field.dart';
 import 'package:pest_gpt/src/common_widget/powered_by.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/user/user_login_request.dart';
+import 'package:pest_gpt/src/pages/home/home.dart';
 import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
 import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
 import 'package:pest_gpt/src/pages/login/widget/header.dart';
@@ -67,7 +68,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       ));
       ToastManager.showSuccess(StringConstant.loginSuccess.tr);
       Get.find<AuthenticationController>().login(response);
-      Get.to(PestDetection());
+      Get.to(HomePage());
     } catch (e) {
       ToastManager.showError(e.toString());
     }

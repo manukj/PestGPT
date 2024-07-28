@@ -5,7 +5,9 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
+import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/resource/db_service/db_service.dart';
+import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class PrecautionList extends StatefulWidget {
   final List<String> precautions;
@@ -86,9 +88,8 @@ class _PrecautionListState extends State<PrecautionList> {
                 await DatabaseService().addPestTask(
                   pestTask,
                 );
-                await Future.delayed(const Duration(milliseconds: 500));
-                var data = await DatabaseService().getAllPestTasks();
-                print(data);
+                Get.find<HomeController>().fetchPestTasks();
+                ToastManager.showSuccess("Added as task successfully");
               },
               title: StringConstant.addAsTask.tr,
             ),
