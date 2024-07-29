@@ -31,7 +31,8 @@ class PestTaskList extends GetView<HomeController> {
                 shrinkWrap: true,
                 children: controller.pestTasks.value.map((e) {
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: CommonCard(
                       child: ListTile(
                         contentPadding:

@@ -32,6 +32,7 @@ class StringConstant {
   static const String home = 'Home';
   static const String apply = 'Apply';
   static const String addAsTask = 'Add as Task';
+  static const String tasks = 'Tasks';
 
   //pest detection 
   static const String detectPest = 'Detect Pest';
