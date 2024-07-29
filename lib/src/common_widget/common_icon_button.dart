@@ -22,6 +22,7 @@ class CommonIconButton extends StatelessWidget {
       buttonHeight: width ?? 50,
       buttonWidth: height ?? 50,
       enableAnimation: true,
+      buttonColor: color ?? neuDefault1,
       icon: Icon(
         icon,
         color: Theme.of(context).colorScheme.surface,

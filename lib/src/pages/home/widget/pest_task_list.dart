@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pest_gpt/src/common_widget/common_card.dart';
+import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
@@ -28,20 +30,28 @@ class PestTaskList extends GetView<HomeController> {
             : ListView(
                 shrinkWrap: true,
                 children: controller.pestTasks.value.map((e) {
-                  return ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(e.pestName),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            controller.deletePestTask(e.pestName);
-                          },
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CommonCard(
+                      child: ListTile(
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 8),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(e.pestName),
+                            CommonIconButton(
+                              color: Colors.red,
+                              icon: Icons.delete,
+                              onPressed: () {
+                                controller.deletePestTask(e.pestName);
+                              },
+                            ),
+                          ],
                         ),
-                      ],
+                        subtitle: Text("Total Task ${e.tasks.length}"),
+                      ),
                     ),
-                    subtitle: Text(e.tasks.length.toString()),
                   );
                 }).toList(),
               );
