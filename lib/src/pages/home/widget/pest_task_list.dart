@@ -35,6 +35,9 @@ class PestTaskList extends GetView<HomeController> {
                         const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: CommonCard(
                       child: ListTile(
+                        onTap: () => {
+                          Get.to(page);
+                        },
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 8),
                         title: Row(
