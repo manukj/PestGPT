@@ -7,6 +7,7 @@ class CommonIconButton extends StatelessWidget {
   final double? height;
   final Color? color;
   final IconData icon;
+  final double? iconSize;
   const CommonIconButton({
     super.key,
     required this.onPressed,
@@ -14,6 +15,7 @@ class CommonIconButton extends StatelessWidget {
     this.height,
     this.color,
     required this.icon,
+    this.iconSize,
   });
 
   @override
@@ -26,7 +28,7 @@ class CommonIconButton extends StatelessWidget {
       icon: Icon(
         icon,
         color: Theme.of(context).colorScheme.surface,
-        size: 30,
+        size: iconSize ?? 30,
       ),
       onPressed: onPressed,
     );

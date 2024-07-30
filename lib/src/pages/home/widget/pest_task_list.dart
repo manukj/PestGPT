@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
+import 'package:pest_gpt/src/pages/pest_task/pest_task_details.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
 class PestTaskList extends GetView<HomeController> {
@@ -29,31 +30,33 @@ class PestTaskList extends GetView<HomeController> {
               )
             : ListView(
                 shrinkWrap: true,
-                children: controller.pestTasks.value.map((e) {
+                children: controller.pestTasks.value.map((pestTask) {
                   return Padding(
                     padding:
                         const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                     child: CommonCard(
                       child: ListTile(
                         onTap: () => {
-                          Get.to(page);
+                          Get.to(
+                            PestTaskDetailsPage(pestName: pestTask.pestName),
+                          )
                         },
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 8),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(e.pestName),
+                            Text(pestTask.pestName),
                             CommonIconButton(
                               color: Colors.red,
                               icon: Icons.delete,
                               onPressed: () {
-                                controller.deletePestTask(e.pestName);
+                                controller.deletePestTask(pestTask.pestName);
                               },
                             ),
                           ],
                         ),
-                        subtitle: Text("Total Task ${e.tasks.length}"),
+                        subtitle: Text("Total Task ${pestTask.tasks.length}"),
                       ),
                     ),
                   );

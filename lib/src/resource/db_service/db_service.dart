@@ -61,7 +61,7 @@ class DatabaseService {
 
     if (maps.isNotEmpty) {
       var pestTaskMap = maps.first['pestTasks'];
-      return PestTasks.fromJson(pestTaskMap);
+      return PestTasks.fromJson(jsonDecode(pestTaskMap));
     } else {
       throw Exception('Pest $pestName not found');
     }
@@ -76,27 +76,19 @@ class DatabaseService {
     });
   }
 
-  Future<int> addTask(String pestName, Task task) async {
-    final db = await database;
-    var pestTask = await getPestTask(pestName);
-    pestTask.tasks.add(task);
-    return await db.update(
-      'PestTasks',
-      pestTask.toJson(),
-      where: 'pestName = ?',
-      whereArgs: [pestName],
-    );
-  }
-
   Future<void> updateTask(String pestName, Task task) async {
     final db = await database;
     var pestTask = await getPestTask(pestName);
     var index = pestTask.tasks
         .indexWhere((element) => element.taskName == task.taskName);
     pestTask.tasks[index] = task;
+    String tasksJson = jsonEncode(pestTask.toJson());
     await db.update(
       'PestTasks',
-      pestTask.toJson(),
+      {
+        'pestName': pestTask.pestName,
+        'pestTasks': tasksJson,
+      },
       where: 'pestName = ?',
       whereArgs: [pestName],
     );

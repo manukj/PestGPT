@@ -31,28 +31,36 @@ class _CommonTabHeaderState extends State<CommonTabHeader> {
     return Column(
       children: [
         // Tab Headers
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(widget.numberOfTab, (index) {
-            return NeuTextButton(
-              onPressed: () => _onTabTap(index),
-              text: Text(
-                widget.tabHeaders[index],
-                style: TextStyle(
-                  color: _currentTabIndex == index
-                      ? Theme.of(context).colorScheme.surface
-                      : Theme.of(context).colorScheme.onSurface,
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(widget.numberOfTab, (index) {
+              return Expanded(
+                flex: 1,
+                child: NeuTextButton(
+                  onPressed: () => _onTabTap(index),
+                  text: Text(
+                    widget.tabHeaders[index],
+                    style: TextStyle(
+                      color: _currentTabIndex == index
+                          ? Theme.of(context).colorScheme.surface
+                          : Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  enableAnimation: true,
+                  buttonColor: _currentTabIndex != index
+                      ? Colors.transparent
+                      : neuDefault1,
+                  borderColor:
+                      _currentTabIndex != index ? Colors.transparent : neuBlack,
+                  shadowColor: _currentTabIndex != index
+                      ? Colors.transparent
+                      : neuShadow,
                 ),
-              ),
-              enableAnimation: true,
-              buttonColor:
-                  _currentTabIndex != index ? Colors.transparent : neuDefault1,
-              borderColor:
-                  _currentTabIndex != index ? Colors.transparent : neuBlack,
-              shadowColor:
-                  _currentTabIndex != index ? Colors.transparent : neuShadow,
-            );
-          }),
+              );
+            }),
+          ),
         ),
         // Tab Content
       ],

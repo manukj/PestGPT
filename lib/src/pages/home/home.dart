@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonScaffold(
       appBar: CommonAppBar(
-        titleText: StringConstant.tasks.tr,
+        titleText: StringConstant.pestTasks.tr,
         showBackButton: false,
       ),
       body: const PestTaskList(),
