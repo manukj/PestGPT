@@ -28,15 +28,15 @@ const mockResponse = """
   "pesticides": [
     {
       "name": "Insecticidal Soap",
-      "cost": "15 per liter"
+      "cost": "15"
     },
     {
       "name": "Neem Oil",
-      "cost": "20 per liter"
+      "cost": "20"
     },
     {
       "name": "Pyrethrin",
-      "cost": "25 per liter"
+      "cost": "25"
     }
   ]
 }

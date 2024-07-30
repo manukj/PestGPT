@@ -45,7 +45,7 @@ class PestInfoPage extends StatelessWidget {
             color: Theme.of(Get.context!).colorScheme.surface,
             onPressed: () => {
               Get.to(
-                const PesticidesPage(),
+                PesticidesPage(pestInfo: pestInfo),
               )
             },
             titleWidget: Padding(
