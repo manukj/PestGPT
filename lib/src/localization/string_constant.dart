@@ -44,4 +44,8 @@ class StringConstant {
   static const String captureImage = 'Capture Image';
   static const String pickFromGallery = 'Pick From Gallery';
   static const String cameraInitError = 'Camera initialization error';
+
+  //pesticides
+  static const String pesticides = 'Pesticides';
+  static const String viewPesticides = 'View Pesticides';
 }

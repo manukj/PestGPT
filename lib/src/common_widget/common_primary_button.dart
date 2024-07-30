@@ -7,7 +7,9 @@ class CommonPrimaryButton extends StatelessWidget {
   final String? title;
   final bool isLoading;
   final double? width;
+  final Color? color;
   final double? height;
+  final EdgeInsets padding;
 
   const CommonPrimaryButton({
     required this.onPressed,
@@ -16,36 +18,41 @@ class CommonPrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.width,
     this.height,
+    this.color,
     Key? key,
+    this.padding = const EdgeInsets.all(0),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return titleWidget != null
-        ? GestureDetector(
-            onTap: onPressed,
-            child: NeuCard(
-              cardColor: neuDefault1,
-              cardWidth: width ?? double.infinity,
-              cardHeight: height,
-              child: titleWidget!,
-            ),
-          )
-        : Container(
-            width: width ?? double.infinity,
-            height: height,
-            padding: const EdgeInsets.all(10),
-            child: NeuTextButton(
-              enableAnimation: true,
-              onPressed: isLoading ? null : onPressed,
-              text: Text(
-                title ?? '',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.surface,
+    return Padding(
+      padding: padding,
+      child: titleWidget != null
+          ? GestureDetector(
+              onTap: onPressed,
+              child: NeuCard(
+                cardColor: color ?? neuDefault1,
+                cardWidth: width ?? double.infinity,
+                cardHeight: height,
+                child: titleWidget!,
+              ),
+            )
+          : Container(
+              width: width ?? double.infinity,
+              height: height,
+              padding: const EdgeInsets.all(10),
+              child: NeuTextButton(
+                enableAnimation: true,
+                onPressed: isLoading ? null : onPressed,
+                text: Text(
+                  title ?? '',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
                 ),
               ),
             ),
-          );
+    );
   }
 }
