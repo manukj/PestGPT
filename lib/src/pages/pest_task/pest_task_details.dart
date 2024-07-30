@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/common_widget/common_tab_header.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
-import 'package:pest_gpt/src/pages/pest_task/widget/completed.dart';
+import 'package:pest_gpt/src/pages/pest_task/widget/task_list.dart';
 
 class PestTaskDetailsPage extends StatefulWidget {
   final String pestName;
@@ -23,6 +24,9 @@ class _PestTaskDetailsPageState extends State<PestTaskDetailsPage> {
         return element.pestName == widget.pestName;
       });
       return CommonScaffold(
+        appBar: CommonAppBar(
+          titleText: "${widget.pestName.split(' ')[0].capitalize} Task's",
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -43,14 +47,14 @@ class _PestTaskDetailsPageState extends State<PestTaskDetailsPage> {
               ),
               Expanded(
                 child: showCompletedTab
-                    ? CompletedList(
+                    ? TaskList(
                         tasks: pestTask.tasks.where((element) {
                           return element.isCompleted;
                         }).toList(),
                         pestName: pestTask.pestName,
                         isCompleted: true,
                       )
-                    : CompletedList(
+                    : TaskList(
                         tasks: pestTask.tasks.where((element) {
                           return !element.isCompleted;
                         }).toList(),

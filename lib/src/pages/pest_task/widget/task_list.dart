@@ -7,11 +7,11 @@ import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
-class CompletedList extends GetView<HomeController> {
+class TaskList extends GetView<HomeController> {
   final List<Task> tasks;
   final String pestName;
   final bool isCompleted;
-  const CompletedList({
+  const TaskList({
     super.key,
     required this.tasks,
     required this.pestName,
