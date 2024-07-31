@@ -14,7 +14,6 @@ class PestCameraController extends GetxController {
   init() async {
     cameras = await availableCameras();
     if (cameras.isEmpty) {
-      
       throw Exception('No camera found');
     } else {
       final firstCamera = cameras.first;

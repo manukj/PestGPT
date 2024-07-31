@@ -25,6 +25,8 @@ dependencies:
   toastification: ^2.0.0
   lottie: ^3.1.2
   sqflite: ^2.3.3+1
+  error_view:
+    path: /Users/manukenchappajunjanna/Documents/package/error_view
   flutter_localizations:
     sdk: flutter
 
