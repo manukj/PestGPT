@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
+import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
@@ -15,11 +16,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      appBar: CommonAppBar(
-        titleText: StringConstant.pestTasks.tr,
-        showBackButton: false,
-      ),
-      body: const PestTaskList(),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return const CommonLoader();
+        }
+        return Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            children: [
+              controller.userInfo.value == null
+                  ? const SizedBox()
+                  : CommonAppBar(
+                      showBackButton: false,
+                      titleText:
+                          "Welcome ${controller.userInfo.value?.fullName ?? ""}",
+                    ),
+              const PestTaskList(),
+            ],
+          ),
+        );
+      }),
       floatingActionButton: CommonPrimaryButton(
         height: 50,
         width: 150,
