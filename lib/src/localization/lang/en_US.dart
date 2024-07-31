@@ -32,4 +32,8 @@ const Map<String, String> en_US = {
   'Camera initialization error': 'Camera initialization error',
   'Apply': 'Apply',
   'Add as Task': 'Add as Task',
+  'Tasks': 'Tasks',
+  'Pest Tasks': 'Pest Tasks',
+  'Pesticides': 'Pesticides',
+  'View Pesticides': 'View Pesticides',
 };

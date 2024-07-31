@@ -36,6 +36,19 @@ class BaseApiService extends GetConnect {
     }
   }
 
+  Future getApi(String url) async {
+    final response = await get(
+      _baseUrl + url,
+      headers: getHeaders(),
+      contentType: _getContentTypes(),
+    );
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Login Api Failed : ${response.body}');
+    }
+  }
+
   String _getContentTypes() {
     return 'application/json; charset=UTF-8';
   }

@@ -1,11 +1,18 @@
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
+import 'package:pest_gpt/src/models/user/user_info_response.dart';
+import 'package:pest_gpt/src/pages/splash/splash.dart';
+import 'package:pest_gpt/src/resource/api_service/user_service.dart';
 import 'package:pest_gpt/src/resource/db_service/db_service.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 
 class HomeController extends GetxController {
+  final RxBool isLoading = false.obs;
+  final Rx<UserInfoResponse?> userInfo = null.obs;
   final Rx<List<PestTasks>> pestTasks = Rx([]);
 
   HomeController() {
+    fetchUserInfo();
     fetchPestTasks();
   }
 
@@ -26,5 +33,18 @@ class HomeController extends GetxController {
   Future<void> deletePestTask(String pestName) async {
     await DatabaseService().deletePestTask(pestName);
     fetchPestTasks();
+  }
+
+  Future<void> fetchUserInfo() async {
+    isLoading.value = true;
+    try {
+      var value = await UserService().getUserInfo();
+      userInfo.value = value;
+      isLoading.value = false;
+    } catch (e) {
+      Get.find<AuthenticationController>().logOut();
+      Get.offAll(Splash());
+    }
+    isLoading.value = false;
   }
 }
