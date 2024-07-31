@@ -41,14 +41,36 @@ class PesticidesPage extends GetView<PesticideController> {
       floatingActionButton: Obx(() {
         return controller.selectedPesticideList.isNotEmpty
             ? CommonPrimaryButton(
+                height: 50,
+                width: 100,
                 onPressed: () {
                   controller.clearPesticide();
                 },
-                titleWidget: const Row(
+                titleWidget: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.shopping_cart_rounded),
-                    SizedBox(width: 10),
-                    Text('Clear'),
+                    Badge(
+                      label: Text(
+                        controller.selectedPesticideList.length.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.shopping_cart_rounded,
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    Text(
+                      "10",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                    )
                   ],
                 ),
               )
