@@ -36,14 +36,15 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchUserInfo() async {
+    if (userInfo.value != null) return;
     isLoading.value = true;
     try {
       var value = await UserService().getUserInfo();
       userInfo.value = value;
       isLoading.value = false;
     } catch (e) {
-      Get.find<AuthenticationController>().logOut();
-      Get.offAll(Splash());
+      await Get.find<AuthenticationController>().logOut();
+      Get.offAll(() => Splash());
     }
     isLoading.value = false;
   }

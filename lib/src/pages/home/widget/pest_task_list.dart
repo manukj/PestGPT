@@ -18,7 +18,7 @@ class PestTaskList extends GetView<HomeController> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Lottie.asset(IMAGEPATH.emptyList),
+                  Lottie.asset(IMAGEPATH.emptyList,height: 200,width: 200),
                   const Text(
                     'No pest tasks available',
                     style: TextStyle(

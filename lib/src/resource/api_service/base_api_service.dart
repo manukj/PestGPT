@@ -55,7 +55,7 @@ class BaseApiService extends GetConnect {
 
   Map<String, String>? getHeaders() {
     final token = Get.find<AuthenticationController>().getAccessToken();
-    if (token != null) {
+    if (token == null) {
       return {};
     }
     return {'Authorization': '$token'};

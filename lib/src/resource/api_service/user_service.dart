@@ -21,7 +21,7 @@ class UserService extends BaseApiService {
   }
 
   Future<UserInfoResponse> getUserInfo() async {
-    final response = await getApi('auth/user');
+    final response = await getApi('user');
     return UserInfoResponse.fromJson(response);
   }
 }
