@@ -7,4 +7,5 @@ class IMAGEPATH {
   static const String scanningAnimation = "assets/lottiefiles/scaning.json";
   static const String emptyList = "assets/lottiefiles/empty_list.json";
   static const String emptyTaskList = "assets/lottiefiles/empty_task_list.json";
+  static const String cameraError = "assets/lottiefiles/camera_error.json";
 }
