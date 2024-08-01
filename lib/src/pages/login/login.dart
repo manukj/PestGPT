@@ -24,9 +24,11 @@ class Login extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [LoginWidget(), PoweredBy()],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [LoginWidget(), PoweredBy()],
+          ),
         ),
       ),
     );

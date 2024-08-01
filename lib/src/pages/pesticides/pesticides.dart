@@ -5,6 +5,7 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/pages/pesticides/controller/pesticide_controller.dart';
+import 'package:pest_gpt/src/pages/pesticides/widget/cart/cart.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/pesticides_list_item.dart';
 
 class PesticidesPage extends GetView<PesticideController> {
@@ -44,7 +45,11 @@ class PesticidesPage extends GetView<PesticideController> {
                 height: 50,
                 width: 100,
                 onPressed: () {
-                  controller.clearPesticide();
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const CartBottomSheet();
+                      });
                 },
                 titleWidget: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +71,9 @@ class PesticidesPage extends GetView<PesticideController> {
                     Text(
                       "10",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.surface,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: Theme.of(context).colorScheme.surface,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     )
                   ],
                 ),

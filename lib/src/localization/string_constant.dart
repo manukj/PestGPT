@@ -35,7 +35,7 @@ class StringConstant {
   static const String tasks = 'Tasks';
   static const String pestTasks = 'Pest Tasks';
 
-  //pest detection 
+  //pest detection
   static const String detectPest = 'Detect Pest';
   static const String failedToDetectPest = 'Failed to detect pest';
   static const String pestDetected = 'Pest detected';
@@ -48,4 +48,11 @@ class StringConstant {
   //pesticides
   static const String pesticides = 'Pesticides';
   static const String viewPesticides = 'View Pesticides';
+
+  //cart
+  static const String buy = 'Buy';
+  static const String walletWarning =
+      'Please note that this is a test mode. Make sure you are using a test wallet to buy the product. Any transactions made on the mainnet might not be refunded.';
+  static const String connectWallet = 'Connect Wallet';
+  static const String connectWalletTitle = 'Connect Wallet to Buy Product';
 }

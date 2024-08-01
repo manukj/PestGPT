@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
-import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
+import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -13,15 +13,10 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      pages: [page1(), page2(), page3(), page4()],
-      showSkipButton: true,
-      done: const Icon(Icons.done),
+      pages: [page1()],
+      showSkipButton: false,
+      showDoneButton: false,
       next: const Icon(Icons.arrow_right_outlined),
-      skip: const Text("Skip"),
-      onDone: () async {
-        await Get.find<IntroController>().markIntroAsSeen();
-        Get.to(const Login());
-      },
     );
   }
 
