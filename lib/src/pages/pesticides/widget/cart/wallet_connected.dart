@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
-import 'package:web3modal_flutter/services/w3m_service/w3m_service.dart';
-import 'package:web3modal_flutter/widgets/w3m_network_select_button.dart';
+import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 class WalletConnected extends StatelessWidget {
   final W3MService service;
@@ -25,21 +24,18 @@ class WalletConnected extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              StringConstant.selectedNetwork.tr,
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            W3MNetworkSelectButton(service: service),
-          ],
+        const SizedBox(
+          height: 10,
         ),
+        _buildTextAndWidget(
+          StringConstant.selectedNetwork.tr,
+          W3MNetworkSelectButton(service: service),
+        ),
+        _buildTextAndWidget(
+          StringConstant.balance.tr,
+          W3MAccountButton(service: service),
+        ),
+        const Divider(),
         const SizedBox(
           height: 10,
         ),
@@ -65,6 +61,29 @@ class WalletConnected extends StatelessWidget {
             // write logiv to buyt the product
           },
           title: StringConstant.buy.tr,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextAndWidget(String text, Widget widget) {
+    return Column(
+      children: [
+        const Divider(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            widget,
+          ],
         ),
       ],
     );

@@ -27,7 +27,6 @@ class CartBottomSheet extends GetView<WalletConnectController> {
             return Padding(
               padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
               child: SizedBox(
-                height: 350,
                 child: Obx(() {
                   if (controller.isWalletConnected.value) {
                     return WalletConnected(service: snap.data!);
