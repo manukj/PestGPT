@@ -1,5 +1,19 @@
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
+
+const _chainId = "11155111"; // sepolia chain id
+final _sepoliaChain = W3MChainInfo(
+  chainName: 'Sepolia',
+  namespace: 'eip155:$_chainId',
+  chainId: _chainId,
+  tokenName: 'ETH',
+  rpcUrl: 'https://rpc.sepolia.org/',
+  blockExplorer: W3MBlockExplorer(
+    name: 'Sepolia Explorer',
+    url: 'https://sepolia.etherscan.io/',
+  ),
+);
 
 class WalletConnectController extends GetxController {
   W3MService? _w3mService;
@@ -10,6 +24,7 @@ class WalletConnectController extends GetxController {
   }
 
   Future<void> initalize() async {
+    W3MChainPresets.chains.putIfAbsent(_chainId, () => _sepoliaChain);
     _w3mService = W3MService(
       projectId: 'd8eb95f605374ff6e204ae7326531e8b',
       metadata: const PairingMetadata(
@@ -32,5 +47,10 @@ class WalletConnectController extends GetxController {
       await initalize();
     }
     return _w3mService!;
+  }
+
+  void updateStatus() {
+    isWalletConnected.value = _w3mService!.isConnected;
+    ToastManager.showSuccess("Wallet Connected Successfully");
   }
 }

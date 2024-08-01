@@ -55,4 +55,6 @@ class StringConstant {
       'Please note that this is a test mode. Make sure you are using a test wallet to buy the product. Any transactions made on the mainnet might not be refunded.';
   static const String connectWallet = 'Connect Wallet';
   static const String connectWalletTitle = 'Connect Wallet to Buy Product';
+  static const String walletConnected = 'Wallet Connected';
+  static const String selectedNetwork = 'Selected Network';
 }

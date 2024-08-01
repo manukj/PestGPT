@@ -8,9 +8,10 @@ import 'package:pest_gpt/src/pages/pesticides/controller/pesticide_controller.da
 import 'package:pest_gpt/src/pages/pesticides/widget/cart/cart.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/pesticides_list_item.dart';
 
-class PesticidesPage extends GetView<PesticideController> {
+class PesticidesPage extends StatelessWidget {
+  final PesticideController controller = PesticideController();
   final LLMPestInfo pestInfo;
-  const PesticidesPage({
+  PesticidesPage({
     super.key,
     required this.pestInfo,
   });
