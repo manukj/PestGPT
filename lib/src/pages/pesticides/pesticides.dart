@@ -70,7 +70,7 @@ class PesticidesPage extends StatelessWidget {
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      "10",
+                      controller.totalPesticideCost.toString(),
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.surface,
                           fontSize: 16,

@@ -25,14 +25,15 @@ class CartBottomSheet extends GetView<WalletConnectController> {
               );
             }
             return Padding(
-              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              padding: const EdgeInsets.only(
+                  top: 20, right: 20, left: 20, bottom: 20),
               child: SizedBox(
                 child: Obx(() {
                   if (controller.isWalletConnected.value) {
                     return WalletConnected(service: snap.data!);
                   }
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         StringConstant.connectWalletTitle.tr,

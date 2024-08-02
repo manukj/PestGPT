@@ -24,12 +24,20 @@ class _PesticidesListItemState extends State<PesticidesListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0,),
+      padding: const EdgeInsets.only(
+        bottom: 10.0,
+      ),
       child: CommonCard(
         child: ListTile(
-          title: Text(widget.pesticide.name),
-          subtitle: Text(
+          title: Text(
             widget.pesticide.name,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            "${widget.pesticide.cost} per/litre",
+            style: const TextStyle(
+              color: Colors.black,
+            ),
           ),
           trailing: isSelected
               ? CommonIconButton(

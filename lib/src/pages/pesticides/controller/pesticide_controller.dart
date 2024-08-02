@@ -16,4 +16,16 @@ class PesticideController extends GetxController {
   void clearPesticide() {
     _selectedPesticideList.clear();
   }
+
+  double get totalPesticideCost {
+    double totalCost = 0;
+    for (var pesticide in _selectedPesticideList) {
+      try {
+        totalCost += double.parse(pesticide.cost);
+      } catch (e) {
+        print(e);
+      }
+    }
+    return totalCost;
+  }
 }
