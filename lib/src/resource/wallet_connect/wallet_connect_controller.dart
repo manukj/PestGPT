@@ -51,6 +51,10 @@ class WalletConnectController extends GetxController {
 
   void updateStatus() {
     isWalletConnected.value = _w3mService!.isConnected;
-    ToastManager.showSuccess("Wallet Connected Successfully");
+    if (isWalletConnected.value) {
+      ToastManager.showSuccess("Wallet Connected Successfully");
+    } else {
+      ToastManager.showError("Wallet Disconnected");
+    }
   }
 }

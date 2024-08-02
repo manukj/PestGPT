@@ -58,4 +58,5 @@ class StringConstant {
   static const String walletConnected = 'Wallet Connected';
   static const String selectedNetwork = 'Selected Network';
   static const String balance = 'Balance';
+  static const String disconnectWallet = 'Disconnect Wallet';
 }

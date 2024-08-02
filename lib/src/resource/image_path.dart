@@ -9,4 +9,5 @@ class IMAGEPATH {
   static const String emptyTaskList = "assets/lottiefiles/empty_task_list.json";
   static const String cameraError = "assets/lottiefiles/camera_error.json";
   static const String walletConnect = "assets/lottiefiles/wallet_connect.json";
+  static const String pestLoadingAnimation = "assets/lottiefiles/pest_loading_animation.json";
 }

@@ -5,12 +5,14 @@ class CommonScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final bool? resizeToAvoidBottomInset;
   final Widget? floatingActionButton;
+  final EdgeInsetsGeometry padding;
   const CommonScaffold({
     super.key,
     required this.body,
     this.appBar,
     this.resizeToAvoidBottomInset,
     this.floatingActionButton,
+    this.padding = const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
   });
 
   @override
@@ -18,7 +20,10 @@ class CommonScaffold extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: appBar,
-        body: body,
+        body: Padding(
+          padding: padding,
+          child: body,
+        ),
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         floatingActionButton: floatingActionButton,
       ),

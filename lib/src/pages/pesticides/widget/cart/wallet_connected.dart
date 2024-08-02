@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
-class WalletConnected extends StatelessWidget {
+class WalletConnected extends GetView<WalletConnectController> {
   final W3MService service;
   const WalletConnected({super.key, required this.service});
 
@@ -14,12 +15,30 @@ class WalletConnected extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "${StringConstant.walletConnected.tr} ✅",
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "${StringConstant.walletConnected.tr} ✅",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (service.isConnected) {
+                  service.disconnect();
+                  controller.updateStatus();
+                }
+              },
+              child: Text(
+                StringConstant.disconnectWallet.tr,
+                style: const TextStyle(
+                    color: Colors.red, decoration: TextDecoration.underline),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 10,

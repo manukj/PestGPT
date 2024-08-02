@@ -22,13 +22,10 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CommonScaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [LoginWidget(), PoweredBy()],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [LoginWidget(), PoweredBy()],
         ),
       ),
     );

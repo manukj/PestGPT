@@ -26,7 +26,7 @@ class _PestDetectionState extends State<PestDetection> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      
+      padding: EdgeInsets.zero,
       body: Obx(
         () => _cameraController.captureFile.value != null
             ? DetectPest(path: _cameraController.captureFile.value!.path)

@@ -16,27 +16,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const CommonLoader();
-        }
-        return Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            children: [
-              controller.userInfo.value == null
-                  ? const SizedBox()
-                  : CommonAppBar(
-                      showBackButton: false,
-                      titleText:
-                          "Welcome ${controller.userInfo.value?.fullName ?? ""}",
-                    ),
-              const PestTaskList(),
-            ],
-          ),
-        );
-      }),
+      appBar: const CommonAppBar(
+        showBackButton: false,
+        titleText: "Welcome",
+      ),
+      body: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const CommonLoader();
+          }
+          return const PestTaskList();
+        }),
+      ),
       floatingActionButton: CommonPrimaryButton(
         height: 50,
         width: 150,

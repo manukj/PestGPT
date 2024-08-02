@@ -5,7 +5,6 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
-import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -32,6 +31,7 @@ class IntroPage extends StatelessWidget {
         ),
       ),
       bodyWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             StringConstant.welcomeToPFarm.tr,
@@ -40,6 +40,7 @@ class IntroPage extends StatelessWidget {
           const SizedBox(height: 20),
           const Text(
             "The \"Farmer-Centred Interoperable Mobile-Cloud System\" (FCIMCS) project, a collaborative effort spanning the UK and China",
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 20,
