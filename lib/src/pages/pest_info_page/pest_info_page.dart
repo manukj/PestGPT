@@ -23,25 +23,19 @@ class PestInfoPage extends StatelessWidget {
         titleText: pestModel.pestName,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
-                  const SizedBox(height: 16),
-                  _buildPestInfo(pestInfo, pestModel),
-                ],
-              ),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
+                const SizedBox(height: 16),
+                _buildPestInfo(pestInfo, pestModel),
+              ],
             ),
           ),
           CommonPrimaryButton(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 10,
-            ),
             color: Theme.of(Get.context!).colorScheme.surface,
             onPressed: () => {
               Get.to(

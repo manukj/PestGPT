@@ -12,7 +12,7 @@ class CommonScaffold extends StatelessWidget {
     this.appBar,
     this.resizeToAvoidBottomInset,
     this.floatingActionButton,
-    this.padding = const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+    this.padding = const EdgeInsets.only(bottom: 16, left: 25, right: 25),
   });
 
   @override

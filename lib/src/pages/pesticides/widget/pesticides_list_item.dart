@@ -24,7 +24,7 @@ class _PesticidesListItemState extends State<PesticidesListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0, left: 10, right: 10),
+      padding: const EdgeInsets.only(bottom: 10.0,),
       child: CommonCard(
         child: ListTile(
           title: Text(widget.pesticide.name),
