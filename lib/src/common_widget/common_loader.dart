@@ -7,8 +7,9 @@ class CommonLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
+      height: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -18,7 +19,7 @@ class CommonLoader extends StatelessWidget {
             width: 200,
           ),
           const SizedBox(height: 10),
-          const Text('Loading...'),
+          const Text('Loading...', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         ],
       ),
     );

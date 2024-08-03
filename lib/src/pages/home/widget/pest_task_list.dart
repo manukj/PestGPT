@@ -15,21 +15,19 @@ class PestTaskList extends GetView<HomeController> {
     return Obx(
       () {
         return controller.pestTasks.value.isEmpty
-            ? Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Lottie.asset(IMAGEPATH.emptyList, height: 200, width: 200),
-                    const Text(
-                      'No pest tasks available',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset(IMAGEPATH.emptyList, height: 200, width: 200),
+                const Text(
+                  'No pest tasks available',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
-              )
+              ],
+            )
             : ListView(
                 shrinkWrap: true,
                 children: controller.pestTasks.value.map((pestTask) {
