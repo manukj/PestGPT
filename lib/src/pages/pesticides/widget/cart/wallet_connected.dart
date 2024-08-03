@@ -26,9 +26,9 @@ class WalletConnected extends GetView<WalletConnectController> {
               ),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (service.isConnected) {
-                  service.disconnect();
+                  await service.disconnect();
                   controller.updateStatus();
                 }
               },

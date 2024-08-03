@@ -1,59 +1,68 @@
 // SPDX-License-Identifier: MIT
+// deployed at 0x2a775CF35546Ac2ecad20E395E20Ab76b47d6e5E // sepolia
 pragma solidity ^0.8.0;
 
-// contarct deployed in
-// Sepolio : 0xc4B6Db3C4Dbd23493fdBA30F3eb864dA968dfFe0
 contract PesticidePurchases {
-    struct Purchase {
-        uint userId;
-        mapping(string => uint) pesticides; // pesticide name to amount of ETH
+    struct Pesticide {
+        string name;
+        uint cost;
     }
 
-    mapping(address => Purchase) public purchases;
-    mapping(address => uint) public balances;
+    struct Purchase {
+        address userAddress;
+        Pesticide[] pesticides; // List of pesticides
+    }
+
+    mapping(uint => Purchase) private purchases;
+    mapping(uint => uint) private balances;
 
     event PurchaseMade(
         address indexed buyer,
-        uint id,
+        uint indexed userId,
         string pesticideName,
         uint amount
     );
     event RefundIssued(
         address indexed buyer,
-        uint id,
+        uint indexed userId,
         string pesticideName,
         uint amount
     );
 
-    function pay(uint _id, string memory _pesticideName) public payable {
-        require(msg.value > 0, "Payment must be greater than 0");
-
-        Purchase storage purchase = purchases[msg.sender];
-        purchase.userId = _id;
-        purchase.pesticides[_pesticideName] += msg.value;
-
-        balances[msg.sender] += msg.value;
-
-        emit PurchaseMade(msg.sender, _id, _pesticideName, msg.value);
-    }
-
-    function refund(
-        uint _id,
+    function buyPesticide(
+        uint _userId,
         string memory _pesticideName,
         uint _amount
-    ) public {
-        Purchase storage purchase = purchases[msg.sender];
-        require(purchase.userId == _id, "Invalid purchase ID");
-        require(
-            purchase.pesticides[_pesticideName] >= _amount,
-            "Insufficient purchase amount for refund"
-        );
+    ) public payable {
+        require(msg.value == _amount, "Incorrect amount sent");
+        Purchase storage purchase = purchases[_userId];
+        purchase.pesticides.push(Pesticide(_pesticideName, _amount));
+        balances[_userId] += _amount;
+        emit PurchaseMade(msg.sender, _userId, _pesticideName, _amount);
+    }
 
-        purchase.pesticides[_pesticideName] -= _amount;
-        balances[msg.sender] -= _amount;
+    function refundPesticide(uint _userId, uint _pesticideIndex) public {
+        Purchase storage purchase = purchases[_userId];
+        Pesticide storage pesticide = purchase.pesticides[_pesticideIndex];
+        balances[_userId] -= pesticide.cost;
+        payable(msg.sender).transfer(pesticide.cost);
+        emit RefundIssued(msg.sender, _userId, pesticide.name, pesticide.cost);
+    }
 
-        payable(msg.sender).transfer(_amount);
+    function getAmountBought(uint _userId) public view returns (uint) {
+        return balances[_userId];
+    }
 
-        emit RefundIssued(msg.sender, _id, _pesticideName, _amount);
+    function getPesticidesBought(
+        uint _userId
+    ) public view returns (Pesticide[] memory) {
+        Purchase storage purchase = purchases[_userId];
+        return purchase.pesticides;
+    }
+
+    function clearPesticides(uint _userId) public {
+        payable(purchases[_userId].userAddress).transfer(balances[_userId]);
+        delete purchases[_userId];
+        delete balances[_userId];
     }
 }
