@@ -8,10 +8,11 @@ import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/pages/home/widget/pest_task_list.dart';
 import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
+import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<WalletConnectController> {
   HomePage({super.key});
-  final HomeController controller = Get.put(HomeController());
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,28 +25,59 @@ class HomePage extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         child: Obx(() {
-          if (controller.isLoading.value) {
+          if (homeController.isLoading.value) {
             return const CommonLoader();
           }
           return const PestTaskList();
         }),
       ),
-      floatingActionButton: CommonPrimaryButton(
-        height: 50,
-        width: 150,
-        titleWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.pest_control_outlined,
-                color: Theme.of(context).colorScheme.surface),
-            const SizedBox(width: 10),
-            Text(
-              StringConstant.detectPest.tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Obx(() {
+            if (controller.isWalletConnected.value) {
+              return CommonPrimaryButton(
+                height: 50,
+                width: 150,
+                titleWidget: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add,
+                        color: Theme.of(context).colorScheme.surface),
+                    const SizedBox(width: 10),
+                    Text(
+                      StringConstant.connectWallet.tr,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface),
+                    ),
+                  ],
+                ),
+                onPressed: (() {}),
+              );
+            } else {
+              return Container();
+            }
+          }),
+          const SizedBox(height: 10),
+          CommonPrimaryButton(
+            height: 50,
+            width: 150,
+            titleWidget: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.pest_control_outlined,
+                    color: Theme.of(context).colorScheme.surface),
+                const SizedBox(height: 10),
+                Text(
+                  StringConstant.detectPest.tr,
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.surface),
+                ),
+              ],
             ),
-          ],
-        ),
-        onPressed: () => Get.to(const PestDetection()),
+            onPressed: () => Get.to(const PestDetection()),
+          ),
+        ],
       ),
     );
   }

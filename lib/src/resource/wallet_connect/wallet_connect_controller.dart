@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/resource/contract_abi/contract_abi.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
@@ -39,7 +40,9 @@ class WalletConnectController extends GetxController {
       ),
     );
     await _w3mService!.init();
+    _w3mService!.selectChain(_sepoliaChain);
     isWalletConnected.value = _w3mService!.isConnected;
+    _w3mService!.getApprovedMethods();
   }
 
   Future<W3MService> get w3mService async {
@@ -55,6 +58,35 @@ class WalletConnectController extends GetxController {
       ToastManager.showSuccess("Wallet Connected Successfully");
     } else {
       ToastManager.showError("Wallet Disconnected");
+    }
+  }
+
+  Future<void> buyPesticide(
+    int userId,
+    String pesticideName,
+    int cost,
+  ) async {
+    // Transfer 0.01 amount of Token using Smart Contract's transfer function
+    var service = await w3mService;
+    if (service.session == null || service.session!.address == null) {
+      ToastManager.showError("Wallet not connected");
+      return;
+    }
+    service.launchConnectedWallet();
+    final result = await service.requestWriteContract(
+      topic: service.session!.topic,
+      chainId: 'eip155:$_chainId',
+      deployedContract: deployedContract,
+      functionName: 'buyPesticide',
+      transaction: Transaction(
+        from: EthereumAddress.fromHex(service.session!.address!),
+        value: EtherAmount.fromInt(EtherUnit.wei, cost),
+      ),
+    );
+    if (result.error != null) {
+      ToastManager.showError(result.error!.message);
+    } else {
+      ToastManager.showSuccess("Transaction Successful");
     }
   }
 }

@@ -29,7 +29,9 @@ class WalletConnected extends GetView<WalletConnectController> {
               onPressed: () async {
                 if (service.isConnected) {
                   await service.disconnect();
-                  controller.updateStatus();
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    controller.updateStatus();
+                  });
                 }
               },
               child: Text(
