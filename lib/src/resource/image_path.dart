@@ -10,4 +10,7 @@ class IMAGEPATH {
   static const String cameraError = "assets/lottiefiles/camera_error.json";
   static const String walletConnect = "assets/lottiefiles/wallet_connect.json";
   static const String pestLoadingAnimation = "assets/lottiefiles/pest_loading_animation.json";
+  static const String successAnimation = "assets/lottiefiles/success_animation.json";
+  static const String failedAnimation = "assets/lottiefiles/failed_animation.json";
+  
 }

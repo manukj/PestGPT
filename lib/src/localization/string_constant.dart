@@ -3,7 +3,7 @@ import 'package:lang_internationalization/lang_internationalization.dart';
 @LangInternationalization(["en_US", "zh_CN"])
 class StringConstant {
   static const String appName = 'Parallel Farm';
-  static const String welcomeToPFarm = 'Welcome To Parallel Farm';
+  static const String welcome = 'Welcome';
   static const String welcomeToPFarmDesc = 'Welcome to the future of farming';
   static const String invalidEmail = 'Invalid Email';
   static const String userNameCannotBeEmpty = 'User Name cannot be empty';
@@ -58,5 +58,9 @@ class StringConstant {
   static const String walletConnected = 'Wallet Connected';
   static const String selectedNetwork = 'Selected Network';
   static const String balance = 'Balance';
-  static const String disconnectWallet = 'Disconnect Wallet';
+  static const String disconnectWallet = 'Disconnect ';
+  static const String transactionSuccess = 'Transaction Success';
+  static const String buyMore = 'Buy More';
+  static const String transactionFailed = 'Transaction Failed';
+  static const String tryAgain = 'Try Again';
 }

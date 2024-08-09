@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:pest_gpt/src/resource/contract_abi/contract_abi.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
@@ -16,12 +17,19 @@ final _sepoliaChain = W3MChainInfo(
   ),
 );
 
+enum TransactionStatus { init, inProgress, success, failed }
+
 class WalletConnectController extends GetxController {
   W3MService? _w3mService;
   RxBool isWalletConnected = false.obs;
+  Rx<TransactionStatus> transcationStatus = TransactionStatus.init.obs;
 
   WalletConnectController() {
     initalize();
+  }
+
+  void resetTransactionStatus() {
+    transcationStatus.value = TransactionStatus.init;
   }
 
   Future<void> initalize() async {
@@ -62,31 +70,79 @@ class WalletConnectController extends GetxController {
   }
 
   Future<void> buyPesticide(
-    int userId,
+    String userId,
     String pesticideName,
     int cost,
   ) async {
-    // Transfer 0.01 amount of Token using Smart Contract's transfer function
-    var service = await w3mService;
-    if (service.session == null || service.session!.address == null) {
-      ToastManager.showError("Wallet not connected");
-      return;
+    try {
+      // Transfer 0.01 amount of Token using Smart Contract's transfer function
+      var service = await w3mService;
+      if (service.session == null || service.session!.address == null) {
+        ToastManager.showError("Wallet not connected");
+        return;
+      }
+      service.launchConnectedWallet();
+
+      final result = await service.requestWriteContract(
+        topic: service.session!.topic,
+        chainId: 'eip155:$_chainId',
+        deployedContract: deployedContract,
+        functionName: 'buyPesticide',
+        transaction: Transaction(
+          from: EthereumAddress.fromHex(service.session!.address!),
+          value: EtherAmount.fromInt(EtherUnit.wei, cost),
+        ),
+        parameters: [
+          userId,
+          pesticideName,
+          BigInt.from(cost),
+        ],
+      );
+      if (result is String && result.contains("User declined")) {
+        ToastManager.showSuccess("User Declined Transaction");
+      } else {
+        transcationStatus.value = TransactionStatus.inProgress;
+        await listenToEvents();
+        transcationStatus.value = TransactionStatus.success;
+        service.launchBlockExplorer();
+      }
+    } catch (e) {
+      ToastManager.showError("Transaction Failed $e");
+      transcationStatus.value = TransactionStatus.failed;
     }
-    service.launchConnectedWallet();
-    final result = await service.requestWriteContract(
-      topic: service.session!.topic,
-      chainId: 'eip155:$_chainId',
-      deployedContract: deployedContract,
-      functionName: 'buyPesticide',
-      transaction: Transaction(
-        from: EthereumAddress.fromHex(service.session!.address!),
-        value: EtherAmount.fromInt(EtherUnit.wei, cost),
-      ),
-    );
-    if (result.error != null) {
-      ToastManager.showError(result.error!.message);
-    } else {
-      ToastManager.showSuccess("Transaction Successful");
-    }
+  }
+
+  Future<void> listenToEvents() async {
+    final client = Web3Client(_sepoliaChain.rpcUrl, http.Client());
+    final purchaseMadeEvent = deployedContract.event("PurchaseMade");
+    var subscription = client
+        .events(FilterOptions.events(
+            contract: deployedContract, event: purchaseMadeEvent))
+        .take(1)
+        .listen((event) {
+      final decoded =
+          purchaseMadeEvent.decodeResults(event.topics!, event.data!);
+
+      final from = decoded[0] as EthereumAddress;
+      from.toString();
+      final pesticideName = decoded[1];
+      final costOfPesticide = decoded[2] as BigInt;
+      ToastManager.showSuccess(
+        "Transcation Successfull for $pesticideName at $costOfPesticide",
+      );
+    });
+    await subscription.asFuture();
+    await subscription.cancel();
+    await client.dispose();
+  }
+
+  String shortenEthereumAddress(String address) {
+    return "${address.substring(0, 6)}...${address.substring(address.length - 4)}";
+  }
+
+  @override
+  void onClose() {
+    _w3mService?.dispose();
+    super.onClose();
   }
 }

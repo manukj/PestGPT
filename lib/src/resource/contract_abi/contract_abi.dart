@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 final contractAddress =
-    EthereumAddress.fromHex("0x2a775CF35546Ac2ecad20E395E20Ab76b47d6e5E");
+    EthereumAddress.fromHex("0xf36ed5cf08f95a0f801251aba8aa2f5e2a6b19b1");
 
 final deployedContract = DeployedContract(
   ContractAbi.fromJson(
@@ -19,9 +19,9 @@ final deployedContract = DeployedContract(
           },
           {
             "indexed": true,
-            "internalType": "uint256",
+            "internalType": "string",
             "name": "userId",
-            "type": "uint256"
+            "type": "string"
           },
           {
             "indexed": false,
@@ -50,9 +50,9 @@ final deployedContract = DeployedContract(
           },
           {
             "indexed": true,
-            "internalType": "uint256",
+            "internalType": "string",
             "name": "userId",
-            "type": "uint256"
+            "type": "string"
           },
           {
             "indexed": false,
@@ -72,7 +72,7 @@ final deployedContract = DeployedContract(
       },
       {
         "inputs": [
-          {"internalType": "uint256", "name": "_userId", "type": "uint256"},
+          {"internalType": "string", "name": "_userId", "type": "string"},
           {
             "internalType": "string",
             "name": "_pesticideName",
@@ -87,7 +87,7 @@ final deployedContract = DeployedContract(
       },
       {
         "inputs": [
-          {"internalType": "uint256", "name": "_userId", "type": "uint256"}
+          {"internalType": "string", "name": "_userId", "type": "string"}
         ],
         "name": "clearPesticides",
         "outputs": [],
@@ -96,7 +96,7 @@ final deployedContract = DeployedContract(
       },
       {
         "inputs": [
-          {"internalType": "uint256", "name": "_userId", "type": "uint256"}
+          {"internalType": "string", "name": "_userId", "type": "string"}
         ],
         "name": "getAmountBought",
         "outputs": [
@@ -107,7 +107,7 @@ final deployedContract = DeployedContract(
       },
       {
         "inputs": [
-          {"internalType": "uint256", "name": "_userId", "type": "uint256"}
+          {"internalType": "string", "name": "_userId", "type": "string"}
         ],
         "name": "getPesticidesBought",
         "outputs": [
@@ -126,7 +126,7 @@ final deployedContract = DeployedContract(
       },
       {
         "inputs": [
-          {"internalType": "uint256", "name": "_userId", "type": "uint256"},
+          {"internalType": "string", "name": "_userId", "type": "string"},
           {
             "internalType": "uint256",
             "name": "_pesticideIndex",

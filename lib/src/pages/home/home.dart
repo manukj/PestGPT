@@ -17,67 +17,43 @@ class HomePage extends GetView<WalletConnectController> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      appBar: const CommonAppBar(
+      appBar:  CommonAppBar(
         showBackButton: false,
-        titleText: "Welcome",
+        titleText: StringConstant.welcome.tr,
       ),
       body: SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child: Obx(() {
-          if (homeController.isLoading.value) {
-            return const CommonLoader();
-          }
-          return const PestTaskList();
-        }),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Obx(() {
-            if (controller.isWalletConnected.value) {
-              return CommonPrimaryButton(
-                height: 50,
-                width: 150,
-                titleWidget: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add,
-                        color: Theme.of(context).colorScheme.surface),
-                    const SizedBox(width: 10),
-                    Text(
-                      StringConstant.connectWallet.tr,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.surface),
-                    ),
-                  ],
-                ),
-                onPressed: (() {}),
-              );
-            } else {
-              return Container();
-            }
-          }),
-          const SizedBox(height: 10),
-          CommonPrimaryButton(
-            height: 50,
-            width: 150,
-            titleWidget: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.pest_control_outlined,
-                    color: Theme.of(context).colorScheme.surface),
-                const SizedBox(height: 10),
-                Text(
-                  StringConstant.detectPest.tr,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.surface),
-                ),
-              ],
+        child: Column(
+          children: [
+            Expanded(
+              child: Obx(() {
+                if (homeController.isLoading.value) {
+                  return const CommonLoader();
+                }
+                return const PestTaskList();
+              }),
             ),
-            onPressed: () => Get.to(const PestDetection()),
-          ),
-        ],
+            CommonPrimaryButton(
+              height: 50,
+              width: double.infinity,
+              titleWidget: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.pest_control_outlined,
+                      color: Theme.of(context).colorScheme.surface),
+                  const SizedBox(height: 10),
+                  Text(
+                    StringConstant.detectPest.tr,
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.surface),
+                  ),
+                ],
+              ),
+              onPressed: () => Get.to(const PestDetection()),
+            ),
+          ],
+        ),
       ),
     );
   }

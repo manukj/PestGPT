@@ -7,6 +7,7 @@ import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/pages/pesticides/controller/pesticide_controller.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/cart/cart.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/pesticides_list_item.dart';
+import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class PesticidesPage extends StatelessWidget {
   final PesticideController controller = PesticideController();
@@ -47,10 +48,12 @@ class PesticidesPage extends StatelessWidget {
                 width: 100,
                 onPressed: () {
                   showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const CartBottomSheet();
-                      });
+                    context: context,
+                    builder: (context) {
+                      Get.find<WalletConnectController>().resetTransactionStatus();
+                      return const CartBottomSheet();
+                    },
+                  );
                 },
                 titleWidget: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

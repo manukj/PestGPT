@@ -34,7 +34,7 @@ class IntroPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            StringConstant.welcomeToPFarm.tr,
+            StringConstant.welcome.tr,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
