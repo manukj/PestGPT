@@ -5,6 +5,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackPressed;
   final Color? backgroundColor;
   final bool showBackButton;
+  final List<Widget>? actions;
 
   const CommonAppBar({
     super.key,
@@ -12,11 +13,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onBackPressed,
     this.backgroundColor,
     this.showBackButton = true,
+    this.actions,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: 100,
       backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
       leading: showBackButton
           ? IconButton(
@@ -46,6 +49,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : null,
+      actions: actions,
     );
   }
 

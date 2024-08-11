@@ -8,6 +8,8 @@ import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/pages/home/widget/pest_task_list.dart';
 import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
+import 'package:pest_gpt/src/pages/transcation_history.dart/transcation_history.dart';
+import 'package:pest_gpt/src/resource/image_path.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class HomePage extends GetView<WalletConnectController> {
@@ -17,9 +19,28 @@ class HomePage extends GetView<WalletConnectController> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      appBar:  CommonAppBar(
+      appBar: CommonAppBar(
         showBackButton: false,
         titleText: StringConstant.welcome.tr,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 10,
+            ),
+            child: CommonPrimaryButton(
+              color: Colors.white,
+              height: 50,
+              width: 50,
+              titleWidget: Image.asset(
+                IMAGEPATH.transactionHistory,
+                fit: BoxFit.cover,
+              ),
+              onPressed: () {
+                Get.to(const TranscationHistory());
+              },
+            ),
+          )
+        ],
       ),
       body: SizedBox(
         height: double.infinity,
@@ -42,7 +63,7 @@ class HomePage extends GetView<WalletConnectController> {
                 children: [
                   Icon(Icons.pest_control_outlined,
                       color: Theme.of(context).colorScheme.surface),
-                  const SizedBox(height: 10),
+                  const SizedBox(width: 10),
                   Text(
                     StringConstant.detectPest.tr,
                     style:
