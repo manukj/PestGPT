@@ -64,6 +64,8 @@ class StringConstant {
   static const String transactionFailed = 'Transaction Failed';
   static const String openBlockExplorer = 'Open Block Explorer';
   static const String tryAgain = 'Try Again';
+  static const String transactionInProgress =
+      'Your transaction is being confirmed on the blockchain. This could take a moment.';
 
   //transaction history
   static const String transactionHistory = 'Transaction History';

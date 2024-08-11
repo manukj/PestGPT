@@ -20,6 +20,7 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
   Widget build(BuildContext context) {
     if (status == TransactionStatus.inProgress) {
       return CommonLoader(
+        loadingText: StringConstant.transactionInProgress.tr,
         buttonWidget: CommonPrimaryButton(
           title: StringConstant.openBlockExplorer.tr,
           onPressed: launchBlockExplorer,
@@ -50,22 +51,25 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
     String buttonText,
     void Function() onPressed,
   ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, bottom: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Lottie.asset(lottifilePath, height: 200),
-        CommonPrimaryButton(
-          onPressed: onPressed,
-          title: buttonText,
-        ),
-      ],
+          Lottie.asset(lottifilePath, height: 200),
+          CommonPrimaryButton(
+            onPressed: onPressed,
+            title: buttonText,
+          ),
+        ],
+      ),
     );
   }
 }

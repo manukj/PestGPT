@@ -57,30 +57,33 @@ class TranscationHistory extends GetView<TranscationHistoryController> {
             shrinkWrap: true,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              return CommonCard(
-                child: ListTile(
-                  title: Text(snapshot.data![index].name),
-                  subtitle: Text(
-                    "${snapshot.data![index].cost} ${Constants.currencySymbol}",
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.blueGrey,
-                    child: Padding(
-                      padding: const EdgeInsets.all(7.0),
-                      child: Text(
-                        DateFormat('MMM d').format(
-                          DateTime.fromMillisecondsSinceEpoch(
-                            snapshot.data![index].dateOfPurchase
-                                .millisecondsSinceEpoch,
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: CommonCard(
+                  child: ListTile(
+                    title: Text(snapshot.data![index].name),
+                    subtitle: Text(
+                      "${snapshot.data![index].cost} ${Constants.currencySymbol}",
+                    ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.blueGrey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Text(
+                          DateFormat('MMM d').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                              snapshot.data![index].dateOfPurchase
+                                  .millisecondsSinceEpoch,
+                            ),
                           ),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),

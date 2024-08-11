@@ -28,11 +28,15 @@ class CommonLoader extends StatelessWidget {
                   width: 200,
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  loadingText,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    loadingText,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],

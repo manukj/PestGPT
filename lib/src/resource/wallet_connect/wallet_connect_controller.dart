@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pest_gpt/src/pages/transcation_history.dart/controller/transcation_history_controller.dart';
 import 'package:pest_gpt/src/resource/contract_abi/contract_abi.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
@@ -112,7 +113,7 @@ class WalletConnectController extends GetxController {
         transcationStatus.value = TransactionStatus.inProgress;
         await listenToEvents();
         transcationStatus.value = TransactionStatus.success;
-        service.launchBlockExplorer();
+        Get.find<TranscationHistoryController>().clearTranscationHistory();
       }
     } catch (e) {
       print("Transaction Failed: $e");

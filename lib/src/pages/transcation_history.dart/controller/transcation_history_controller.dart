@@ -35,16 +35,18 @@ class TranscationHistoryController extends GetxController {
       functionName: 'getPesticidesBought',
       parameters: [userID],
     );
-
-    var list = result.map((e) {
-      var name = e[0][0];
-      var cost = (e[0][1] as BigInt).toInt();
-      var dateOfPurchase =
-          DateTime.fromMillisecondsSinceEpoch((e[0][2] as BigInt).toInt());
-      var pesticidePurchase = PesticidePurchaseModel(
-          name: name, cost: cost, dateOfPurchase: dateOfPurchase);
-      return pesticidePurchase;
-    }).toList();
+    var list = <PesticidePurchaseModel>[];
+    for (var purchaseList in result) {
+      purchaseList.forEach((purchase) {
+        var name = purchase[0];
+        var cost = (purchase[1] as BigInt).toInt();
+        var dateOfPurchase = DateTime.fromMillisecondsSinceEpoch(
+            (purchase[2] as BigInt).toInt());
+        var pesticidePurchase = PesticidePurchaseModel(
+            name: name, cost: cost, dateOfPurchase: dateOfPurchase);
+        list.add(pesticidePurchase);
+      });
+    }
     transcationHistory.value = list;
     return list;
   }
