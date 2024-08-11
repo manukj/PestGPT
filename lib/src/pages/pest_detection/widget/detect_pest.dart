@@ -64,6 +64,7 @@ class DetectPest extends StatelessWidget {
             ),
           ),
           CommonPrimaryButton(
+            color: isPestDetected ? Colors.green : null,
             onPressed: () => {
               if (isPestDetected)
                 {Get.to(PestDetectDetails())}

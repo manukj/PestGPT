@@ -42,6 +42,7 @@ class CommonPrimaryButton extends StatelessWidget {
               height: height,
               padding: const EdgeInsets.all(10),
               child: NeuTextButton(
+                buttonColor: color ?? neuDefault1,
                 enableAnimation: true,
                 onPressed: isLoading ? null : onPressed,
                 text: Text(
