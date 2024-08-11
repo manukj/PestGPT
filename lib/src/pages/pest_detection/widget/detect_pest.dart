@@ -44,8 +44,8 @@ class DetectPest extends StatelessWidget {
                 ),
                 controller.isLoading.value
                     ? const Center(
-                      child: DetectingAnimation(),
-                    )
+                        child: DetectingAnimation(),
+                      )
                     : Container(),
                 CommonAppBar(
                   onBackPressed: () {
@@ -53,6 +53,12 @@ class DetectPest extends StatelessWidget {
                     controller.processedImage.value = null;
                   },
                   backgroundColor: Colors.transparent,
+                  titleText: StringConstant.detectPest.tr,
+                  actions: const [
+                    SizedBox(
+                      width: 30,
+                    )
+                  ],
                 )
               ],
             ),
