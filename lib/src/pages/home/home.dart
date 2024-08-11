@@ -22,7 +22,11 @@ class HomePage extends GetView<WalletConnectController> {
         future: homeController.fetchUserInfo(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
-            return const CommonLoader();
+            return CommonScaffold(
+              body: CommonLoader(
+                loadingText: StringConstant.loadingUserDetails.tr,
+              ),
+            );
           }
           return CommonScaffold(
             appBar: CommonAppBar(
@@ -44,7 +48,7 @@ class HomePage extends GetView<WalletConnectController> {
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
-                      Get.to(const TranscationHistory());
+                      Get.to(() => const TranscationHistory());
                     },
                   ),
                 )

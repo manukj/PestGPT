@@ -4,11 +4,11 @@ import 'package:pest_gpt/src/resource/contract_abi/contract_abi.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
-const _chainId = "11155111"; // sepolia chain id
+const chainId = "11155111"; // sepolia chain id
 final _sepoliaChain = W3MChainInfo(
   chainName: 'Sepolia',
-  namespace: 'eip155:$_chainId',
-  chainId: _chainId,
+  namespace: 'eip155:$chainId',
+  chainId: chainId,
   tokenName: 'ETH',
   rpcUrl: 'https://rpc.sepolia.org/',
   blockExplorer: W3MBlockExplorer(
@@ -33,7 +33,7 @@ class WalletConnectController extends GetxController {
   }
 
   Future<void> initalize() async {
-    W3MChainPresets.chains.putIfAbsent(_chainId, () => _sepoliaChain);
+    W3MChainPresets.chains.putIfAbsent(chainId, () => _sepoliaChain);
     _w3mService = W3MService(
       projectId: 'd8eb95f605374ff6e204ae7326531e8b',
       metadata: const PairingMetadata(
@@ -91,7 +91,7 @@ class WalletConnectController extends GetxController {
       service.launchConnectedWallet();
       final result = await service.requestWriteContract(
         topic: service.session!.topic,
-        chainId: 'eip155:$_chainId',
+        chainId: 'eip155:$chainId',
         deployedContract: deployedContract,
         functionName: 'buyPesticides',
         transaction: Transaction(

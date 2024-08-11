@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pest_gpt/src/models/pest/pest_tasks.dart';
 import 'package:pest_gpt/src/models/user/user_info_response.dart';
+import 'package:pest_gpt/src/pages/transcation_history.dart/controller/transcation_history_controller.dart';
 import 'package:pest_gpt/src/resource/api_service/user_service.dart';
 import 'package:pest_gpt/src/resource/db_service/db_service.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
@@ -41,6 +42,7 @@ class HomeController extends GetxController {
       var response = await UserService().getUserInfo();
       isLoading.value = false;
       userInfo.value = response;
+      Get.find<TranscationHistoryController>().setUserID(userInfo.value?.id);
     } catch (e) {
       ToastManager.showError(e.toString());
       // await Get.find<AuthenticationController>().logOut();

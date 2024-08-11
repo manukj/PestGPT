@@ -64,4 +64,9 @@ class StringConstant {
   static const String transactionFailed = 'Transaction Failed';
   static const String openBlockExplorer = 'Open Block Explorer';
   static const String tryAgain = 'Try Again';
+
+  //transaction history
+  static const String transactionHistory = 'Transaction History';
+  static const String noTransactionHistory = 'No Transaction History';
+  static const String loadingUserDetails = 'Loading User Details';
 }

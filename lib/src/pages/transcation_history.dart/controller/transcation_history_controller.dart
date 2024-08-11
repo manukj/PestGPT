@@ -10,12 +10,6 @@ class TranscationHistoryController extends GetxController {
   String? userID;
   Rx<List<PesticidePurchaseModel>> transcationHistory = Rx([]);
 
-  @override
-  void onInit() {
-    fetchTranscationHistory();
-    super.onInit();
-  }
-
   void setUserID(String? id) {
     userID = id;
   }
@@ -38,12 +32,12 @@ class TranscationHistoryController extends GetxController {
     }
     final result = await service.requestWriteContract(
       topic: service.session!.topic,
-      chainId: 'eip155:1',
+      chainId: 'eip155:$chainId',
       deployedContract: deployedContract,
       functionName: 'getPesticidesBought',
       transaction: Transaction(
         from: EthereumAddress.fromHex(service.session!.address!),
-        value: EtherAmount.fromInt(EtherUnit.finney, 10), // == 0.010
+        value: EtherAmount.fromInt(EtherUnit.finney, 10),
       ),
       parameters: [userID],
     );
