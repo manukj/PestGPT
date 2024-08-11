@@ -62,5 +62,6 @@ class StringConstant {
   static const String transactionSuccess = 'Transaction Success';
   static const String buyMore = 'Buy More';
   static const String transactionFailed = 'Transaction Failed';
+  static const String openBlockExplorer = 'Open Block Explorer';
   static const String tryAgain = 'Try Again';
 }

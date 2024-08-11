@@ -71,35 +71,43 @@ class WalletConnectController extends GetxController {
 
   Future<void> buyPesticide(
     String userId,
-    String pesticideName,
-    int cost,
+    List<String> pesticideName,
+    List<int> cost,
   ) async {
     try {
-      // Transfer 0.01 amount of Token using Smart Contract's transfer function
+      if (pesticideName.isEmpty || cost.isEmpty) {
+        throw Exception("Pesticide names or costs cannot be empty.");
+      }
+
+      final totalCost =
+          cost.fold(0, (previousValue, element) => previousValue + element);
+      List<BigInt> costBigInt = cost.map((e) => BigInt.from(e)).toList();
+
       var service = await w3mService;
       if (service.session == null || service.session!.address == null) {
         ToastManager.showError("Wallet not connected");
         return;
       }
       service.launchConnectedWallet();
-
       final result = await service.requestWriteContract(
         topic: service.session!.topic,
         chainId: 'eip155:$_chainId',
         deployedContract: deployedContract,
-        functionName: 'buyPesticide',
+        functionName: 'buyPesticides',
         transaction: Transaction(
           from: EthereumAddress.fromHex(service.session!.address!),
-          value: EtherAmount.fromInt(EtherUnit.wei, cost),
+          value: EtherAmount.fromInt(EtherUnit.wei, totalCost),
         ),
         parameters: [
           userId,
           pesticideName,
-          BigInt.from(cost),
+          costBigInt,
         ],
       );
-      if (result is String && result.contains("User declined")) {
-        ToastManager.showSuccess("User Declined Transaction");
+      if (result is String &&
+          (result.contains("User declined") ||
+              result.contains("User rejected"))) {
+        ToastManager.showError("User Declined Transaction");
       } else {
         transcationStatus.value = TransactionStatus.inProgress;
         await listenToEvents();
@@ -107,7 +115,8 @@ class WalletConnectController extends GetxController {
         service.launchBlockExplorer();
       }
     } catch (e) {
-      ToastManager.showError("Transaction Failed $e");
+      print("Transaction Failed: $e");
+      ToastManager.showError("Transaction Failed: $e");
       transcationStatus.value = TransactionStatus.failed;
     }
   }

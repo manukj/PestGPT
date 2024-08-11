@@ -10,7 +10,7 @@ import 'package:pest_gpt/src/pages/pesticides/widget/pesticides_list_item.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class PesticidesPage extends StatelessWidget {
-  final PesticideController controller = PesticideController();
+  final PesticideController controller = Get.put(PesticideController());
   final LLMPestInfo pestInfo;
   PesticidesPage({
     super.key,
@@ -50,7 +50,8 @@ class PesticidesPage extends StatelessWidget {
                   showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      Get.find<WalletConnectController>().resetTransactionStatus();
+                      Get.find<WalletConnectController>()
+                          .resetTransactionStatus();
                       return const CartBottomSheet();
                     },
                   );

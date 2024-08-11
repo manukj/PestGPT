@@ -7,29 +7,37 @@ import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
-class TranscationStatusWidget extends StatelessWidget {
+class TranscationStatusWidget extends GetView<WalletConnectController> {
   final TransactionStatus status;
   const TranscationStatusWidget({super.key, required this.status});
+
+  void launchBlockExplorer() async {
+    var service = await controller.w3mService;
+    service.launchBlockExplorer();
+  }
 
   @override
   Widget build(BuildContext context) {
     if (status == TransactionStatus.inProgress) {
-      return const CommonLoader();
+      return CommonLoader(
+        buttonWidget: CommonPrimaryButton(
+          title: StringConstant.openBlockExplorer.tr,
+          onPressed: launchBlockExplorer,
+        ),
+      );
     } else if (status == TransactionStatus.success) {
       return _buildStatus(
         StringConstant.transactionSuccess.tr,
         IMAGEPATH.successAnimation,
-        StringConstant.buyMore.tr,
-        () {
-          Get.back();
-        },
+        StringConstant.openBlockExplorer.tr,
+        launchBlockExplorer,
       );
     } else {
       return _buildStatus(
         StringConstant.transactionFailed.tr,
         IMAGEPATH.failedAnimation,
         StringConstant.tryAgain.tr,
-        () {
+        () async {
           Get.find<WalletConnectController>().resetTransactionStatus();
         },
       );
@@ -43,12 +51,12 @@ class TranscationStatusWidget extends StatelessWidget {
     void Function() onPressed,
   ) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
           title,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
         ),

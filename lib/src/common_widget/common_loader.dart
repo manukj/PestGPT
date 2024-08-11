@@ -3,7 +3,13 @@ import 'package:lottie/lottie.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
 class CommonLoader extends StatelessWidget {
-  const CommonLoader({super.key});
+  final Widget? buttonWidget;
+  final String loadingText;
+  const CommonLoader({
+    super.key,
+    this.buttonWidget,
+    this.loadingText = 'Loading...',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +17,34 @@ class CommonLoader extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Lottie.asset(
-            IMAGEPATH.pestLoadingAnimation,
-            width: 200,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Lottie.asset(
+                  IMAGEPATH.pestLoadingAnimation,
+                  width: 200,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  loadingText,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 10),
-          const Text('Loading...', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          if (buttonWidget != null)
+            Align(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: buttonWidget!,
+              ),
+            ),
         ],
       ),
     );

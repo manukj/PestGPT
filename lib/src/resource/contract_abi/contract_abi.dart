@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 final contractAddress =
-    EthereumAddress.fromHex("0xf36ed5cf08f95a0f801251aba8aa2f5e2a6b19b1");
+    EthereumAddress.fromHex("0xE428CdC392c5689B28121D377dBD6195389FF9bA");
 
 final deployedContract = DeployedContract(
   ContractAbi.fromJson(
@@ -33,6 +33,12 @@ final deployedContract = DeployedContract(
             "indexed": false,
             "internalType": "uint256",
             "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "dateOfPurchase",
             "type": "uint256"
           }
         ],
@@ -74,13 +80,13 @@ final deployedContract = DeployedContract(
         "inputs": [
           {"internalType": "string", "name": "_userId", "type": "string"},
           {
-            "internalType": "string",
-            "name": "_pesticideName",
-            "type": "string"
+            "internalType": "string[]",
+            "name": "_pesticideNames",
+            "type": "string[]"
           },
-          {"internalType": "uint256", "name": "_amount", "type": "uint256"}
+          {"internalType": "uint256[]", "name": "_amounts", "type": "uint256[]"}
         ],
-        "name": "buyPesticide",
+        "name": "buyPesticides",
         "outputs": [],
         "stateMutability": "payable",
         "type": "function"
@@ -92,6 +98,41 @@ final deployedContract = DeployedContract(
         "name": "clearPesticides",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getAllPurchases",
+        "outputs": [
+          {
+            "components": [
+              {"internalType": "string", "name": "userId", "type": "string"},
+              {
+                "components": [
+                  {"internalType": "string", "name": "name", "type": "string"},
+                  {
+                    "internalType": "uint256",
+                    "name": "cost",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "dateOfPurchase",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct PesticidePurchases.Pesticide[]",
+                "name": "pesticides",
+                "type": "tuple[]"
+              },
+              {"internalType": "uint256", "name": "balance", "type": "uint256"}
+            ],
+            "internalType": "struct PesticidePurchases.PurchaseSummary[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -114,7 +155,12 @@ final deployedContract = DeployedContract(
           {
             "components": [
               {"internalType": "string", "name": "name", "type": "string"},
-              {"internalType": "uint256", "name": "cost", "type": "uint256"}
+              {"internalType": "uint256", "name": "cost", "type": "uint256"},
+              {
+                "internalType": "uint256",
+                "name": "dateOfPurchase",
+                "type": "uint256"
+              }
             ],
             "internalType": "struct PesticidePurchases.Pesticide[]",
             "name": "",
@@ -134,6 +180,13 @@ final deployedContract = DeployedContract(
           }
         ],
         "name": "refundPesticide",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "withdraw",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

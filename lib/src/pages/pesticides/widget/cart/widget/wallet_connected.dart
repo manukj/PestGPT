@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
+import 'package:pest_gpt/src/pages/pesticides/controller/pesticide_controller.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
@@ -84,11 +85,18 @@ class WalletConnected extends GetView<WalletConnectController> {
         CommonPrimaryButton(
           onPressed: () {
             final userInfo = Get.find<HomeController>().userInfo.value;
+            final pesticideController = Get.find<PesticideController>();
             if (userInfo == null) {
               ToastManager.showError("User Info not found");
               return;
             }
-            controller.buyPesticide(userInfo.id!, "Pesticide", 100);
+            final List<String> pesticideName = [];
+            final List<int> cost = [];
+            for (var pesticide in pesticideController.selectedPesticideList) {
+              pesticideName.add(pesticide.name);
+              cost.add(int.parse(pesticide.cost));
+            }
+            controller.buyPesticide(userInfo.id!, pesticideName, cost);
           },
           title: StringConstant.buy.tr,
         ),
