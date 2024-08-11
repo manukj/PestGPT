@@ -18,64 +18,73 @@ class HomePage extends GetView<WalletConnectController> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      appBar: CommonAppBar(
-        showBackButton: false,
-        titleText: StringConstant.welcome.tr,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
+    return FutureBuilder(
+        future: homeController.fetchUserInfo(),
+        builder: (context, snap) {
+          if (snap.connectionState == ConnectionState.waiting) {
+            return const CommonLoader();
+          }
+          return CommonScaffold(
+            appBar: CommonAppBar(
+              leading: const SizedBox(),
+              showBackButton: false,
+              titleText:
+                  '${StringConstant.welcome.tr}\n${homeController.userInfo.value?.fullName ?? ''}',
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 10,
+                  ),
+                  child: CommonPrimaryButton(
+                    color: Colors.white,
+                    height: 50,
+                    width: 50,
+                    titleWidget: Image.asset(
+                      IMAGEPATH.transactionHistory,
+                      fit: BoxFit.cover,
+                    ),
+                    onPressed: () {
+                      Get.to(const TranscationHistory());
+                    },
+                  ),
+                )
+              ],
             ),
-            child: CommonPrimaryButton(
-              color: Colors.white,
-              height: 50,
-              width: 50,
-              titleWidget: Image.asset(
-                IMAGEPATH.transactionHistory,
-                fit: BoxFit.cover,
-              ),
-              onPressed: () {
-                Get.to(const TranscationHistory());
-              },
-            ),
-          )
-        ],
-      ),
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            Expanded(
-              child: Obx(() {
-                if (homeController.isLoading.value) {
-                  return const CommonLoader();
-                }
-                return const PestTaskList();
-              }),
-            ),
-            CommonPrimaryButton(
-              height: 50,
+            body: SizedBox(
+              height: double.infinity,
               width: double.infinity,
-              titleWidget: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
-                  Icon(Icons.pest_control_outlined,
-                      color: Theme.of(context).colorScheme.surface),
-                  const SizedBox(width: 10),
-                  Text(
-                    StringConstant.detectPest.tr,
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.surface),
+                  Expanded(
+                    child: Obx(() {
+                      if (homeController.isLoading.value) {
+                        return const CommonLoader();
+                      }
+                      return const PestTaskList();
+                    }),
+                  ),
+                  CommonPrimaryButton(
+                    height: 50,
+                    width: double.infinity,
+                    titleWidget: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.pest_control_outlined,
+                            color: Theme.of(context).colorScheme.surface),
+                        const SizedBox(width: 10),
+                        Text(
+                          StringConstant.detectPest.tr,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.surface),
+                        ),
+                      ],
+                    ),
+                    onPressed: () => Get.to(const PestDetection()),
                   ),
                 ],
               ),
-              onPressed: () => Get.to(const PestDetection()),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }

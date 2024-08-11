@@ -6,6 +6,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final bool showBackButton;
   final List<Widget>? actions;
+  final Widget? leading;
 
   const CommonAppBar({
     super.key,
@@ -14,6 +15,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.showBackButton = true,
     this.actions,
+    this.leading,
   });
 
   @override
@@ -35,7 +37,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
             )
-          : null,
+          : leading,
       title: titleText != null
           ? Container(
               width: double.infinity,
@@ -46,6 +48,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             )
           : null,
