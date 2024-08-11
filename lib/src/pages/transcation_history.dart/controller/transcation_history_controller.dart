@@ -30,18 +30,22 @@ class TranscationHistoryController extends GetxController {
       ToastManager.showError("Wallet not connected");
       throw Exception("Wallet not connected");
     }
-    final result = await service.requestWriteContract(
-      topic: service.session!.topic,
-      chainId: 'eip155:$chainId',
+    final result = await service.requestReadContract(
       deployedContract: deployedContract,
       functionName: 'getPesticidesBought',
-      transaction: Transaction(
-        from: EthereumAddress.fromHex(service.session!.address!),
-        value: EtherAmount.fromInt(EtherUnit.finney, 10),
-      ),
       parameters: [userID],
     );
-    print(result);
-    return [];
+
+    var list = result.map((e) {
+      var name = e[0][0];
+      var cost = (e[0][1] as BigInt).toInt();
+      var dateOfPurchase =
+          DateTime.fromMillisecondsSinceEpoch((e[0][2] as BigInt).toInt());
+      var pesticidePurchase = PesticidePurchaseModel(
+          name: name, cost: cost, dateOfPurchase: dateOfPurchase);
+      return pesticidePurchase;
+    }).toList();
+    transcationHistory.value = list;
+    return list;
   }
 }
