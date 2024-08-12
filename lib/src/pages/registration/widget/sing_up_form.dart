@@ -6,7 +6,6 @@ import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/registration/widget/sign_in_button.dart';
 import 'package:pest_gpt/src/pages/registration/widget/terms_and_condition.dart';
 
-
 class SingUpForm extends StatelessWidget {
   const SingUpForm({super.key});
 
@@ -14,6 +13,7 @@ class SingUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CommonTextField(
           hintText: StringConstant.userName.tr,
@@ -46,7 +46,7 @@ class SingUpForm extends StatelessWidget {
         const SizedBox(height: 24),
         CommonPrimaryButton(
           onPressed: () {},
-          titleWidget: Text(StringConstant.signUp.tr),
+          title: StringConstant.signUp.tr,
         ),
         const SizedBox(height: 16),
         const SignInButton(),

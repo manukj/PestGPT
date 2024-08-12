@@ -4,6 +4,7 @@ import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/language_switcher_widget.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/user/user_info_response.dart';
+import 'package:pest_gpt/src/pages/login/login.dart';
 import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart'; // Assuming you're using GetX for navigation or state management
 
 class UserProfileBottomSheet extends StatelessWidget {
@@ -44,7 +45,7 @@ class UserProfileBottomSheet extends StatelessWidget {
           onPressed: () {
             Get.find<AuthenticationController>().logOut();
             Get.back(); // Close the bottom sheet
-            // Add any additional logout logic here
+            Get.to(const Login());
           },
           title: StringConstant.logout.tr,
         ),
