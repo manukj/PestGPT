@@ -11,7 +11,7 @@ class StringConstant {
   static const String somethingWentWrong = 'Something went wrong';
   static const String loginSuccess = 'Login Success';
   static const String noPestDetected =
-      "No pest history found.\nPlease use the 'Detect Pest' feature to identify pests.";
+      "No pest history found. Please use the Detect Pest feature to identify pests.";
   static const String logout = 'Logout';
 
   // login
