@@ -10,6 +10,8 @@ class StringConstant {
   static const String passwordCannotBeEmpty = 'Password cannot be empty';
   static const String somethingWentWrong = 'Something went wrong';
   static const String loginSuccess = 'Login Success';
+  static const String noPestDetected =
+      "No pest history found.\nPlease use the 'Detect Pest' feature to identify pests.";
 
   // login
   static const String email = 'Email';
@@ -73,5 +75,6 @@ class StringConstant {
   static const String loadingUserDetails = 'Loading User Details';
 
   //common
-  static const String fetchingTransactionHistory = 'Fetching Transaction History';
+  static const String fetchingTransactionHistory =
+      'Fetching Transaction History';
 }

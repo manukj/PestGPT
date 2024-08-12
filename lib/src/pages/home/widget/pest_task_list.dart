@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
+import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/pages/pest_task/pest_task_details.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
@@ -16,18 +17,19 @@ class PestTaskList extends GetView<HomeController> {
       () {
         return controller.pestTasks.value.isEmpty
             ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.asset(IMAGEPATH.emptyList, height: 200, width: 200),
-                const Text(
-                  'No pest tasks available',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(IMAGEPATH.emptyList, height: 200, width: 200),
+                  Text(
+                    StringConstant.noPestDetected.tr,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
-            )
+                ],
+              )
             : ListView(
                 shrinkWrap: true,
                 children: controller.pestTasks.value.map((pestTask) {

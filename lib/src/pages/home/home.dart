@@ -79,7 +79,8 @@ class HomePage extends GetView<WalletConnectController> {
                         Text(
                           StringConstant.detectPest.tr,
                           style: TextStyle(
-                              color: Theme.of(context).colorScheme.surface),
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
                         ),
                       ],
                     ),
