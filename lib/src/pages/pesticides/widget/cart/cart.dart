@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/cart/widget/transcation_status.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/cart/widget/wallet_connected.dart';
-import 'package:pest_gpt/src/pages/pesticides/widget/cart/widget/wallet_not_connected.dart';
+import 'package:pest_gpt/src/pages/pesticides/widget/cart/widget/connect_wallet_widget.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class CartBottomSheet extends GetView<WalletConnectController> {
@@ -27,7 +27,7 @@ class CartBottomSheet extends GetView<WalletConnectController> {
               if (controller.isWalletConnected.value) {
                 return WalletConnected(service: snap.data!);
               } else {
-                return WalletNotConnected(service: snap.data!);
+                return const ConnectWalletWidget();
               }
             } else {
               return TranscationStatusWidget(

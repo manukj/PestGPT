@@ -7,12 +7,28 @@ import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/pages/pesticides/widget/cart/widget/connect_wallet_widget.dart';
 import 'package:pest_gpt/src/pages/transcation_history.dart/controller/transcation_history_controller.dart';
 import 'package:pest_gpt/src/resource/constants.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
+import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
+import 'package:pest_gpt/src/utils/bottom_sheet_util.dart';
 
-class TranscationHistory extends GetView<TranscationHistoryController> {
+class TranscationHistory extends StatefulWidget {
   const TranscationHistory({super.key});
+
+  @override
+  State<TranscationHistory> createState() => _TranscationHistoryState();
+}
+
+class _TranscationHistoryState extends State<TranscationHistory> {
+  final TranscationHistoryController controller =
+      Get.put(TranscationHistoryController());
+  final WalletConnectController walletConnectController = Get.find();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +48,9 @@ class TranscationHistory extends GetView<TranscationHistoryController> {
           }
 
           if (snapshot.hasError && snapshot.data == null) {
+            if (!walletConnectController.isWalletConnected.value) {
+              showAppBottomSheet(const ConnectWalletWidget());
+            }
             return Center(
               child: Text('Error: ${snapshot.error}'),
             );

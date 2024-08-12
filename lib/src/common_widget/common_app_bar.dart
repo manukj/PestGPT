@@ -7,6 +7,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final List<Widget>? actions;
   final Widget? leading;
+  final Alignment alignment;
+  final TextAlign textAlign;
 
   const CommonAppBar({
     super.key,
@@ -16,6 +18,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = true,
     this.actions,
     this.leading,
+    this.alignment = Alignment.center,
+    this.textAlign = TextAlign.center,
   });
 
   @override
@@ -41,14 +45,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleText != null
           ? Container(
               width: double.infinity,
-              alignment: Alignment.center,
+              alignment: alignment,
               child: Text(
                 titleText!,
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: textAlign,
               ),
             )
           : null,

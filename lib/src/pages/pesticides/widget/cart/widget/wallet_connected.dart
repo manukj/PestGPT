@@ -36,10 +36,9 @@ class WalletConnected extends GetView<WalletConnectController> {
                 onPressed: () async {
                   // if (service.isConnected) {
                   await service.disconnect();
-                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  await Future.delayed(const Duration(milliseconds: 500), () {
                     controller.updateStatus();
                   });
-                  // }
                 },
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(

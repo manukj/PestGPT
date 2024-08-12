@@ -30,7 +30,26 @@ class HomePage extends GetView<WalletConnectController> {
           }
           return CommonScaffold(
             appBar: CommonAppBar(
-              leading: const SizedBox(),
+              alignment: Alignment.centerLeft,
+              textAlign: TextAlign.start,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Card(
+                  shape: const CircleBorder(),
+                  elevation: 4.0,
+                  child: CircleAvatar(
+                    radius: 20,
+                    child: ClipOval(
+                      child: Image.network(
+                        homeController.userInfo.value?.avatar ?? '',
+                        fit: BoxFit.cover,
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               showBackButton: false,
               titleText:
                   '${StringConstant.welcome.tr}\n${homeController.userInfo.value?.fullName ?? ''}',
@@ -48,7 +67,7 @@ class HomePage extends GetView<WalletConnectController> {
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
-                      Get.to(() => const TranscationHistory());
+                      Get.to(() => TranscationHistory());
                     },
                   ),
                 )

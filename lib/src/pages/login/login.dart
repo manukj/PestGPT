@@ -25,7 +25,10 @@ class Login extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [LoginWidget(), PoweredBy()],
+          children: [
+            LoginWidget(),
+            PoweredBy(),
+          ],
         ),
       ),
     );
