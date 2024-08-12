@@ -55,4 +55,7 @@ const Map<String, String> zh_CN = {
   'No Transaction History': '没有交易历史',
   'Loading User Details': '正在加载用户详情',
   'Fetching Transaction History': '正在获取交易历史',
+  'Welcome to the future of farming. Pest Shield is a platform that helps you to detect pests in your crops and provides you with the best solutions to protect your crops.': '欢迎来到农业的未来。Pest Shield是一个帮助您检测作物中的虫害并为您提供最佳解决方案保护作物的平台。',
+  'Welcome to Pest Shield': 'Welcome to Pest Shield',
+  'Pest Shield': 'Pest Shield',
 };

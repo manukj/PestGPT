@@ -55,4 +55,7 @@ const Map<String, String> en_US = {
   'No Transaction History': 'No Transaction History',
   'Loading User Details': 'Loading User Details',
   'Fetching Transaction History': 'Fetching Transaction History',
+  'Welcome to the future of farming. Pest Shield is a platform that helps you to detect pests in your crops and provides you with the best solutions to protect your crops.': 'Welcome to the future of farming. Pest Shield is a platform that helps you to detect pests in your crops and provides you with the best solutions to protect your crops.',
+  'Welcome to Pest Shield': 'Welcome to Pest Shield',
+  'Pest Shield': 'Pest Shield',
 };
