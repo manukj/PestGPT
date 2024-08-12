@@ -71,4 +71,7 @@ class StringConstant {
   static const String transactionHistory = 'Transaction History';
   static const String noTransactionHistory = 'No Transaction History';
   static const String loadingUserDetails = 'Loading User Details';
+
+  //common
+  static const String fetchingTransactionHistory = 'Fetching Transaction History';
 }

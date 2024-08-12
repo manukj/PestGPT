@@ -47,7 +47,7 @@ class TranscationHistoryController extends GetxController {
         list.add(pesticidePurchase);
       });
     }
-    transcationHistory.value = list;
+     transcationHistory.value = list;
     return list;
   }
 }

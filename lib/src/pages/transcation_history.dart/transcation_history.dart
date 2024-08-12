@@ -24,8 +24,10 @@ class TranscationHistory extends GetView<TranscationHistoryController> {
         future: controller.fetchTranscationHistory(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CommonLoader(),
+            return Center(
+              child: CommonLoader(
+                loadingText: StringConstant.fetchingTransactionHistory.tr,
+              ),
             );
           }
 
@@ -35,22 +37,26 @@ class TranscationHistory extends GetView<TranscationHistoryController> {
             );
           }
           if (snapshot.data!.isEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.asset(
-                  IMAGEPATH.emptyTaskList,
-                  height: 200,
-                  width: 200,
-                ),
-                const Text(
-                  "No Transcation History",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            return SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    IMAGEPATH.emptyTaskList,
+                    height: 300,
+                    width: 300,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  const Text(
+                    "No Transcation History",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             );
           }
           return ListView.builder(
