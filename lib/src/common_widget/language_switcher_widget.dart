@@ -7,28 +7,21 @@ class LanguageSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('language'.tr),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LanguageButton(
-              languageCode: 'en',
-              countryCode: 'US',
-              languageName: 'English',
-            ),
-            SizedBox(height: 20),
-            LanguageButton(
-              languageCode: 'zh',
-              countryCode: 'CN',
-              languageName: '中文',
-            ),
-          ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        LanguageButton(
+          languageCode: 'en',
+          countryCode: 'US',
+          languageName: 'English',
         ),
-      ),
+        const SizedBox(width: 20),
+        LanguageButton(
+          languageCode: 'zh',
+          countryCode: 'CN',
+          languageName: '中文',
+        ),
+      ],
     );
   }
 }
@@ -50,8 +43,8 @@ class LanguageButton extends StatelessWidget {
         Get.locale?.countryCode == countryCode;
 
     return CommonPrimaryButton(
-      width: 60,
-      color: isSelected ? Colors.blue : Colors.transparent,
+      width: 150,
+      color: isSelected ? Colors.blue : Colors.grey,
       onPressed: () {
         var locale = Locale(languageCode, countryCode);
         Get.updateLocale(locale);

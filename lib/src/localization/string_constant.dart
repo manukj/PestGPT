@@ -12,6 +12,7 @@ class StringConstant {
   static const String loginSuccess = 'Login Success';
   static const String noPestDetected =
       "No pest history found.\nPlease use the 'Detect Pest' feature to identify pests.";
+  static const String logout = 'Logout';
 
   // login
   static const String email = 'Email';

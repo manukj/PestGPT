@@ -7,10 +7,12 @@ import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/home/controller/home_controller.dart';
 import 'package:pest_gpt/src/pages/home/widget/pest_task_list.dart';
+import 'package:pest_gpt/src/pages/home/widget/user_info_bottomsheet.dart';
 import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
 import 'package:pest_gpt/src/pages/transcation_history.dart/transcation_history.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
+import 'package:pest_gpt/src/utils/bottom_sheet_util.dart';
 
 class HomePage extends GetView<WalletConnectController> {
   HomePage({super.key});
@@ -32,19 +34,26 @@ class HomePage extends GetView<WalletConnectController> {
             appBar: CommonAppBar(
               alignment: Alignment.centerLeft,
               textAlign: TextAlign.start,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Card(
-                  shape: const CircleBorder(),
-                  elevation: 4.0,
-                  child: CircleAvatar(
-                    radius: 20,
-                    child: ClipOval(
-                      child: Image.network(
-                        homeController.userInfo.value?.avatar ?? '',
-                        fit: BoxFit.cover,
-                        width: 40,
-                        height: 40,
+              leading: GestureDetector(
+                onTap: () {
+                  showAppBottomSheet(UserProfileBottomSheet(
+                    userInfo: homeController.userInfo.value!,
+                  ));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Card(
+                    shape: const CircleBorder(),
+                    elevation: 4.0,
+                    child: CircleAvatar(
+                      radius: 20,
+                      child: ClipOval(
+                        child: Image.network(
+                          homeController.userInfo.value?.avatar ?? '',
+                          fit: BoxFit.cover,
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ),
                   ),
@@ -67,7 +76,7 @@ class HomePage extends GetView<WalletConnectController> {
                       fit: BoxFit.cover,
                     ),
                     onPressed: () {
-                      Get.to(() => TranscationHistory());
+                      Get.to(() => const TranscationHistory());
                     },
                   ),
                 )
