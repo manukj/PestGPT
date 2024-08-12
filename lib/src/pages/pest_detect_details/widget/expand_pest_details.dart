@@ -31,7 +31,7 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
           widget.pestModel.pestName,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        tilePadding: const EdgeInsets.all(10),
+        tilePadding: const EdgeInsets.only(top: 10, bottom: 10),
         leading: CommonCard(
           height: 50,
           width: 50,
@@ -73,33 +73,18 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
         child: Text("Failed to fetch details"),
       );
     } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            Text(pestDetail.pestInfo ?? "N/A"),
-            TextButton(
-              onPressed: () {
-                Get.to(PestInfoPage(pestModel, pestDetail));
-              },
-              child: const Text('View More'),
-            )
-          ],
-        ),
-      );
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Ideal Temperature"),
-          Text("Min: ${pestDetail.idealTemperature?.min ?? 'N/A'}"),
-          Text("Max: ${pestDetail.idealTemperature?.max ?? 'N/A'}"),
-          const SizedBox(height: 10),
-          const Text("Precautions"),
-          ...(pestDetail.precautions ?? []).map((e) => Text("• $e")),
-          const SizedBox(height: 10),
-          const Text("Pesticides"),
-          ...(pestDetail.pesticides ?? [])
-              .map((e) => Text("${e?.name} - ${e?.cost}")),
+          Text(
+            pestDetail.pestInfo ?? "N/A",
+            textAlign: TextAlign.justify,
+          ),
+          TextButton(
+            onPressed: () {
+              Get.to(PestInfoPage(pestModel, pestDetail));
+            },
+            child: const Text('View More'),
+          )
         ],
       );
     }

@@ -11,7 +11,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pest Gpt</string>
+	<string>PestShield</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -51,5 +51,28 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>metamask</string>
+		<string>trust</string>	
+		<string>safe</string>
+		<string>rainbow</string>
+		<string>cbwallet</string>
+		<!-- Add other wallet schemes names here -->
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLName</key>
+		<string>com.example.yourBundleId</string> <!-- Bundle ID of your app -->
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<!-- your own custom scheme. Be mind of removing :// for this step -->
+		<string>pestGPT</string>
+		</array>
+	</dict>
+	</array>
 </dict>
 </plist>

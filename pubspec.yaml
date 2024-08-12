@@ -24,8 +24,13 @@ dependencies:
   lang_internationalization: ^0.0.5
   toastification: ^2.0.0
   lottie: ^3.1.2
+  sqflite: ^2.3.3+1
+  # error_view:
+  #   path: /Users/manukenchappajunjanna/Documents/package/error_view
   flutter_localizations:
     sdk: flutter
+  web3modal_flutter: ^3.3.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +44,6 @@ dev_dependencies:
   google_generative_ai: ^0.4.3
   neubrutalism_ui: ^2.0.2
   syncfusion_flutter_charts: ^26.1.40
-  location: ^7.0.0
 
   
 dependency_overrides:

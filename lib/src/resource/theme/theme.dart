@@ -18,6 +18,8 @@ ThemeData lightTheme() {
     colorScheme: base.colorScheme.copyWith(
       primary: Colors.green[700], // Background color of the ElevatedButton
       onPrimary: Colors.white,
+      surface: Colors.white,
+      onSurface: Colors.black,
     ),
   );
 }

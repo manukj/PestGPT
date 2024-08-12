@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
-import 'package:pest_gpt/src/common_widget/common_card.dart';
+import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
+import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/pest/pest_model.dart';
 import 'package:pest_gpt/src/pages/pest_info_page/widget/pest_image_n_climate.dart';
+import 'package:pest_gpt/src/pages/pest_info_page/widget/precaution_list.dart';
+import 'package:pest_gpt/src/pages/pesticides/pesticides.dart';
+import 'package:pest_gpt/src/resource/image_path.dart';
 
 class PestInfoPage extends StatelessWidget {
   final PestModel pestModel;
@@ -17,37 +22,64 @@ class PestInfoPage extends StatelessWidget {
       appBar: CommonAppBar(
         titleText: pestModel.pestName,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
-            const SizedBox(height: 16),
-            // Expanded(child: _buildPestInfo(pestInfo)),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                PestImageNClimate(pestModel: pestModel, pestInfo: pestInfo),
+                const SizedBox(height: 16),
+                _buildPestInfo(pestInfo, pestModel),
+              ],
+            ),
+          ),
+          CommonPrimaryButton(
+            color: Theme.of(Get.context!).colorScheme.surface,
+            onPressed: () => {
+              Get.to(
+                PesticidesPage(pestInfo: pestInfo),
+              )
+            },
+            titleWidget: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    IMAGEPATH.pesticideIcon,
+                    width: 30,
+                    height: 30,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    StringConstant.viewPesticides.tr,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildPestInfo(LLMPestInfo pestInfo) {
-    return ListView(
-      shrinkWrap: true,
+  Widget _buildPestInfo(LLMPestInfo pestInfo, PestModel pestModel) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        
-        CommonCard(
-          child: Text(
-            'Precautions: ${pestInfo.precautions?.join(', ')}',
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
+        pestInfo.precautions != null
+            ? PrecautionList(
+                pestInfo.precautions!,
+                pestModel: pestModel,
+              )
+            : const SizedBox(),
         const SizedBox(height: 16),
-        CommonCard(
-          child: Text(
-            'Pesticides: ${pestInfo.pesticides?.map((e) => '${e.name} - ${e.cost}').join(', ')}',
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
         const SizedBox(height: 16),
       ],
     );

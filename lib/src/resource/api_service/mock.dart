@@ -1,7 +1,16 @@
+import 'dart:convert';
 
 import 'package:pest_gpt/src/models/tempature/forecast_weather_response.dart';
+import 'package:pest_gpt/src/models/user/user_info_response.dart';
 
 class MockWeatherResponse {
+  static const userInfoJson = """
+{"id":"630f4718d997b428f967597e","username":"gaoshanbi","fullName":"Gaoshan Bi","email":"gaoshanbi95@gmail.com","phone":"44 07300950735","gender":"Male","birth":"1995-07-08","scopeId":"630f4718d997b428f967597b","note":"test","avatar":"https://www.gravatar.com/avatar/88dd52d641bc12ba657b9ee017dce4b2.jpg?s=150&d=identicon","createTime":"2022-08-31 11:33","updateTime":"2024-07-31 18:48","role":{"id":"630f4718d997b428f967597c","name":"Admin","permissions":["task:check","field:check","user:check","user:update","farm:check","crop:check","user:add"],"menus":[{"id":"62deaec4e4405051a22b9db3","path":{"name":"home"},"icon":"mdi-view-dashboard-variant"},{"id":"62deafc2e4405051a22b9db7","path":{"name":"farm"},"icon":"mdi-tractor"},{"id":"62deb002e4405051a22b9db9","path":{"name":"crops"},"icon":"mdi-barley"},{"id":"62deaeeee4405051a22b9db5","path":{"name":"analysis decision"},"icon":"mdi-google-analytics","children":[{"id":"62deb818e4405051a22b9dbd","path":{"name":"task"}},{"id":"62deb827e4405051a22b9dbe","path":{"name":"report"}}]},{"id":"62deafade4405051a22b9db6","path":{"name":"message"},"icon":"mdi-forum","children":[{"id":"62ea0343a88f301f210e0b51","path":{"name":"push template"}},{"id":"62ea0f5aa88f301f210e0b52","path":{"name":"messages sent"}}]},{"id":"65e10044302d434f8b57d545","path":{"name":"ai models"},"icon":"mdi-google-analytics","children":[{"id":"64bdcd05626fa8ae7d7861ec","path":{"name":"visualisation"}},{"id":"65d7d4b87da3945d792ed242","path":{"name":"visualisation_2"}}]},{"id":"62deafede4405051a22b9db8","path":{"name":"user"},"icon":"mdi-account-multiple","children":[{"id":"62deb845e4405051a22b9dbf","path":{"name":"all users"}},{"id":"62deb851e4405051a22b9dc0","path":{"name":"role"}}]}],"createTime":"2022-08-31 11:33","scopeId":"630f4718d997b428f967597b","priority":-1,"note":"Admin"},"extral":{"lastLogin":{"time":"2024-07-31 18:48","place":"Sheffield, United Kingdom"}}}
+""";
+
+  static UserInfoResponse get userInfo =>
+      UserInfoResponse.fromJson(jsonDecode(userInfoJson));
+
   static final _weatherForecast = {
     "city": {
       "id": 3163858,
@@ -1071,10 +1080,6 @@ class MockWeatherResponse {
       }
     ]
   };
-
-
-  
-
 
   static final getWeatherResponse =
       ForecastWeatherResponse.fromJson(_weatherForecast);

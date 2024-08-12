@@ -7,10 +7,10 @@ import 'package:pest_gpt/src/common_widget/common_text_field.dart';
 import 'package:pest_gpt/src/common_widget/powered_by.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/models/user/user_login_request.dart';
+import 'package:pest_gpt/src/pages/home/home.dart';
 import 'package:pest_gpt/src/pages/login/widget/alternative_options.dart';
 import 'package:pest_gpt/src/pages/login/widget/forgot_password.dart';
 import 'package:pest_gpt/src/pages/login/widget/header.dart';
-import 'package:pest_gpt/src/pages/pest_detection/pest_detection_page.dart';
 import 'package:pest_gpt/src/resource/api_service/user_service.dart';
 import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart';
 import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
@@ -22,8 +22,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CommonScaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [LoginWidget(), PoweredBy()],
@@ -61,16 +60,23 @@ class _LoginWidgetState extends State<LoginWidget> {
     //   return;
     // }
     try {
+      setState(() {
+        isLoading = true;
+      });
       final response = await UserService().login(UserLoginRequest(
         username: userNameController.text,
         password: passwordController.text,
       ));
       ToastManager.showSuccess(StringConstant.loginSuccess.tr);
       Get.find<AuthenticationController>().login(response);
-      Get.to(PestDetection());
+      Get.to(HomePage());
     } catch (e) {
       ToastManager.showError(e.toString());
+      setState(() {
+        isLoading = false;
+      });
     }
+    isLoading = false;
   }
 
   @override
@@ -97,7 +103,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               const SizedBox(height: 10),
               CommonPrimaryButton(
                 onPressed: login,
-                titleWidget: Text(StringConstant.signIn.tr),
+                title: (StringConstant.signIn.tr),
               ),
               const SizedBox(height: 20),
               const AlternativeOptions(),

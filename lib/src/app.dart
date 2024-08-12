@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         translations: LocalizationManager(),
         fallbackLocale: const Locale('en', 'US'),
         locale: Get.deviceLocale,
-        darkTheme: darkTheme(),
+        // darkTheme: darkTheme(),
         theme: lightTheme(),
         debugShowCheckedModeBanner: false,
         supportedLocales: const [
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         routingCallback: (routing) {
           if (kDebugMode) {
             print("pushing ${routing?.current} router");

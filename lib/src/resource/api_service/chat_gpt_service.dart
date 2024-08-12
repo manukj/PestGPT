@@ -15,28 +15,28 @@ const mockResponse = """
     "min": 60.0,
     "max": 80.0
   },
-  "ideal_rainfall": {
+  "ideal_wind": {
     "min": 20.0,
     "max": 50.0
   },
   "precautions": [
-    "Regularly inspect plants for signs of aphids.",
-    "Use insecticidal soaps or neem oil as preventive measures.",
-    "Encourage natural predators like ladybugs and lacewings.",
-    "Avoid over-fertilizing plants as it can attract aphids."
+    "1. Regularly inspect plants for signs of aphids.",
+    "2. Use insecticidal soaps or neem oil as preventive measures.",
+    "3. Encourage natural predators like ladybugs and lacewings.",
+    "4. Avoid over-fertilizing plants as it can attract aphids."
   ],
   "pesticides": [
     {
       "name": "Insecticidal Soap",
-      "cost": "15 per liter"
+      "cost": "15"
     },
     {
       "name": "Neem Oil",
-      "cost": "20 per liter"
+      "cost": "20"
     },
     {
       "name": "Pyrethrin",
-      "cost": "25 per liter"
+      "cost": "25"
     }
   ]
 }

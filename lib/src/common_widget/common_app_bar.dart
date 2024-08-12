@@ -4,42 +4,55 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? titleText;
   final VoidCallback? onBackPressed;
   final Color? backgroundColor;
+  final bool showBackButton;
+  final List<Widget>? actions;
+  final Widget? leading;
 
   const CommonAppBar({
     super.key,
     this.titleText,
     this.onBackPressed,
     this.backgroundColor,
+    this.showBackButton = true,
+    this.actions,
+    this.leading,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor ?? Colors.transparent,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          size: 30,
-        ),
-        onPressed: () {
-          if (onBackPressed != null) {
-            onBackPressed!();
-            return;
-          }
-          Navigator.pop(context);
-        },
-      ),
+      toolbarHeight: 100,
+      backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
+      leading: showBackButton
+          ? IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
+              ),
+              onPressed: () {
+                if (onBackPressed != null) {
+                  onBackPressed!();
+                  return;
+                }
+                Navigator.pop(context);
+              },
+            )
+          : leading,
       title: titleText != null
-          ? Expanded(
+          ? Container(
+              width: double.infinity,
+              alignment: Alignment.center,
               child: Text(
                 titleText!,
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             )
           : null,
+      actions: actions,
     );
   }
 

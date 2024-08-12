@@ -14,7 +14,7 @@ class PestDetectDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       detailsController.loadPestInformation(controller.pestList);
     });
     controller.getPestNames();

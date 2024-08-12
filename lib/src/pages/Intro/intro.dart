@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
-import 'package:pest_gpt/src/pages/Intro/controller/intro_controler.dart';
 import 'package:pest_gpt/src/pages/login/login.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
@@ -13,15 +12,10 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      pages: [page1(), page2(), page3(), page4()],
-      showSkipButton: true,
-      done: const Icon(Icons.done),
+      pages: [page1()],
+      showSkipButton: false,
+      showDoneButton: false,
       next: const Icon(Icons.arrow_right_outlined),
-      skip: const Text("Skip"),
-      onDone: () async {
-        await Get.find<IntroController>().markIntroAsSeen();
-        Get.to(const Login());
-      },
     );
   }
 
@@ -37,14 +31,16 @@ class IntroPage extends StatelessWidget {
         ),
       ),
       bodyWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            StringConstant.welcomeToPFarm.tr,
+            StringConstant.welcome.tr,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           const Text(
             "The \"Farmer-Centred Interoperable Mobile-Cloud System\" (FCIMCS) project, a collaborative effort spanning the UK and China",
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 20,
