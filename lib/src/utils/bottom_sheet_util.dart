@@ -8,20 +8,19 @@ void showAppBottomSheet(Widget newBottomSheetContent,
     Get.back();
   }
 
-  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    Get.bottomSheet(
-      Container(
-        width: Get.width,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        child: newBottomSheetContent,
+  // Show the new bottom sheet
+  Get.bottomSheet(
+    Container(
+      width: Get.width,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      child: newBottomSheetContent,
+    ),
+    backgroundColor: Theme.of(Get.context!).colorScheme.surface,
+    isDismissible: isDismissible,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
       ),
-      backgroundColor: Theme.of(Get.context!).colorScheme.surface,
-      isDismissible: isDismissible,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-      ),
-    );
-  });
+    ),
+  );
 }

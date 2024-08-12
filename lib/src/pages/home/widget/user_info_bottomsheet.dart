@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/language_switcher_widget.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
-import 'package:pest_gpt/src/models/user/user_info_response.dart'; // Assuming you're using GetX for navigation or state management
+import 'package:pest_gpt/src/models/user/user_info_response.dart';
+import 'package:pest_gpt/src/utils/authentication/authentication_controller.dart'; // Assuming you're using GetX for navigation or state management
 
 class UserProfileBottomSheet extends StatelessWidget {
   final UserInfoResponse userInfo;
@@ -41,7 +42,7 @@ class UserProfileBottomSheet extends StatelessWidget {
         // Logout Button
         CommonPrimaryButton(
           onPressed: () {
-            // Handle logout logic
+            Get.find<AuthenticationController>().logOut();
             Get.back(); // Close the bottom sheet
             // Add any additional logout logic here
           },

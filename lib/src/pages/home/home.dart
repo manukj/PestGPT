@@ -87,6 +87,9 @@ class HomePage extends GetView<WalletConnectController> {
               width: double.infinity,
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Expanded(
                     child: Obx(() {
                       if (homeController.isLoading.value) {

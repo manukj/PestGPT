@@ -49,7 +49,9 @@ class _TranscationHistoryState extends State<TranscationHistory> {
 
           if (snapshot.hasError && snapshot.data == null) {
             if (!walletConnectController.isWalletConnected.value) {
-              showAppBottomSheet(const ConnectWalletWidget());
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                showAppBottomSheet(const ConnectWalletWidget());
+              });
             }
             return Center(
               child: Text('Error: ${snapshot.error}'),
