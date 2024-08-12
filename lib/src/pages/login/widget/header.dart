@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 
 class LoginHeader extends StatelessWidget {
@@ -15,9 +17,9 @@ class LoginHeader extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         // Title
-        const Text(
-          'Prallel Farm',
-          style: TextStyle(
+        Text(
+          StringConstant.pestShield.tr,
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),

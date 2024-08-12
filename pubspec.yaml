@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   get:
   get_storage:
-  introduction_screen: ^3.1.12
   image_picker: ^1.0.7
   flutter_svg: ^2.0.10+1
   json_annotation: ^4.9.0

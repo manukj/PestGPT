@@ -10,6 +10,7 @@ class CommonPrimaryButton extends StatelessWidget {
   final Color? color;
   final double? height;
   final EdgeInsets padding;
+  final Color? textColor;
 
   const CommonPrimaryButton({
     required this.onPressed,
@@ -21,6 +22,7 @@ class CommonPrimaryButton extends StatelessWidget {
     this.color,
     Key? key,
     this.padding = const EdgeInsets.all(0),
+    this.textColor,
   }) : super(key: key);
 
   @override
@@ -49,7 +51,7 @@ class CommonPrimaryButton extends StatelessWidget {
                   title ?? '',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: textColor ?? Theme.of(context).colorScheme.surface,
                   ),
                 ),
               ),

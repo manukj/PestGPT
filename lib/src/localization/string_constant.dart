@@ -4,6 +4,8 @@ import 'package:lang_internationalization/lang_internationalization.dart';
 class StringConstant {
   static const String appName = 'Parallel Farm';
   static const String welcome = 'Welcome';
+  static const String introToPestShield =
+      'Welcome to the future of farming. Pest Shield is a platform that helps you to detect pests in your crops and provides you with the best solutions to protect your crops.';
   static const String welcomeToPFarmDesc = 'Welcome to the future of farming';
   static const String invalidEmail = 'Invalid Email';
   static const String userNameCannotBeEmpty = 'User Name cannot be empty';
@@ -13,6 +15,7 @@ class StringConstant {
   static const String noPestDetected =
       "No pest history found. Please use the Detect Pest feature to identify pests.";
   static const String logout = 'Logout';
+  static const String welcomeToPestShield = 'Welcome to Pest Shield';
 
   // login
   static const String email = 'Email';
@@ -21,6 +24,7 @@ class StringConstant {
   static const String signIn = 'Sign In';
   static const String signInWithFingerprint = 'Sign In With Fingerprint';
   static const String orUse = 'OR USE';
+  static const String pestShield = 'Pest Shield';
 
   // register
   static const String register = 'Register';
