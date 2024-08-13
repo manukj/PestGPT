@@ -41,8 +41,9 @@ class RegistrationController extends GetxController {
       isLoading.value = false;
       Get.to(() => const Login());
     }).catchError((error) {
+      print('error while logout' + error.toString());
       isLoading.value = false;
-      ToastManager.showError(error.message.toString());
+      ToastManager.showError(error.toString());
     });
   }
 }

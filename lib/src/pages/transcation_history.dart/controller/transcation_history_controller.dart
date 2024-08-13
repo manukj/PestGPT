@@ -16,6 +16,11 @@ class TranscationHistoryController extends GetxController {
 
   void clearTranscationHistory() {
     transcationHistory.value = [];
+    ever(walletConnectController.isWalletConnected, (isConnected) {
+      if (isConnected) {
+        fetchTranscationHistory();
+      }
+    });
   }
 
   Future<List<PesticidePurchaseModel>> fetchTranscationHistory() async {
@@ -47,7 +52,7 @@ class TranscationHistoryController extends GetxController {
         list.add(pesticidePurchase);
       });
     }
-     transcationHistory.value = list;
+    transcationHistory.value = list;
     return list;
   }
 }

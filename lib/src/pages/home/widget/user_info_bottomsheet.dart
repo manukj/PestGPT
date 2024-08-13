@@ -45,7 +45,7 @@ class UserProfileBottomSheet extends StatelessWidget {
           onPressed: () {
             Get.find<AuthenticationController>().logOut();
             Get.back(); // Close the bottom sheet
-            Get.to(const Login());
+            Get.offAll(() => const Login());
           },
           title: StringConstant.logout.tr,
         ),

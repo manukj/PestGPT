@@ -22,14 +22,12 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CommonScaffold(
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            LoginWidget(),
-            PoweredBy(),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          LoginWidget(),
+          PoweredBy(),
+        ],
       ),
     );
   }
@@ -85,7 +83,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const CommonLoader()
+        ? SizedBox(height: Get.height - 130, child: const CommonLoader())
         : Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
