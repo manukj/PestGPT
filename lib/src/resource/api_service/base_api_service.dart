@@ -32,7 +32,7 @@ class BaseApiService extends GetConnect {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      throw Exception('Login Api Failed : ${response.body}');
+      throw Exception('API Failed : ${response.body}');
     }
   }
 
@@ -45,7 +45,7 @@ class BaseApiService extends GetConnect {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      throw Exception('Login Api Failed : ${response.body}');
+      throw Exception('API Failed : ${response.body}');
     }
   }
 

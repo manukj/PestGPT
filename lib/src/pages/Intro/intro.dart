@@ -20,8 +20,8 @@ class IntroPage extends StatelessWidget {
         child: Stack(
           children: [
             const Positioned(
-             top: 0,
-             right: 0,
+              top: 0,
+              right: 0,
               child: LanguageSwitcher(
                 isButtonType: false,
               ),
@@ -65,7 +65,7 @@ class IntroPage extends StatelessWidget {
                       textColor: neuDefault1,
                       width: 170,
                       onPressed: () {
-                        Get.to(const Registration());
+                        Get.to(Registration());
                       },
                       title: StringConstant.register.tr,
                     ),

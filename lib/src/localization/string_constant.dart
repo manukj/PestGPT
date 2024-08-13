@@ -16,6 +16,7 @@ class StringConstant {
       "No pest history found. Please use the Detect Pest feature to identify pests.";
   static const String logout = 'Logout';
   static const String welcomeToPestShield = 'Welcome to Pest Shield';
+  static const String registeringUser = 'Registering User, Please wait...';
 
   // login
   static const String email = 'Email';
@@ -30,6 +31,7 @@ class StringConstant {
   static const String register = 'Register';
   static const String createAccount = 'Create Account';
   static const String userName = 'User Name';
+  static const String fullName = 'Full Name';
   static const String mobileNumber = 'Mobile Number';
   static const String congfirmPassword = 'Confirm Password';
   static const String alreadyHaveAnAccount = 'Already have an account?';
