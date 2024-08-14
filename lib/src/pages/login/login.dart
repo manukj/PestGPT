@@ -83,7 +83,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? SizedBox(height: Get.height - 130, child: const CommonLoader())
+        ? const Expanded( child: CommonLoader())
         : Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -99,6 +99,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 hintText: StringConstant.password.tr,
                 prefixIcon: const Icon(Icons.vpn_key),
                 textController: passwordController,
+                obscureText: true,
               ),
               const ForgotPassword(),
               const SizedBox(height: 10),

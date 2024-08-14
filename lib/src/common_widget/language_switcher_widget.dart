@@ -49,8 +49,7 @@ class LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = Get.locale?.languageCode == languageCode &&
-        Get.locale?.countryCode == countryCode;
+    final isSelected = Get.locale?.languageCode == languageCode;
     var color = isSelected ? Colors.teal : Colors.grey;
     return !isButtonType
         ? TextButton(
