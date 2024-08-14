@@ -18,7 +18,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = true,
     this.actions,
     this.leading,
-    this.alignment = Alignment.center,
+    this.alignment = Alignment.centerLeft,
     this.textAlign = TextAlign.center,
   });
 

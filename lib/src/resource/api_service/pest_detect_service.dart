@@ -86,6 +86,7 @@ class PestDetectService extends BaseApiService {
   }
 
   Future<ImageUploadResponse> uploadImage(String filePath) async {
+  
     var response = await postApiWithFile('common/attachment/add/', filePath);
     return ImageUploadResponse.fromJson(jsonDecode(response));
   }

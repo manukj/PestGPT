@@ -65,7 +65,7 @@ class HomePage extends GetView<WalletConnectController> {
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    right: 10,
+                    right: 20,
                   ),
                   child: CommonPrimaryButton(
                     color: Colors.white,

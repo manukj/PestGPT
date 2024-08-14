@@ -47,18 +47,20 @@ class PestInfoPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    IMAGEPATH.pesticideIcon,
-                    width: 30,
-                    height: 30,
-                  ),
+                  const Icon(Icons.shopping_cart),
                   const SizedBox(width: 10),
                   Text(
-                    StringConstant.viewPesticides.tr,
+                    StringConstant.buyPesticide.tr,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
+                  const SizedBox(width: 5),
+                  Image.asset(
+                    IMAGEPATH.pesticideIcon,
+                    width: 30,
+                    height: 30,
                   ),
                 ],
               ),

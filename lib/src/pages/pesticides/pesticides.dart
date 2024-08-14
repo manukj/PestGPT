@@ -7,6 +7,7 @@ import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/pages/pesticides/controller/pesticide_controller.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/cart/cart.dart';
 import 'package:pest_gpt/src/pages/pesticides/widget/pesticides_list_item.dart';
+import 'package:pest_gpt/src/resource/constants.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class PesticidesPage extends StatelessWidget {
@@ -21,7 +22,7 @@ class PesticidesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonScaffold(
       appBar: const CommonAppBar(
-        titleText: 'Pesticides',
+        titleText: 'Buy Pesticides',
       ),
       body: pestInfo.pesticides?.isEmpty ?? true
           ? const Center(
@@ -45,7 +46,7 @@ class PesticidesPage extends StatelessWidget {
         return controller.selectedPesticideList.isNotEmpty
             ? CommonPrimaryButton(
                 height: 50,
-                width: 100,
+                width: 130,
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -74,7 +75,7 @@ class PesticidesPage extends StatelessWidget {
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      controller.totalPesticideCost.toString(),
+                      "${controller.totalPesticideCost} ${Constants.currencySymbol}",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.surface,
                           fontSize: 16,

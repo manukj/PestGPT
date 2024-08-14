@@ -88,7 +88,8 @@ class DetectPest extends StatelessWidget {
                       ? StringConstant.showPestDetails.tr
                       : StringConstant.detectPest.tr,
                   isLoading: controller.isLoading.value,
-                )
+                ),
+                const SizedBox(height: 15,)
               ],
             );
     });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pest_gpt/src/common_widget/common_card.dart';
 import 'package:pest_gpt/src/common_widget/common_icon_button.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
+import 'package:pest_gpt/src/resource/constants.dart';
 
 class PesticidesListItem extends StatefulWidget {
   final Pesticide pesticide;
@@ -34,7 +35,7 @@ class _PesticidesListItemState extends State<PesticidesListItem> {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
-            "${widget.pesticide.cost} per/litre",
+            "${widget.pesticide.cost} ${Constants.currencySymbol} per/litre",
             style: const TextStyle(
               color: Colors.black,
             ),
@@ -45,7 +46,7 @@ class _PesticidesListItemState extends State<PesticidesListItem> {
                   width: 35,
                   height: 35,
                   icon: (Icons.check_circle),
-                  color: Colors.green,
+                  color: Colors.teal,
                   onPressed: () {
                     setState(() {
                       isSelected = false;

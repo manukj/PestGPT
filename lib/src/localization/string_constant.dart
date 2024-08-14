@@ -54,10 +54,13 @@ class StringConstant {
   static const String captureImage = 'Capture Image';
   static const String pickFromGallery = 'Pick From Gallery';
   static const String cameraInitError = 'Camera initialization error';
+  static const String fetchingPestDetail =
+      'Fetching pest details from LLM. Please wait...';
 
   //pesticides
   static const String pesticides = 'Pesticides';
   static const String viewPesticides = 'View Pesticides';
+  static const String buyPesticide = 'Buy Pesticide';
 
   //cart
   static const String buy = 'Buy';
