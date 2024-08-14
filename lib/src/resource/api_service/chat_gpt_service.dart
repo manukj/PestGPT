@@ -3,44 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
-
-const mockResponse = """
-{
-  "pest_info": "Aphids are small sap-sucking insects that affect a wide variety of plants, including roses, vegetables, fruit trees, and ornamental plants. They have a long history of being a major agricultural pest, causing damage by feeding on plant sap and transmitting plant viruses. Aphids reproduce rapidly, making them difficult to control once an infestation occurs.",
-  "ideal_temperature": {
-    "min": 15.0,
-    "max": 30.0
-  },
-  "ideal_humidity": {
-    "min": 60.0,
-    "max": 80.0
-  },
-  "ideal_wind": {
-    "min": 20.0,
-    "max": 50.0
-  },
-  "precautions": [
-    "1. Regularly inspect plants for signs of aphids.",
-    "2. Use insecticidal soaps or neem oil as preventive measures.",
-    "3. Encourage natural predators like ladybugs and lacewings.",
-    "4. Avoid over-fertilizing plants as it can attract aphids."
-  ],
-  "pesticides": [
-    {
-      "name": "Insecticidal Soap",
-      "cost": "15"
-    },
-    {
-      "name": "Neem Oil",
-      "cost": "20"
-    },
-    {
-      "name": "Pyrethrin",
-      "cost": "25"
-    }
-  ]
-}
-""";
+import 'package:pest_gpt/src/resource/api_service/local_data/pest_detection_local_data.dart';
 
 class ChatGptService extends GetConnect {
   final String url = 'https://api.openai.com/v1/chat/completions';
@@ -50,8 +13,10 @@ class ChatGptService extends GetConnect {
   };
 
   Future<LLMPestInfo> generateResponse(String pestName) async {
-    // await Future.delayed(Duration(seconds: 2));
-    // return LLMPestInfo.fromJson(jsonDecode(mockResponse));
+    var localData = getPestInfoFromLocalData(pestName);
+    if (localData != null) {
+      return localData;
+    }
     final Map<String, dynamic> data = {
       "model": "gpt-4o-mini",
       "messages": [
