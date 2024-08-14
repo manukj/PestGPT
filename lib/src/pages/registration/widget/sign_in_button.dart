@@ -17,7 +17,7 @@ class SignInButton extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Get.to(const Login());
+            Get.to(() => const Login());
           },
           child: Text(
             StringConstant.signIn.tr,

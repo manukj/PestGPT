@@ -80,7 +80,7 @@ class DetectPest extends StatelessWidget {
                   color: isPestDetected ? Colors.green : null,
                   onPressed: () => {
                     if (isPestDetected)
-                      {Get.to(PestDetectDetails())}
+                      {Get.to(() => PestDetectDetails())}
                     else
                       {controller.detectPest(path)}
                   },

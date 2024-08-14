@@ -41,7 +41,8 @@ class PestTaskList extends GetView<HomeController> {
                       child: ListTile(
                         onTap: () => {
                           Get.to(
-                            PestTaskDetailsPage(pestName: pestTask.pestName),
+                            () => PestTaskDetailsPage(
+                                pestName: pestTask.pestName),
                           )
                         },
                         contentPadding:

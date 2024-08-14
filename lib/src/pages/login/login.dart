@@ -69,7 +69,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         password: passwordController.text,
       ));
       Get.find<AuthenticationController>().login(response);
-      Get.to(HomePage());
+      Get.offAll(() => HomePage());
     } catch (e) {
       ToastManager.showError(e.toString());
       setState(() {

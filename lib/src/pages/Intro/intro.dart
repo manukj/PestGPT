@@ -53,21 +53,23 @@ class IntroPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CommonPrimaryButton(
-                      width: 170,
-                      onPressed: () {
-                        Get.to(const Login());
-                      },
-                      title: StringConstant.signIn.tr,
+                    Expanded(
+                      child: CommonPrimaryButton(
+                        onPressed: () {
+                          Get.to(() => const Login());
+                        },
+                        title: StringConstant.signIn.tr,
+                      ),
                     ),
-                    CommonPrimaryButton(
-                      color: Colors.white,
-                      textColor: neuDefault1,
-                      width: 170,
-                      onPressed: () {
-                        Get.to(Registration());
-                      },
-                      title: StringConstant.register.tr,
+                    Expanded(
+                      child: CommonPrimaryButton(
+                        color: Colors.white,
+                        textColor: neuDefault1,
+                        onPressed: () {
+                          Get.to(() => Registration());
+                        },
+                        title: StringConstant.register.tr,
+                      ),
                     ),
                   ],
                 ),

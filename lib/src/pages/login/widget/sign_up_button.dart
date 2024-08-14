@@ -17,7 +17,7 @@ class SignUpButton extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Get.to(Registration());
+            Get.to(() => Registration());
           },
           child: Text(
             StringConstant.register.tr,

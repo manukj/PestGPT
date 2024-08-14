@@ -26,8 +26,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 100,
-      
       backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
+      leadingWidth: showBackButton ? null : 0,
       leading: showBackButton
           ? IconButton(
               icon: const Icon(
@@ -42,19 +42,29 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
             )
-          : leading,
+          : Container(),
       title: titleText != null
-          ? Container(
-              width: double.infinity,
-              alignment: alignment,
-              child: Text(
-                titleText!,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+          ? Row(
+              children: [
+                if (leading != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: leading!,
+                  ),
+                Expanded(
+                  child: Container(
+                    alignment: alignment,
+                    child: Text(
+                      titleText!,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: textAlign,
+                    ),
+                  ),
                 ),
-                textAlign: textAlign,
-              ),
+              ],
             )
           : null,
       actions: actions,

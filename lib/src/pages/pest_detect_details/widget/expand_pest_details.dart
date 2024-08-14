@@ -81,7 +81,7 @@ class _ExpandPestDetailsState extends State<ExpandPestDetails> {
           ),
           TextButton(
             onPressed: () {
-              Get.to(PestInfoPage(pestModel, pestDetail));
+              Get.to(() => PestInfoPage(pestModel, pestDetail));
             },
             child: const Text('View More'),
           )
