@@ -17,16 +17,14 @@ class CommonScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: appBar,
-        body: Padding(
-          padding: padding,
-          child: body,
-        ),
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        floatingActionButton: floatingActionButton,
+    return Scaffold(
+      appBar: appBar,
+      body: Padding(
+        padding: padding,
+        child: body,
       ),
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      floatingActionButton: floatingActionButton,
     );
   }
 }

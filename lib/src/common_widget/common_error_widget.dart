@@ -8,11 +8,17 @@ class CommonErrorWidget extends StatelessWidget {
   final String message;
   final VoidCallback? onRetry;
   final String lottieAssetPath;
-  const CommonErrorWidget(
-      {super.key,
-      required this.message,
-      this.onRetry,
-      required this.lottieAssetPath});
+  final bool hideRetryButton;
+  final String? retyButtonTitle;
+  
+  const CommonErrorWidget({
+    super.key,
+    required this.message,
+    this.onRetry,
+    required this.lottieAssetPath,
+    this.hideRetryButton = false,
+    this.retyButtonTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +46,11 @@ class CommonErrorWidget extends StatelessWidget {
             ],
           ),
         ),
-        CommonPrimaryButton(
-          onPressed: onRetry ?? () {},
-          title: StringConstant.tryAgain.tr,
-        ),
+        if (!hideRetryButton)
+          CommonPrimaryButton(
+            onPressed: onRetry ?? () {},
+            title: retyButtonTitle ?? StringConstant.tryAgain.tr,
+          ),
         const SizedBox(
           height: 10,
         ),

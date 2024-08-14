@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_card.dart';
+import 'package:pest_gpt/src/common_widget/common_error_widget.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
@@ -50,11 +51,22 @@ class _TranscationHistoryState extends State<TranscationHistory> {
           if (snapshot.hasError && snapshot.data == null) {
             if (!walletConnectController.isWalletConnected.value) {
               WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                showAppBottomSheet(const ConnectWalletWidget());
+                showAppBottomSheet(const ConnectWalletWidget(
+                  title: "Connect Wallet to View Purchase History",
+                ));
               });
             }
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
+            return CommonErrorWidget(
+              message: snapshot.error.toString(),
+              lottieAssetPath: IMAGEPATH.noPestDetectedAnimation,
+              onRetry: () {
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  showAppBottomSheet(const ConnectWalletWidget(
+                    title: "Connect Wallet to View Purchase History",
+                  ));
+                });
+              },
+              retyButtonTitle: StringConstant.connectWallet.tr,
             );
           }
           if (snapshot.data!.isEmpty) {

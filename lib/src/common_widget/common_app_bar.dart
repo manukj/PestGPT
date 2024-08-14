@@ -26,6 +26,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 100,
+      
       backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.surface,
       leading: showBackButton
           ? IconButton(

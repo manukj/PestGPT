@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          LoginWidget(),
+          Expanded(child: LoginWidget()),
           PoweredBy(),
         ],
       ),
@@ -68,7 +68,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         username: userNameController.text,
         password: passwordController.text,
       ));
-      ToastManager.showSuccess(StringConstant.loginSuccess.tr);
       Get.find<AuthenticationController>().login(response);
       Get.to(HomePage());
     } catch (e) {
@@ -83,33 +82,35 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const Expanded( child: CommonLoader())
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const LoginHeader(),
-              const SizedBox(height: 20),
-              CommonTextField(
-                hintText: StringConstant.userName.tr,
-                prefixIcon: const Icon(Icons.person_4_sharp),
-                textController: userNameController,
-              ),
-              const SizedBox(height: 20),
-              CommonTextField(
-                hintText: StringConstant.password.tr,
-                prefixIcon: const Icon(Icons.vpn_key),
-                textController: passwordController,
-                obscureText: true,
-              ),
-              const ForgotPassword(),
-              const SizedBox(height: 10),
-              CommonPrimaryButton(
-                onPressed: login,
-                title: (StringConstant.signIn.tr),
-              ),
-              const SizedBox(height: 20),
-              const AlternativeOptions(),
-            ],
+        ? const CommonLoader()
+        : SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const LoginHeader(),
+                const SizedBox(height: 20),
+                CommonTextField(
+                  hintText: StringConstant.userName.tr,
+                  prefixIcon: const Icon(Icons.person_4_sharp),
+                  textController: userNameController,
+                ),
+                const SizedBox(height: 20),
+                CommonTextField(
+                  hintText: StringConstant.password.tr,
+                  prefixIcon: const Icon(Icons.vpn_key),
+                  textController: passwordController,
+                  obscureText: true,
+                ),
+                const ForgotPassword(),
+                const SizedBox(height: 10),
+                CommonPrimaryButton(
+                  onPressed: login,
+                  title: (StringConstant.signIn.tr),
+                ),
+                const SizedBox(height: 20),
+                const AlternativeOptions(),
+              ],
+            ),
           );
   }
 }

@@ -8,8 +8,10 @@ import 'package:pest_gpt/src/resource/image_path.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
 class ConnectWalletWidget extends GetView<WalletConnectController> {
+  final String? title;
   const ConnectWalletWidget({
     super.key,
+    this.title,
   });
 
   @override
@@ -29,11 +31,12 @@ class ConnectWalletWidget extends GetView<WalletConnectController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  StringConstant.connectWalletTitle.tr,
+                  title ?? StringConstant.connectWalletTitle.tr,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 Lottie.asset(
                   IMAGEPATH.walletConnect,

@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:pest_gpt/src/models/pest/pesticide_purchase_model.dart';
 import 'package:pest_gpt/src/resource/contract_abi/contract_abi.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
-import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 class TranscationHistoryController extends GetxController {
@@ -32,7 +31,6 @@ class TranscationHistoryController extends GetxController {
     }
     var service = await walletConnectController.w3mService;
     if (service.session == null || service.session!.address == null) {
-      ToastManager.showError("Wallet not connected");
       throw Exception("Wallet not connected");
     }
     final result = await service.requestReadContract(
