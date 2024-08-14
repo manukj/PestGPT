@@ -21,7 +21,7 @@ class PestTaskList extends GetView<HomeController> {
                 children: [
                   Lottie.asset(IMAGEPATH.emptyList, height: 200, width: 200),
                   Text(
-                    StringConstant.noPestDetected.tr,
+                    StringConstant.emptyPest.tr,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,

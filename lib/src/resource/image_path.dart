@@ -13,5 +13,6 @@ class IMAGEPATH {
   static const String successAnimation = "assets/lottiefiles/success_animation.json";
   static const String failedAnimation = "assets/lottiefiles/failed_animation.json";
   static const String transactionHistory = "assets/images/transcation_history.png";
+  static const String noPestDetectedAnimation = "assets/lottiefiles/no_pest_animation.json";
   
 }

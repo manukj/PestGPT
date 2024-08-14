@@ -12,11 +12,12 @@ class StringConstant {
   static const String passwordCannotBeEmpty = 'Password cannot be empty';
   static const String somethingWentWrong = 'Something went wrong';
   static const String loginSuccess = 'Login Success';
-  static const String noPestDetected =
+  static const String emptyPest =
       "No pest history found. Please use the Detect Pest feature to identify pests.";
   static const String logout = 'Logout';
   static const String welcomeToPestShield = 'Welcome to Pest Shield';
   static const String registeringUser = 'Registering User, Please wait...';
+  static const String noPestDetected = 'No pest detected';
 
   // login
   static const String email = 'Email';

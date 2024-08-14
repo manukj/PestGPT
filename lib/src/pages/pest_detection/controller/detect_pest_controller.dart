@@ -15,6 +15,7 @@ class DetectPestController extends GetxController {
   final isLoading = false.obs;
   final Rx<PestDetectionResponse?> response = Rx<PestDetectionResponse?>(null);
   final Rx<Uint8List?> processedImage = Rx<Uint8List?>(null);
+  final Rx<bool> isPestDetectedResultEmpty = false.obs;
   List<PestModel> pestList = [];
 
   void setLoading(bool value) {
@@ -26,22 +27,29 @@ class DetectPestController extends GetxController {
   }
 
   void clearResponse() {
+    isPestDetectedResultEmpty.value = false;
+    processedImage.value = null;
     response.value = null;
+    pestList.clear();
   }
 
   Future<void> detectPest(String imagePath) async {
     setLoading(true);
-    PestDetectionRequest request = PestDetectionRequest(
-        detectionList: ["user_images/Ninzore/20231212203813.jpg"]);
-
     try {
+      var uploadResponse = await PestDetectService().uploadImage(imagePath);
+      PestDetectionRequest request = PestDetectionRequest(detectionList: [
+        uploadResponse.getFirstImageUrl(),
+      ]);
       var response = await PestDetectService().detect(request);
-      ToastManager.showSuccess(StringConstant.pestDetected.tr,
-          duration: const Duration(seconds: 1));
+      if (response.getPestDetectionList().isEmpty) {
+        isPestDetectedResultEmpty.value = true;
+        return;
+      }
       await proccessResponse(response, imagePath);
       setResponse(response);
       // Get.to(PestDetectDetails());
     } catch (e) {
+      print("error while detecting $e");
       ToastManager.showError(
           StringConstant.failedToDetectPest.tr + e.toString());
     }
