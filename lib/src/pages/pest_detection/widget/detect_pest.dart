@@ -20,71 +20,80 @@ class DetectPest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final isPestDetected = controller.processedImage.value != null;
-      return controller.isPestDetectedResultEmpty.value
-          ? CommonErrorWidget(
-              message: StringConstant.noPestDetected.tr,
-              lottieAssetPath: IMAGEPATH.emptyTaskList,
-              onRetry: () {
-                Get.find<PestCameraController>().captureFile.value = null;
-                controller.clearResponse();
-              },
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Opacity(
-                          opacity: controller.isLoading.value ? 0.5 : 1,
-                          child: isPestDetected
-                              ? Hero(
-                                  tag: controller.processedImage.value!
-                                      .toString(),
-                                  child: Image.memory(
-                                    controller.processedImage.value!,
+    return Obx(
+      () {
+        final isPestDetected = controller.processedImage.value != null;
+        return controller.isPestDetectedResultEmpty.value
+            ? CommonErrorWidget(
+                message: StringConstant.noPestDetected.tr,
+                lottieAssetPath: IMAGEPATH.emptyTaskList,
+                onRetry: () {
+                  Get.find<PestCameraController>().captureFile.value = null;
+                  controller.clearResponse();
+                },
+              )
+            : Column(
+                children: [
+                  AppBar(),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Opacity(
+                            opacity: controller.isLoading.value ? 0.5 : 1,
+                            child: isPestDetected
+                                ? Hero(
+                                    tag: controller.processedImage.value!
+                                        .toString(),
+                                    child: Image.memory(
+                                      controller.processedImage.value!,
+                                      width: double.infinity,
+                                    ),
+                                  )
+                                : Image.file(
+                                    File(path),
                                     width: double.infinity,
                                   ),
-                                )
-                              : Image.file(
-                                  File(path),
-                                  width: double.infinity,
-                                ),
+                          ),
                         ),
-                      ),
-                      controller.isLoading.value
-                          ? const Center(
-                              child: DetectingAnimation(),
-                            )
-                          : Container(),
-                      _buildAppBar(),
-                    ],
+                        controller.isLoading.value
+                            ? const Center(
+                                child: DetectingAnimation(),
+                              )
+                            : Container(),
+                      ],
+                    ),
                   ),
-                ),
-                CommonPrimaryButton(
-                  color: isPestDetected ? Colors.green : null,
-                  onPressed: () => {
-                    if (isPestDetected)
-                      {Get.to(() => PestDetectDetails())}
-                    else
-                      {controller.detectPest(path)}
-                  },
-                  title: isPestDetected
-                      ? StringConstant.showPestDetails.tr
-                      : StringConstant.detectPest.tr,
-                  isLoading: controller.isLoading.value,
-                ),
-                const SizedBox(
-                  height: 15,
-                )
-              ],
-            );
-    });
+                  CommonPrimaryButton(
+                    color: isPestDetected ? Colors.green : null,
+                    onPressed: () => {
+                      if (isPestDetected)
+                        {Get.to(() => PestDetectDetails())}
+                      else
+                        {controller.detectPest(path)}
+                    },
+                    title: isPestDetected
+                        ? StringConstant.showPestDetails.tr
+                        : StringConstant.detectPest.tr,
+                    isLoading: controller.isLoading.value,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  )
+                ],
+              );
+      },
+    );
   }
+}
 
-  Widget _buildAppBar() {
+class AppBar extends GetView<DetectPestController> {
+  const AppBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 80,
       width: Get.width,
@@ -98,8 +107,6 @@ class DetectPest extends StatelessWidget {
                 Colors.teal.withOpacity(0.7),
                 Colors.teal.withOpacity(0.5),
                 Colors.teal.withOpacity(0.3),
-                const Color(0XFF14161E).withOpacity(0.7),
-                const Color(0XFF14161E).withOpacity(0.7),
                 Colors.teal.withOpacity(0.3),
                 Colors.teal.withOpacity(0.5),
                 Colors.teal.withOpacity(0.7),
