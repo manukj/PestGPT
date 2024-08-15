@@ -25,26 +25,29 @@ class ConnectWalletWidget extends GetView<WalletConnectController> {
               child: CommonLoader(),
             );
           }
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title ?? StringConstant.connectWalletTitle.tr,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title ?? StringConstant.connectWalletTitle.tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              Lottie.asset(
-                IMAGEPATH.walletConnect,
-                height: 200,
-                width: 200,
-              ),
-              ConnectWalletButton(
-                service: snap.data!,
-              ),
-            ],
+                Lottie.asset(
+                  IMAGEPATH.walletConnect,
+                  height: 200,
+                  width: 200,
+                ),
+                ConnectWalletButton(
+                  service: snap.data!,
+                ),
+              ],
+            ),
           );
         });
   }
