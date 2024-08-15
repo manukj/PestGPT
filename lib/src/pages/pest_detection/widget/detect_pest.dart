@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_error_widget.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
@@ -59,20 +59,7 @@ class DetectPest extends StatelessWidget {
                               child: DetectingAnimation(),
                             )
                           : Container(),
-                      CommonAppBar(
-                        onBackPressed: () {
-                          Get.find<PestCameraController>().captureFile.value =
-                              null;
-                          controller.clearResponse();
-                        },
-                        backgroundColor: Colors.transparent,
-                        titleText: StringConstant.detectPest.tr,
-                        actions: const [
-                          SizedBox(
-                            width: 30,
-                          )
-                        ],
-                      )
+                      _buildAppBar(),
                     ],
                   ),
                 ),
@@ -89,9 +76,66 @@ class DetectPest extends StatelessWidget {
                       : StringConstant.detectPest.tr,
                   isLoading: controller.isLoading.value,
                 ),
-                const SizedBox(height: 15,)
+                const SizedBox(
+                  height: 15,
+                )
               ],
             );
     });
+  }
+
+  Widget _buildAppBar() {
+    return SizedBox(
+      height: 80,
+      width: Get.width,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.teal.withOpacity(0.7),
+                Colors.teal.withOpacity(0.5),
+                Colors.teal.withOpacity(0.3),
+                const Color(0XFF14161E).withOpacity(0.7),
+                const Color(0XFF14161E).withOpacity(0.7),
+                Colors.teal.withOpacity(0.3),
+                Colors.teal.withOpacity(0.5),
+                Colors.teal.withOpacity(0.7),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  color: Colors.white,
+                  Icons.arrow_back,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Get.find<PestCameraController>().captureFile.value = null;
+                  controller.clearResponse();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                StringConstant.detectPest.tr,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
