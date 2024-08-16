@@ -34,7 +34,6 @@ class DetectPest extends StatelessWidget {
               )
             : Column(
                 children: [
-                  AppBar(),
                   Expanded(
                     child: Stack(
                       children: [
@@ -61,6 +60,7 @@ class DetectPest extends StatelessWidget {
                                 child: DetectingAnimation(),
                               )
                             : Container(),
+                        const AppBar(),
                       ],
                     ),
                   ),
@@ -97,49 +97,49 @@ class AppBar extends GetView<DetectPestController> {
     return SizedBox(
       height: 80,
       width: Get.width,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.teal.withOpacity(0.7),
-                Colors.teal.withOpacity(0.5),
-                Colors.teal.withOpacity(0.3),
-                Colors.teal.withOpacity(0.3),
-                Colors.teal.withOpacity(0.5),
-                Colors.teal.withOpacity(0.7),
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+      child: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0XFF1F6950).withOpacity(0.7),
+                  const Color(0XFF14161E).withOpacity(0.7),
+                  const Color(0XFF14161E).withOpacity(0.7),
+                  const Color(0XFF1F6950).withOpacity(0.7),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                icon: const Icon(
-                  color: Colors.white,
-                  Icons.arrow_back,
-                  size: 30,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    color: Colors.white,
+                    Icons.arrow_back,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Get.find<PestCameraController>().captureFile.value = null;
+                    controller.clearResponse();
+                  },
                 ),
-                onPressed: () {
-                  Get.find<PestCameraController>().captureFile.value = null;
-                  controller.clearResponse();
-                },
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                StringConstant.detectPest.tr,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(
+                  width: 10,
                 ),
-              )
-            ],
+                Text(
+                  StringConstant.detectPest.tr,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
