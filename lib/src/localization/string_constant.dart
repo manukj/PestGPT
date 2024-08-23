@@ -25,7 +25,7 @@ class StringConstant {
   static const String forgotPassword = 'Forgot your password?';
   static const String signIn = 'Sign In';
   static const String signInWithFingerprint = 'Sign In With Fingerprint';
-  static const String orUse = 'OR USE';
+  static const String orUse = 'OR';
   static const String pestShield = 'Pest Shield';
 
   // register

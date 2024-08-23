@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CommonScaffold extends StatelessWidget {
   final Widget body;
@@ -17,14 +18,19 @@ class CommonScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: Padding(
-        padding: padding,
-        child: body,
+    return SafeArea(
+      child: Scaffold(
+        appBar: appBar,
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: Padding(
+            padding: padding,
+            child: body,
+          ),
+        ),
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        floatingActionButton: floatingActionButton,
       ),
-      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      floatingActionButton: floatingActionButton,
     );
   }
 }

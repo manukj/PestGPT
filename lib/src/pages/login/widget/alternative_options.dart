@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
-import 'package:pest_gpt/src/common_widget/common_outlined_primary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
 import 'package:pest_gpt/src/pages/login/widget/sign_up_button.dart';
 
@@ -22,11 +21,7 @@ class AlternativeOptions extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        CommonOutlinedPrimaryButton(
-          onPressed: () {},
-          prefixIcon: const Icon(Icons.fingerprint),
-          child: Text(StringConstant.signInWithFingerprint.tr),
-        ),
+       
         const SignUpButton()
       ],
     );
