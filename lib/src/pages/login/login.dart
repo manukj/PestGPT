@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pest_gpt/src/common_widget/common_app_bar.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
 import 'package:pest_gpt/src/common_widget/common_scaffold.dart';
@@ -20,9 +21,10 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CommonScaffold(
+    return  CommonScaffold(
+      appBar: CommonAppBar(titleText: StringConstant.signIn.tr),
       resizeToAvoidBottomInset: false,
-      body: Column(
+      body:const Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(child: LoginWidget()),

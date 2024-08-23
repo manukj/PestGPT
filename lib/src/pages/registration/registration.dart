@@ -20,7 +20,10 @@ class Registration extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Expanded(child: SingUpForm()), PoweredBy()],
+          children: [
+            Expanded(child: SingUpForm()),
+            PoweredBy(),
+          ],
         ),
       ),
     );

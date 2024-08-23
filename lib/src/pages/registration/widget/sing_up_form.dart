@@ -19,10 +19,9 @@ class SingUpForm extends GetView<RegistrationController> {
           loadingText: StringConstant.registeringUser.tr,
         );
       }
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      return ListView(
         children: [
+          const SizedBox(height: 16),
           CommonTextField(
             hintText: StringConstant.fullName.tr,
             prefixIcon: const Icon(Icons.person_4_outlined),

@@ -18,6 +18,9 @@ class StringConstant {
   static const String welcomeToPestShield = 'Welcome to Pest Shield';
   static const String registeringUser = 'Registering User, Please wait...';
   static const String noPestDetected = 'No pest detected';
+  static const String pesticidesAreHarmful = 'Pesticides are harmful';
+  static const String doNotUsePesticides =
+      'Pesticides can have negative impacts on the environment and human health. It is important to use them responsibly and follow precautionary measures given to avoid pest.';
 
   // login
   static const String email = 'Email';
@@ -25,7 +28,7 @@ class StringConstant {
   static const String forgotPassword = 'Forgot your password?';
   static const String signIn = 'Sign In';
   static const String signInWithFingerprint = 'Sign In With Fingerprint';
-  static const String orUse = 'OR USE';
+  static const String orUse = 'OR';
   static const String pestShield = 'Pest Shield';
 
   // register
