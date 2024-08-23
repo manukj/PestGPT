@@ -113,8 +113,7 @@ Non-functional requirements are crucial for defining how a system should perform
     
 \section{Blockchain Payment vs Centralized Payment Methods}
 
-Blockchain is a distributed ledger technology that ensures transparency, security, and immutability of transactions, In this project blockchain is used as a payment method for purchasing pesticides. This below table explains why a blockchain payment approach is necessary and compares it to traditional centralized payment methods. \cite{centralised_vs_decentralised}.
-
+Blockchain is a distributed ledger technology that ensures transparency, security, and immutability of transactions, In this project blockchain is used as a payment method for purchasing pesticides. This below table explains why a blockchain payment approach is necessary and compares it to traditional centralized payment methods. (\cite{centralised_vs_decentralised})
 
 \begin{table}[H]
     \centering
@@ -173,7 +172,7 @@ In this section, let's discuss the ethical issues related to the project, includ
 \end{itemize}
 
 \section{Testing Analysis}
-The testing phase is critical to  ensure the reliability, functionality, and user satisfaction of the pest management application. Since the project involves advanced technologies like AI for pest detection, blockchain for secure transactions, and the implementation of cross-platform mobile development frameworks like Flutter, it is critical that each component is extensively tested to ensure smooth integration and strong functioning. Comprehensive testing will help in identifying and resolving possible issues, ensuring the final product meets the highest standards of quality and effectiveness before deployment. This section explores the importance of automation, the testing strategies commonly employed in Flutter, and the tools available to developers \cite{testing_analysis}
+The testing phase is critical to  ensure the reliability, functionality, and user satisfaction of the pest management application. Since the project involves advanced technologies like AI for pest detection, blockchain for secure transactions, and the implementation of cross-platform mobile development frameworks like Flutter, it is critical that each component is extensively tested to ensure smooth integration and strong functioning. Comprehensive testing will help in identifying and resolving possible issues, ensuring the final product meets the highest standards of quality and effectiveness before deployment. This section explores the importance of automation, the testing strategies commonly employed in Flutter, and the tools available to developers (\cite{testing_analysis})
 
 \subsection{Importance of Automated Testing}
 Automated testing is critical for ensuring application quality as they get increasingly complex. It ensures that new additions and upgrades do not disrupt current functioning. Automated testing is an essential component of the development process in the fast-paced IT business, where speedy and uniform testing is required. It also supports Continuous Integration and Continuous Delivery (CI/CD) pipelines, enabling rapid releases without compromising on quality.
@@ -182,7 +181,7 @@ Automated testing is critical for ensuring application quality as they get incre
 The testing pyramid is a widely adopted framework in software testing. In Flutter, this pyramid is composed of:
 \begin{figure}[ht]
 \includegraphics[width=15cm]{myReport/figures/test_pyramid.png}
-\caption{Testing Pyramid (Akanksha Gupta, TestVagrant Tech, 2023)}
+\caption{Testing Pyramid (\cite{testing_analysis})}
 \end{figure}
 
 \begin{itemize}
@@ -213,4 +212,8 @@ The testing pyramid is a widely adopted framework in software testing. In Flutte
     \item A widely-used open-source tool for mobile automation testing.
     \item Although it works on cross platforms, its integration with Flutter is restricted because it does not support all Flutter widgets. It is recommended that you undertake a proof-of-concept to assess its usefulness for certain Flutter applications.
 \end{itemize}
-.
+
+\section{Development Environment and User Base}
+This dissertation project is a cross-platform application that is compatible with both Android and iOS operating systems. The primary reason for selecting a mobile platform over web development is to expand the user base, as mobile usage significantly surpasses that of the web. In the United Kingdom, there are approximately 111.8 million mobile subscriptions (\cite{mobile_uk}), which makes it a strategic decision to develop for mobile devices in order to maximize user reach. one constraint is that the iOS version of the device needs iOS 12 or higher due to camera package restrictions.
+For the development environment, Flutter framework is chosen which uses Dart programming language. Given that the project targets both Android and iOS platforms, we are utilising Xcode 15 for iOS development and Android Studio Jellyfish for Android development. However, Visual Studio Code is the ideal Integrated Development Environment (IDE) due to its comprehensive support for Flutter development. Visual Studio Code also features advanced tools such as DevTools, which aid in widget examination and performance analysis.Since Xcode is only available on macOS, development is being undertaken on an Apple M1 Pro 2021 system. 
+And finally, to perform thorough testing across a wide range of devices, we are using BrowserStack, a cloud-based testing tool that allows us to run the application on many genuine mobile devices, verifying compatibility and performance across varied conditions.
