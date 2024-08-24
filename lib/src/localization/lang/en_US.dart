@@ -60,4 +60,13 @@ const Map<String, String> en_US = {
   'Pest Shield': 'Pest Shield',
   'Registering User, Please wait...': 'Registering User, Please wait...',
   'Full Name': 'Full Name',
+  'No pest detected': 'No pest detected',
+  'Pesticides are harmful': 'Pesticides are harmful',
+  'Pesticides can have negative impacts on the environment and human health. It is important to use them responsibly and follow precautionary measures given to avoid pest.': 'Pesticides can have negative impacts on the environment and human health. It is important to use them responsibly and follow precautionary measures given to avoid pest.',
+  'OR': 'OR',
+  'Fetching pest details from LLM. Please wait...': 'Fetching pest details from LLM. Please wait...',
+  'Connect Wallet to View Purchase History': 'Connect Wallet to View Purchase History',
+  'Buy Pesticide': 'Buy Pesticide',
+  'Go Back': 'Go Back',
+  'Purchase': 'Purchase',
 };

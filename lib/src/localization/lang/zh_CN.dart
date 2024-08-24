@@ -60,4 +60,13 @@ const Map<String, String> zh_CN = {
   'Pest Shield': 'Pest Shield',
   'Registering User, Please wait...': '正在注册用户，请稍候...',
   'Full Name': '全名',
+  'No pest detected': '未检测到虫害',
+  'Pesticides are harmful': '杀虫剂有害',
+  'Pesticides can have negative impacts on the environment and human health. It is important to use them responsibly and follow precautionary measures given to avoid pest.': '杀虫剂可能对环境和人体健康产生负面影响。使用时要负责任，并遵循给出的预防措施以避免虫害。',
+  'OR': '或',
+  'Fetching pest details from LLM. Please wait...': '正在从LLM获取虫害详情。请稍候...',
+  'Connect Wallet to View Purchase History': '连接钱包以查看购买历史',
+  'Buy Pesticide': '购买杀虫剂',
+  'Go Back': '返回',
+  'Purchase': '购买',
 };

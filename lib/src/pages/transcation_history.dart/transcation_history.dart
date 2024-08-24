@@ -51,8 +51,8 @@ class _TranscationHistoryState extends State<TranscationHistory> {
           if (snapshot.hasError && snapshot.data == null) {
             if (!walletConnectController.isWalletConnected.value) {
               WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                showAppBottomSheet(const ConnectWalletWidget(
-                  title: "Connect Wallet to View Purchase History",
+                showAppBottomSheet(ConnectWalletWidget(
+                  title: StringConstant.connectWalletTitleToViewHistory.tr,
                 ));
               });
             }
@@ -61,8 +61,8 @@ class _TranscationHistoryState extends State<TranscationHistory> {
               lottieAssetPath: IMAGEPATH.noPestDetectedAnimation,
               onRetry: () {
                 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                  showAppBottomSheet(const ConnectWalletWidget(
-                    title: "Connect Wallet to View Purchase History",
+                  showAppBottomSheet(ConnectWalletWidget(
+                    title: StringConstant.connectWalletTitleToViewHistory.tr,
                   ));
                 });
               },

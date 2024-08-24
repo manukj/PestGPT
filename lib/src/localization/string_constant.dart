@@ -59,6 +59,8 @@ class StringConstant {
   static const String cameraInitError = 'Camera initialization error';
   static const String fetchingPestDetail =
       'Fetching pest details from LLM. Please wait...';
+  static const String connectWalletTitleToViewHistory =
+      "Connect Wallet to View Purchase History";
 
   //pesticides
   static const String pesticides = 'Pesticides';
@@ -91,4 +93,6 @@ class StringConstant {
   //common
   static const String fetchingTransactionHistory =
       'Fetching Transaction History';
+  static const String goBack = 'Go Back';
+  static const String purchase = 'Purchase';
 }
