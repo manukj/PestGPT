@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pest_gpt/src/common_widget/common_loader.dart';
 import 'package:pest_gpt/src/common_widget/common_primary_button.dart';
+import 'package:pest_gpt/src/common_widget/common_secondary_button.dart';
 import 'package:pest_gpt/src/localization/string_constant.dart';
+import 'package:pest_gpt/src/pages/home/home.dart';
 import 'package:pest_gpt/src/resource/image_path.dart';
 import 'package:pest_gpt/src/resource/wallet_connect/wallet_connect_controller.dart';
 
@@ -32,6 +34,7 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
         IMAGEPATH.successAnimation,
         StringConstant.openBlockExplorer.tr,
         launchBlockExplorer,
+        subtitle: controller.transcationSuccesMessage,
       );
     } else {
       return _buildStatus(
@@ -41,6 +44,7 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
         () async {
           Get.find<WalletConnectController>().resetTransactionStatus();
         },
+        subtitle: controller.transcationSuccesMessage,
       );
     }
   }
@@ -49,8 +53,9 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
     String title,
     String lottifilePath,
     String buttonText,
-    void Function() onPressed,
-  ) {
+    void Function() onPressed, {
+    String? subtitle,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 10),
       child: Column(
@@ -63,10 +68,41 @@ class TranscationStatusWidget extends GetView<WalletConnectController> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          if (subtitle != null)
+            Column(
+              children: [
+                const Divider(),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const Divider(),
+              ],
+            ),
           Lottie.asset(lottifilePath, height: 200),
-          CommonPrimaryButton(
-            onPressed: onPressed,
-            title: buttonText,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: 170,
+                child: CommonSecondaryButton(
+                  onPressed: () {
+                    Get.offAll(() => HomePage());
+                  },
+                  title: StringConstant.home.tr,
+                ),
+              ),
+              SizedBox(
+                width: 170,
+                child: CommonPrimaryButton(
+                  onPressed: onPressed,
+                  title: buttonText,
+                ),
+              ),
+            ],
           ),
         ],
       ),

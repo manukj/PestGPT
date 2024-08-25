@@ -24,6 +24,7 @@ class WalletConnectController extends GetxController {
   W3MService? _w3mService;
   RxBool isWalletConnected = false.obs;
   Rx<TransactionStatus> transcationStatus = TransactionStatus.init.obs;
+  String transcationSuccesMessage = "";
 
   WalletConnectController() {
     initalize();
@@ -64,7 +65,6 @@ class WalletConnectController extends GetxController {
   void updateStatus() {
     isWalletConnected.value = _w3mService!.isConnected;
     if (isWalletConnected.value) {
-      ToastManager.showSuccess("Wallet Connected Successfully");
     } else {
       ToastManager.showError("Wallet Disconnected");
     }
@@ -137,9 +137,8 @@ class WalletConnectController extends GetxController {
       from.toString();
       final pesticideName = decoded[1];
       final costOfPesticide = decoded[2] as BigInt;
-      ToastManager.showSuccess(
-        "Transcation Successfull for $pesticideName at $costOfPesticide",
-      );
+      transcationSuccesMessage =
+          "Pesticide: $pesticideName \n Cost: ${costOfPesticide.toString()}";
     });
     await subscription.asFuture();
     await subscription.cancel();

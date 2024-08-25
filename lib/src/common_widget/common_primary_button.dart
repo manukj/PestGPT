@@ -53,6 +53,7 @@ class CommonPrimaryButton extends StatelessWidget {
                     fontSize: 16,
                     color: textColor ?? Theme.of(context).colorScheme.surface,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
