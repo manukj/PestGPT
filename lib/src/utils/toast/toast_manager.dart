@@ -26,4 +26,15 @@ class ToastManager {
       alignment: Alignment.bottomCenter,
     );
   }
+
+  static void showWidget(Widget child) {
+    toastification.show(
+      context: Get.context,
+      title: child,
+      autoCloseDuration: const Duration(seconds: 5),
+      alignment: Alignment.bottomCenter,
+      icon: Container(),
+      showProgressBar: false,
+    );
+  }
 }

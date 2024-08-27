@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:get/get.dart';
@@ -15,15 +14,9 @@ Future<void> statusBarSetLight() async {
   await FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
   await FlutterStatusbarcolor.setNavigationBarColor(Colors.white);
   await FlutterStatusbarcolor.setNavigationBarWhiteForeground(false);
-
 }
 
 Future<void> main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-    statusBarColor: Colors.white,
-    statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness: Brightness.dark,
-  ));
   await GetStorage.init();
   await dotenv.load(fileName: "assets/.env");
   Get.put(LLMController());

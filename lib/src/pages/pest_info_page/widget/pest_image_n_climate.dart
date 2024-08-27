@@ -24,10 +24,13 @@ class _PestImageNClimateState extends State<PestImageNClimate> {
           children: [
             Hero(
               tag: widget.pestModel.image,
-              child: Image.memory(
-                widget.pestModel.image,
-                fit: BoxFit.scaleDown,
-                height: 100,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.memory(
+                  widget.pestModel.image,
+                  fit: BoxFit.scaleDown,
+                  height: 100,
+                ),
               ),
             ),
             const SizedBox(width: 16),
@@ -43,7 +46,7 @@ class _PestImageNClimateState extends State<PestImageNClimate> {
         LineChart(
           weatherForecast: MockWeatherResponse.getWeatherResponse,
           pestInfo: widget.pestInfo,
-          onChangeTab: (index){
+          onChangeTab: (index) {
             setState(() {
               lineChartType = LineChartType.values[index];
             });
@@ -56,11 +59,11 @@ class _PestImageNClimateState extends State<PestImageNClimate> {
   String getIdealClimate() {
     switch (lineChartType) {
       case LineChartType.temperature:
-      return 'Ideal Temperature: \n ${widget.pestInfo.idealTemperature?.min} - ${widget.pestInfo.idealTemperature?.max} °C';
+        return 'Ideal Temperature: \n ${widget.pestInfo.idealTemperature?.min} - ${widget.pestInfo.idealTemperature?.max} °C';
       case LineChartType.humidity:
-      return 'Ideal Humidity: \n ${widget.pestInfo.idealHumidity?.min} - ${widget.pestInfo.idealHumidity?.max} %';
+        return 'Ideal Humidity: \n ${widget.pestInfo.idealHumidity?.min} - ${widget.pestInfo.idealHumidity?.max} %';
       case LineChartType.wind:
-      return 'Ideal Wind Speed: \n ${widget.pestInfo.idealWindSpeed?.min} - ${widget.pestInfo.idealWindSpeed?.max} km/h';
+        return 'Ideal Wind Speed: \n ${widget.pestInfo.idealWindSpeed?.min} - ${widget.pestInfo.idealWindSpeed?.max} km/h';
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:pest_gpt/src/common_widget/common_tab_header.dart';
 import 'package:pest_gpt/src/models/pest/pest_info.dart';
 import 'package:pest_gpt/src/models/tempature/forecast_weather_response.dart';
 import 'package:pest_gpt/src/utils/tempature_util.dart';
+import 'package:pest_gpt/src/utils/toast/toast_manager.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class RangeChartData {
@@ -116,6 +117,67 @@ class _LineChartState extends State<LineChart> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            const Text(
+              "September Month",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            GestureDetector(
+              onTap: () {
+                ToastManager.showWidget(
+                  Column(
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.square,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "Ideal Weather for the pest",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.square,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          const SizedBox(width: 10),
+                          const Expanded(
+                            child: Text(
+                              "Weather Measured and forcasted",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Icon(
+                  Icons.info_sharp,
+                  color: Colors.blue,
+                ),
+              ),
+            )
+          ],
+        ),
         CommonTabHeader(
           numberOfTab: 3,
           tabHeaders: const [
@@ -145,10 +207,15 @@ class _LineChartState extends State<LineChart> {
                       context,
                       min - 10,
                       max + 10,
+                      Theme.of(context).primaryColor,
+                    ),
+                    buildRangeChart(
+                      pestRangeData,
+                      context,
+                      min - 10,
+                      max + 10,
                       Colors.red,
                     ),
-                    buildRangeChart(pestRangeData, context, min - 10, max + 10,
-                        Theme.of(context).primaryColor.withOpacity(0.2)),
                   ],
                 ),
               ),
@@ -173,15 +240,6 @@ class _LineChartState extends State<LineChart> {
       borderColor: Colors.transparent,
       plotAreaBorderWidth: 0,
       primaryXAxis: NumericAxis(
-        majorGridLines:
-            const MajorGridLines(width: 0, color: Colors.transparent),
-        minorGridLines:
-            const MinorGridLines(width: 0, color: Colors.transparent),
-        majorTickLines:
-            const MajorTickLines(width: 0, color: Colors.transparent),
-        minorTickLines:
-            const MinorTickLines(width: 0, color: Colors.transparent),
-        axisLine: const AxisLine(width: 0, color: Colors.transparent),
         labelFormat: '{value}', // Default format for label values
         interval:
             86400, // Set an appropriate interval (e.g., one day in seconds)

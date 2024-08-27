@@ -28,7 +28,7 @@ dependencies:
   #   path: /Users/manukenchappajunjanna/Documents/package/error_view
   flutter_localizations:
     sdk: flutter
-  web3modal_flutter: ^3.3.0
+  web3modal_flutter: 3.3.0
   intl: ^0.19.0
 
 dev_dependencies:
