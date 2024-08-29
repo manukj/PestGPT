@@ -55,14 +55,18 @@ class ImageUtil {
       img.drawString(image, item.className,
           font: img.arial24, x: (x1), y: y1, color: img.ColorRgb8(0, 0, 0));
 
-      img.drawRect(image,
-          x1: x1,
-          y1: y1,
-          x2: x2,
-          y2: y2,
-          color: color,
-          thickness: 20,
-          radius: 4); // Red color box
+      int thickness = 5; 
+
+      for (int t = 0; t < thickness; t++) {
+        img.drawRect(image,
+            x1: x1 - t,
+            y1: y1 - t,
+            x2: x2 + t,
+            y2: y2 + t,
+            color: color,
+            thickness: 1, 
+            radius: 7);
+      }
     }
   }
 }
