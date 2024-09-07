@@ -44,6 +44,8 @@ dev_dependencies:
   neubrutalism_ui: ^2.0.2
   syncfusion_flutter_charts: ^26.1.40
   flutter_statusbarcolor_ns: ^0.5.0
+  test_cov_console: ^0.2.2
+  mockito: ^5.4.4
 
   
 dependency_overrides:
