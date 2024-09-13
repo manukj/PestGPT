@@ -15,6 +15,7 @@ class ChatGptService extends GetConnect {
   Future<LLMPestInfo> generateResponse(String pestName) async {
     var localData = getPestInfoFromLocalData(pestName);
     if (localData != null) {
+      await Future.delayed(const Duration(seconds: 1));
       return localData;
     }
     final Map<String, dynamic> data = {
