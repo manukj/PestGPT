@@ -1,4 +1,4 @@
-# 🌾 Sustainable Pest Management App ( PEST-GPT )
+# 🌾 Sustainable Pest Management App ( PEST-SHIELD )
 
 This repository contains the source code for a **Farmer-Centric Interoperable Mobile-Cloud System** designed to support sustainable pest management. The app leverages cutting-edge technologies to help farmers identify pests, access pest management guidance, and securely purchase recommended pesticides.
 
